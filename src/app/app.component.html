@@ -1,12 +1,30 @@
-<md-toolbar>
-  <span>{{toolbarTitle}}</span>
+<div class="main-container-shell">
+  <md-toolbar>
+    <span>{{toolbarTitle}}</span>
 
-  <!-- This fills the remaining space of the current row -->
-  <span class="fill-remaining-space"></span>
+    <span class="fill-remaining-space"></span>
 
-  <span>{{toolbarSubTitle}}</span>
-</md-toolbar>
+    <span>{{toolbarSubTitle}}</span>
+  </md-toolbar>
 
-<h1>
-  {{title}}
-</h1>
+  <div class="main-container">
+    <div class="content">
+      <md-card class="card-login-status" *ngIf="!auth.authenticated()">
+        <md-card-title>authenticated = {{auth.authenticated()}}</md-card-title>
+        <md-card-subtitle>Login below</md-card-subtitle>
+        <md-card-actions>
+          <button md-raised-button color="accent" (click)="auth.login()">Login</button>
+        </md-card-actions>
+      </md-card>
+
+      <md-card class="card-login-status" *ngIf="auth.authenticated()">
+        <md-card-title>authenticated = {{auth.authenticated()}}</md-card-title>
+        <md-card-subtitle>{{auth.result.sub}}</md-card-subtitle>
+
+        <md-card-actions>
+          <button md-raised-button color="primary" (click)="auth.logout()">Logout</button>
+        </md-card-actions>
+      </md-card>
+    </div>
+  </div>
+</div>

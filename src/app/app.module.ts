@@ -1,15 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, RequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {MdToolbarModule} from '@angular/material';
+import {MdToolbarModule, MdCardModule, MdButtonModule} from '@angular/material';
 
 import 'hammerjs';
+
+import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
+
+import {Auth} from "./auth.service";
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp( new AuthConfig({}), http, options);
+}
 
 @NgModule({
   declarations: [
@@ -20,9 +28,18 @@ import 'hammerjs';
     FormsModule,
     HttpModule,
     BrowserAnimationsModule,
-    MdToolbarModule
+    MdToolbarModule,
+    MdCardModule,
+    MdButtonModule
   ],
-  providers: [],
+  providers: [
+    Auth,
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [ Http, RequestOptions ]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

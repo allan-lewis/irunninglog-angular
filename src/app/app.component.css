@@ -1,3 +1,22 @@
 .fill-remaining-space {
   flex: auto;
 }
+
+.card-login-status {
+  max-width: 240px;
+}
+
+.main-container-shell {
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  flex: 1 1 auto;
+}
+
+.main-container {
+  display: flex;
+  flex-flow: column;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+}
