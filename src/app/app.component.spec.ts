@@ -1,5 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 
+import {Auth} from './auth.service';
 import { AppComponent } from './app.component';
 import { MaterialModule } from '@angular/material';
 
@@ -10,6 +11,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        Auth
+      ]
     }).compileComponents();
   }));
 
@@ -29,6 +33,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
+    expect(compiled.querySelector('span').textContent).toContain('irunninglog');
   }));
 });
