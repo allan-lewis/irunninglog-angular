@@ -9,17 +9,17 @@
 
   <div class="main-container">
     <div class="content">
-      <md-card class="card-login-status" *ngIf="!auth.authenticated()">
-        <md-card-title>authenticated = {{auth.authenticated()}}</md-card-title>
+      <md-card class="card-login-status" *ngIf="!(username | async)">
+        <md-card-title>authenticated = {{!!(username | async)}}</md-card-title>
         <md-card-subtitle>Login below</md-card-subtitle>
         <md-card-actions>
           <button md-raised-button color="accent" (click)="auth.login()">Login</button>
         </md-card-actions>
       </md-card>
 
-      <md-card class="card-login-status" *ngIf="auth.authenticated()">
-        <md-card-title>authenticated = {{auth.authenticated()}}</md-card-title>
-        <md-card-subtitle>{{auth.result.sub}}</md-card-subtitle>
+      <md-card class="card-login-status" *ngIf="username | async">
+        <md-card-title>authenticated = {{!!(username | async)}}</md-card-title>
+        <md-card-subtitle>{{username | async}}</md-card-subtitle>
 
         <md-card-actions>
           <button md-raised-button color="primary" (click)="auth.logout()">Logout</button>

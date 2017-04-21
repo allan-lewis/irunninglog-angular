@@ -25,6 +25,8 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/store": "^2.2.2",
     "angular2-jwt": "0.2.0",
     "auth0-lock": "10.8.0",
     "core-js": "^2.4.1",

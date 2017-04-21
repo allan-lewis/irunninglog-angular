@@ -15,6 +15,9 @@ import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import {Auth} from "./auth.service";
 
+import { usernameReducer } from './username.reducer';
+import { StoreModule } from '@ngrx/store';
+
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp( new AuthConfig({}), http, options);
 }
@@ -30,7 +33,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserAnimationsModule,
     MdToolbarModule,
     MdCardModule,
-    MdButtonModule
+    MdButtonModule,
+    StoreModule.provideStore({ username: usernameReducer })
   ],
   providers: [
     Auth,
