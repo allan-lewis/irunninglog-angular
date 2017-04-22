@@ -12,15 +12,10 @@ export class Auth {
   jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(private store: Store<AppState>) {
-
     this.lock.on("authenticated", (authResult) => {
       localStorage.setItem('id_token', authResult.idToken);
       this.updateSubject(this.getSubject());
     });
-
-    if (tokenNotExpired()) {
-      this.updateSubject(this.getSubject());
-    }
   }
 
   public login() {
@@ -31,6 +26,12 @@ export class Auth {
     // Remove token from localStorage
     localStorage.removeItem('id_token');
     this.updateSubject('');
+  }
+
+  public checkToken() {
+    if (tokenNotExpired()) {
+      this.updateSubject(this.getSubject());
+    }
   }
 
   private updateSubject(subject: string) {
