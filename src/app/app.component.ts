@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Auth} from './auth.service';
 import {Store} from '@ngrx/store';
 import {Observable} from "rxjs";
