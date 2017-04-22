@@ -11,7 +11,7 @@ import {AppState} from './app.state';
 })
 export class AppComponent implements OnInit{
   toolbarTitle = 'irunninglog';
-  toolbarSubTitle = 'cuatro';
+  toolbarSubTitle = 'cuatro!';
   username: Observable<string>;
 
   constructor(public auth: Auth, private store: Store<AppState>) {
