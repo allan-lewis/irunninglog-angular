@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {AppState} from './app.state';
 
 @Component({
-  selector: 'app-root',
+  selector: 'irl-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
