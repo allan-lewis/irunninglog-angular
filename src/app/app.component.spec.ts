@@ -1,21 +1,21 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import {Auth} from './auth.service';
+import {AuthService} from './auth.service';
 import { AppComponent } from './app.component';
 import { MaterialModule } from '@angular/material';
-import { usernameReducer } from './username.reducer';
+import { authReducer } from './auth.reducer';
 import { StoreModule } from '@ngrx/store';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ MaterialModule.forRoot(),
-        StoreModule.provideStore({ username: usernameReducer }) ],
+        StoreModule.provideStore({ auth: authReducer }) ],
       declarations: [
         AppComponent
       ],
       providers: [
-        Auth
+        AuthService
       ]
     }).compileComponents();
   }));
