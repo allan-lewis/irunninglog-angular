@@ -1,3 +1,5 @@
+import {AuthModel} from './auth.model';
+
 export interface AppState {
-    username: string
+    auth: AuthModel
 }

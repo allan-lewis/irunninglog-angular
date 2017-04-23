@@ -13,9 +13,9 @@ import 'hammerjs';
 
 import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
 
-import {Auth} from "./auth.service";
+import {AuthService} from "./auth.service";
 
-import { usernameReducer } from './username.reducer';
+import {authReducer} from './auth.reducer';
 import { StoreModule } from '@ngrx/store';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -34,10 +34,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MdToolbarModule,
     MdCardModule,
     MdButtonModule,
-    StoreModule.provideStore({ username: usernameReducer })
+    StoreModule.provideStore({
+      auth: authReducer
+    })
   ],
   providers: [
-    Auth,
+    AuthService,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
