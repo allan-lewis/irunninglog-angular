@@ -10,9 +10,10 @@ body {
   display: flex;
   height: 100%;
   font-family: Roboto, Arial, sans-serif;
+  color: #cccccc;
 }
 
-.irl-app-container {
+.irl-page-container {
   height: 100%;
   width: 100%;
   margin: 0;

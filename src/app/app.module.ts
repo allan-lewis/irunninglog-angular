@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import { PageComponent } from './page.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -24,7 +24,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    PageComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +46,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       deps: [ Http, RequestOptions ]
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [PageComponent]
 })
 export class AppModule { }
