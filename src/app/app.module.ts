@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
 
+import { HeaderComponent } from './header.component';
 import { PageComponent } from './page.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -24,6 +25,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 @NgModule({
   declarations: [
+    HeaderComponent,
     PageComponent
   ],
   imports: [
