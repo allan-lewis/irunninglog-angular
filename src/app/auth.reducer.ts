@@ -7,7 +7,7 @@ export const LOGOUT = 'b0924068-0487-4ffb-beb6-932261d65d0b';
 export function authReducer(state: AuthModel = {authenticated: false}, action: Action) {
   switch (action.type) {
     case LOGIN:
-        return Object.assign({}, state, {username: action.payload, authenticated: true});
+        return Object.assign({}, state, {id: action.payload.id, token: action.payload.token, authenticated: true});
     case LOGOUT:
         return Object.assign({}, {authenticated: false});
     default:

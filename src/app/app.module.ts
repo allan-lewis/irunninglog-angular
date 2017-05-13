@@ -13,7 +13,7 @@ import {MdToolbarModule, MdCardModule, MdButtonModule} from '@angular/material';
 
 import 'hammerjs';
 
-import {AuthService} from "./auth.service";
+import {LoginService} from "./login.service";
 
 import {authReducer} from './auth.reducer';
 import { StoreModule } from '@ngrx/store';
@@ -37,7 +37,7 @@ import { StoreModule } from '@ngrx/store';
     })
   ],
   providers: [
-    AuthService
+    LoginService
   ],
   bootstrap: [PageComponent]
 })
