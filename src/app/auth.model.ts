@@ -1,7 +1,7 @@
 export class AuthModel {
 
     id?: number;
-    username?: string;
+    token?: string;
     authenticated: boolean;
 
 }

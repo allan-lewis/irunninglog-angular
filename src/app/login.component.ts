@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from './auth.service';
-import {Observable} from "rxjs";
-import {AuthModel} from './auth.model';
-import {Store} from '@ngrx/store';
-import {AppState} from './app.state';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth.service';
+import { Observable } from "rxjs";
+import { AuthModel } from './auth.model';
+import { Store } from '@ngrx/store';
+import { AppState } from './app.state';
 
 @Component({
   selector: 'irl-component-login',
@@ -21,8 +21,6 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.authService.checkToken();
-
         this.authModel.subscribe(x => console.log('app.component:authModel:next', x));
     }
 
