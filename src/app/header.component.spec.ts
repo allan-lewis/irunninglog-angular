@@ -1,13 +1,16 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import { MaterialModule } from '@angular/material';
+import {MdToolbarModule, MdCardModule, MdButtonModule} from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 
 describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MaterialModule.forRoot(),
+      imports: [     
+        MdToolbarModule,
+        MdCardModule,
+        MdButtonModule
       ],
       declarations: [
         HeaderComponent
