@@ -1,15 +1,24 @@
 <div class="login-component-content">
-    <md-card *ngIf="!(authModel | async).authenticated" class="login-component-card">
-        <md-card-title>{{title}}</md-card-title>
+    <div>
+        <md-card *ngIf="!(authModel | async).authenticated" class="login-component-card">
+            <md-card-title>irunninglog</md-card-title>
+            <md-card-subtitle>Visualize your Strava workouts</md-card-subtitle>
 
-        <md-card-content>
-            <p>
-                You're just a click away from using <em>irunninglog</em> to track and analyze 
-            </p>
-        </md-card-content>
+            <md-card-content>
+                <p>
+                    Use irunninglog to get an alternative view of your Strava running workouts. 
+                </p>
 
-        <md-card-actions>
-            <button md-raised-button color="primary" *ngIf="!(authModel | async).authenticated" (click)="authService.login()">Login</button>
-        </md-card-actions>
-    </md-card>
+                <p>
+                    Take advantage of irunninglog's customizable interface to view historical performance, track progress against goals, and much more.
+                </p>
+
+                <p>
+                    Use the button below to safely and securely login using your Strava account.
+                </p>
+            </md-card-content>
+        </md-card>
+
+        <button md-raised-button class="login-button" color="primary" *ngIf="!(authModel | async).authenticated" (click)="login()">Login</button>
+    </div>
 </div>

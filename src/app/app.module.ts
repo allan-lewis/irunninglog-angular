@@ -13,16 +13,10 @@ import {MdToolbarModule, MdCardModule, MdButtonModule} from '@angular/material';
 
 import 'hammerjs';
 
-import { provideAuth, AuthHttp, AuthConfig } from 'angular2-jwt';
-
 import {AuthService} from "./auth.service";
 
 import {authReducer} from './auth.reducer';
 import { StoreModule } from '@ngrx/store';
-
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp( new AuthConfig({}), http, options);
-}
 
 @NgModule({
   declarations: [
@@ -43,12 +37,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     })
   ],
   providers: [
-    AuthService,
-    {
-      provide: AuthHttp,
-      useFactory: authHttpServiceFactory,
-      deps: [ Http, RequestOptions ]
-    }
+    AuthService
   ],
   bootstrap: [PageComponent]
 })

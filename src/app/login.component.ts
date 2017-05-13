@@ -11,9 +11,6 @@ import { AppState } from './app.state';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-    title = 'Login below';
-
     authModel: Observable<AuthModel>;
 
     constructor(public authService: AuthService, store: Store<AppState>) {
@@ -21,7 +18,13 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.authModel.subscribe(x => console.log('app.component:authModel:next', x));
+        this.authModel.subscribe(x => console.log('login.component:authModel:next', x));
+
+        console.log('login.component:ngOnInit', localStorage.getItem('strava_access_token'));
+    }
+
+    login() {
+        console.log('login.component:login');
     }
 
 }

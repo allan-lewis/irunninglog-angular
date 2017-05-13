@@ -5,7 +5,13 @@
 
 .login-component-content {
     display: flex;
+    flex-flow: column;
     flex: 1 1 auto;
     justify-content: center;
     align-items: center;
+}
+
+.login-button {
+    margin-top: 32px;
+    width: 100%;
 }
