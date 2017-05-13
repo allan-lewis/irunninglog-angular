@@ -1,0 +1,15 @@
+<div class="login-component-content">
+    <md-card *ngIf="!(authModel | async).authenticated" class="login-component-card">
+        <md-card-title>{{title}}</md-card-title>
+
+        <md-card-content>
+            <p>
+                You're just a click away from using <em>irunninglog</em> to track and analyze 
+            </p>
+        </md-card-content>
+
+        <md-card-actions>
+            <button md-raised-button color="primary" *ngIf="!(authModel | async).authenticated" (click)="authService.login()">Login</button>
+        </md-card-actions>
+    </md-card>
+</div>
