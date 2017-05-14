@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+const httpProxy = require('http-proxy');
+const apiProxy = httpProxy.createProxyServer();
 
 // If an incoming request uses
 // a protocol other than HTTPS,
@@ -20,6 +22,10 @@ const forceSSL = function() {
 // middleware
 app.use(forceSSL());
 
+app.all("/api/*", function(req, res) {
+  apiProxy.web(req, res, {target: 'https://irunninglog-api-int.herokuapp.com'});
+});
+
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
@@ -32,4 +38,4 @@ app.use(express.static(__dirname + '/dist'));
 
 // Start the app by listening on the default
 // Heroku port
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8081);
