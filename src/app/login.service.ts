@@ -15,7 +15,9 @@ export class LoginService {
   login(code: string) {
     console.log('login.service:login', code);
 
-    this.http.get('api/login?code=' + code).catch(this.error).subscribe(x => this.response(x));
+    this.http.get('api/login?code=' + code).catch(err => {
+          return this.error(err);
+        }).subscribe(x => this.response(x));
   }
 
   unauthenticated() {
@@ -26,7 +28,9 @@ export class LoginService {
 
   private error(error: Response | any) {
     console.log('login.service:error', error);
+
     this.unauthenticated();
+    
     return Observable.throw('login failed');
   }
 
