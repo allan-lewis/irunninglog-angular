@@ -1,6 +1,6 @@
-<div class="login-component-content">
+<div class="login-component-content" *ngIf="(authModel | async).authenticated === 1">
     <div>
-        <md-card *ngIf="!(authModel | async).authenticated" class="login-component-card">
+        <md-card class="login-component-card">
             <md-card-title>irunninglog</md-card-title>
             <md-card-subtitle>Visualize your Strava workouts</md-card-subtitle>
 
@@ -19,6 +19,6 @@
             </md-card-content>
         </md-card>
 
-        <button md-raised-button class="login-button" color="primary" *ngIf="!(authModel | async).authenticated" (click)="login()">Login with Strava</button>
+        <button md-raised-button class="login-button" color="primary" (click)="login()">Login with Strava</button>
     </div>
 </div>

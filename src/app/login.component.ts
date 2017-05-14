@@ -33,8 +33,14 @@ export class LoginComponent implements OnInit {
     login() {
         console.log('login.component:login', window.location.protocol, window.location.host);
 
-        // TODO - Add some state
-        window.location.href = 'https://www.strava.com/oauth/authorize?client_id=17706&response_type=code&redirect_uri=' + window.location.protocol + '//' + window.location.host;
+        var d = new Date().getTime();
+        let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            let r = (d + Math.random()*16)%16 | 0;
+            d = Math.floor(d/16);
+            return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+        });
+        sessionStorage.setItem('strava_state', uuid);
+        window.location.href = 'https://www.strava.com/oauth/authorize?client_id=17706&response_type=code&redirect_uri=' + window.location.protocol + '//' + window.location.host + '&state=' + uuid;
     }
 
     private getCodeAndLogin() {
@@ -43,9 +49,15 @@ export class LoginComponent implements OnInit {
         console.log('login.component:getCodeAndLogin', !!code);
 
         if (code) {
-            // TODO - Validate state
-            localStorage.setItem('strava_code', code);
-            this.loginService.login(code);
+            let state = sessionStorage.getItem('strava_state');
+            if (state === this.getParameterByName('state', window.location.href)) {
+                localStorage.setItem('strava_code', code);
+                this.loginService.login(code);
+            } else {
+                this.loginService.unauthenticated();
+            }
+        } else {
+            this.loginService.unauthenticated();
         }
     }
 

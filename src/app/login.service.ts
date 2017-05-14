@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { Observable } from 'rxjs/Observable';
-import { LOGIN } from './auth.reducer';
+import { LOGIN, UNAUTHENTICATED } from './auth.reducer';
 
 @Injectable()
 export class LoginService {
@@ -16,6 +16,12 @@ export class LoginService {
     console.log('login.service:login', code);
 
     this.http.get('api/login?code=' + code).catch(this.error).subscribe(x => this.response(x));
+  }
+
+  unauthenticated() {
+    console.log('login.service:unauthenticated');
+
+    this.store.dispatch({type: UNAUTHENTICATED});
   }
 
   private error(error: Response | any) {
