@@ -26,6 +26,7 @@ export class LoginService {
 
   private error(error: Response | any) {
     console.log('login.service:error', error);
+    this.unauthenticated();
     return Observable.throw('login failed');
   }
 
