@@ -1,8 +1,7 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-const httpProxy = require('http-proxy');
-const apiProxy = httpProxy.createProxyServer();
+var proxy = require('http-proxy-middleware');
 
 // If an incoming request uses
 // a protocol other than HTTPS,
@@ -22,9 +21,7 @@ const forceSSL = function() {
 // middleware
 app.use(forceSSL());
 
-app.all("/api/*", function(req, res) {
-  apiProxy.web(req, res, {target: 'https://irunninglog-api-int.herokuapp.com'});
-});
+app.use('/api', proxy({target: 'https://irunninglog-api-int.herokuapp.com', changeOrigin: true}));
 
 // Run the app by serving the static files
 // in the dist directory
