@@ -1,5 +1,7 @@
 <div class="page-component-body">
     <irl-component-header></irl-component-header>
 
-    <irl-component-login></irl-component-login>
+    <irl-component-login *ngIf="(authModel | async).authenticated === 1"></irl-component-login>
+
+    <irl-component-main *ngIf="(authModel | async).authenticated === 0"></irl-component-main>
 </div>
