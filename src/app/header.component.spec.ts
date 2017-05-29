@@ -2,6 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 import { ProfileComponent } from './profile.component';
+import { LogoutComponent } from './logout.component';
 import { MdToolbarModule, MdCardModule, MdButtonModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth.reducer';
@@ -21,7 +22,8 @@ describe('HeaderComponent', () => {
       ],
       declarations: [
         HeaderComponent,
-        ProfileComponent
+        ProfileComponent,
+        LogoutComponent
       ],
       providers: [
       ]
