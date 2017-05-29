@@ -17,12 +17,7 @@ irl-component-header, irl-component-login {
   display: flex;
 }
 
-irl-component-login {
-  height: 100%;
-}
-
 .irl-page-container {
-  height: 100%;
   width: 100%;
   margin: 0;
 }
