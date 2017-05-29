@@ -1,3 +1,35 @@
 .profile-card {
     margin: 16px;
 }
+
+.avatar-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.title-text {
+    height: 50%;
+    line-height: 22.5px;
+    vertical-align: text-top;
+    font-size: 14px;
+}
+
+.sub-title-text {
+    height: 50%;
+    line-height: 22.5px;
+    vertical-align: text-bottom;
+    font-size: 14px;
+    color: rgba(255, 255, 255, .7);
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-info {
+    margin-left: 8px;
+    display: flex;
+    flex-direction: column;
+}

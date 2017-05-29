@@ -1,7 +1,11 @@
 <md-toolbar>
     <span>{{title}}</span>
-
     <span class="fill-remaining-space"></span>
-
     <img class="strava-powered" src="../assets/api_logo_pwrdBy_strava_horiz_white.svg"/>
+    
+    <md-toolbar-row *ngIf="(authModel | async).authenticated === 0">
+        <irl-component-profile></irl-component-profile>
+        <span class="fill-remaining-space"></span>
+    </md-toolbar-row>
+
 </md-toolbar>

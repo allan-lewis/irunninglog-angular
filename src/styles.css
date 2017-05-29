@@ -21,3 +21,7 @@ irl-component-header, irl-component-login {
   width: 100%;
   margin: 0;
 }
+
+.mat-toolbar-row {
+  height: 56px !important;
+}
