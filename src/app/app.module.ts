@@ -8,10 +8,11 @@ import { LoginComponent } from './login.component';
 import { PageComponent } from './page.component';
 import { MainComponent } from './main.component';
 import { ProfileComponent } from './profile.component';
+import { LogoutComponent } from './logout.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {MdToolbarModule, MdCardModule, MdButtonModule} from '@angular/material';
+import {MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule} from '@angular/material';
 
 import 'hammerjs';
 
@@ -30,7 +31,8 @@ import { requestOptionsProvider } from './request-options.service';
     LoginComponent,
     PageComponent,
     MainComponent,
-    ProfileComponent
+    ProfileComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { requestOptionsProvider } from './request-options.service';
     MdToolbarModule,
     MdCardModule,
     MdButtonModule,
+    MdIconModule,
     StoreModule.provideStore({
       auth: authReducer,
       profile: profileReducer

@@ -19,7 +19,7 @@ export class PageComponent implements OnInit {
     }    
     
     ngOnInit() {
-        let code = localStorage.getItem('strava_code');
+        let code = this.loginService.getCode();
 
         if (code) {
             this.loginService.login(code);
@@ -32,15 +32,14 @@ export class PageComponent implements OnInit {
         let code = this.getParameterByName('code', window.location.href);
 
         if (code) {
-            let state = sessionStorage.getItem('strava_state');
+            let state = this.loginService.getState();
             if (state === this.getParameterByName('state', window.location.href)) {
-                localStorage.setItem('strava_code', code);
                 this.loginService.login(code);
             } else {
-                this.loginService.unauthenticated();
+                this.loginService.logout();
             }
         } else {
-            this.loginService.unauthenticated();
+            this.loginService.logout();
         }
     }
 

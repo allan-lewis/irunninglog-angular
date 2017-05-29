@@ -6,6 +6,7 @@
     <md-toolbar-row *ngIf="(authModel | async).authenticated === 0">
         <irl-component-profile></irl-component-profile>
         <span class="fill-remaining-space"></span>
+        <irl-component-logout></irl-component-logout>
     </md-toolbar-row>
 
 </md-toolbar>

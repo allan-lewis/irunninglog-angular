@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { Observable } from 'rxjs/Observable';
-import { LOGIN, UNAUTHENTICATED } from './auth.reducer';
+import { LOGIN, LOGOUT } from './auth.reducer';
 import { AbstractService } from './abstract.service';
 
 @Injectable()
@@ -14,15 +14,31 @@ export class LoginService extends AbstractService {
    }
 
   login(code: string) {
+    localStorage.setItem('strava_code', code);
+
     this.http.get('api/login?code=' + code).catch(err => {
-          this.unauthenticated();
+          this.logout();
 
           return this.error(err);
         }).subscribe(x => this.response(x));
   }
 
-  unauthenticated() {
-    this.store.dispatch({type: UNAUTHENTICATED});
+  logout() {
+    localStorage.removeItem('strava_code');
+    sessionStorage.removeItem('strava_state');
+    this.store.dispatch({type: LOGOUT});
+  }
+
+  getCode() {
+    return localStorage.getItem('strava_code');
+  }
+
+  getState() {
+    return sessionStorage.getItem('strava_state');
+  }
+
+  setState(value : string) {
+    sessionStorage.setItem('strava_state', value);
   }
 
   private response(response: Response) {
