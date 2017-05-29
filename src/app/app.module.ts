@@ -7,6 +7,7 @@ import { HeaderComponent } from './header.component';
 import { LoginComponent } from './login.component';
 import { PageComponent } from './page.component';
 import { MainComponent } from './main.component';
+import { ProfileComponent } from './profile.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -14,17 +15,22 @@ import {MdToolbarModule, MdCardModule, MdButtonModule} from '@angular/material';
 
 import 'hammerjs';
 
-import {LoginService} from "./login.service";
+import { LoginService } from "./login.service";
+import { ProfileService } from "./profile.service";
 
-import {authReducer} from './auth.reducer';
+import { authReducer } from './auth.reducer';
+import { profileReducer } from './profile.reducer';
 import { StoreModule } from '@ngrx/store';
+
+import { requestOptionsProvider } from './request-options.service';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     LoginComponent,
     PageComponent,
-    MainComponent
+    MainComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -35,11 +41,14 @@ import { StoreModule } from '@ngrx/store';
     MdCardModule,
     MdButtonModule,
     StoreModule.provideStore({
-      auth: authReducer
+      auth: authReducer,
+      profile: profileReducer
     })
   ],
   providers: [
-    LoginService
+    LoginService,
+    ProfileService,
+    requestOptionsProvider
   ],
   bootstrap: [PageComponent]
 })

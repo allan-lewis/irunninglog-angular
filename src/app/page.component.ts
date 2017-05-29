@@ -19,10 +19,7 @@ export class PageComponent implements OnInit {
     }    
     
     ngOnInit() {
-        this.authModel.subscribe(x => console.log('page.component:authModel:next', x));
-
         let code = localStorage.getItem('strava_code');
-        console.log('page.component:ngOnInit', !!code);
 
         if (code) {
             this.loginService.login(code);
@@ -33,8 +30,6 @@ export class PageComponent implements OnInit {
 
     private getCodeAndLogin() {
         let code = this.getParameterByName('code', window.location.href);
-        
-        console.log('login.component:getCodeAndLogin', !!code);
 
         if (code) {
             let state = sessionStorage.getItem('strava_state');

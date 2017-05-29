@@ -1,0 +1,7 @@
+<md-card class="profile-card">
+    <md-card-header>
+        <img *ngIf="(profile | async).avatar" md-card-avatar src="{{(profile | async).avatar}}"/>
+        <md-card-title>{{(profile | async).firstName}} {{(profile | async).lastName}}</md-card-title>
+        <md-card-subtitle>{{(profile | async).username}}</md-card-subtitle>
+    </md-card-header>
+</md-card>
