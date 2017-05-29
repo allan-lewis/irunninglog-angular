@@ -1,8 +1,11 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import {MdToolbarModule, MdCardModule, MdButtonModule} from '@angular/material';
+import { ProfileComponent } from './profile.component';
+import { MdToolbarModule, MdCardModule, MdButtonModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
+import { authReducer } from './auth.reducer';
+import { profileReducer } from './profile.reducer';
 
 describe('HeaderComponent', () => {
   beforeEach(async(() => {
@@ -10,10 +13,15 @@ describe('HeaderComponent', () => {
       imports: [     
         MdToolbarModule,
         MdCardModule,
-        MdButtonModule
+        MdButtonModule,
+        StoreModule.provideStore({
+          auth: authReducer,
+          profile: profileReducer
+        })
       ],
       declarations: [
-        HeaderComponent
+        HeaderComponent,
+        ProfileComponent
       ],
       providers: [
       ]
