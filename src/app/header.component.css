@@ -1,3 +1,7 @@
 .fill-remaining-space {
   flex: auto;
 }
+
+.strava-powered {
+  height: 30px;
+}

@@ -12,6 +12,11 @@
 }
 
 .login-button {
+    display: block;
+    margin: auto;
+}
+
+.login-button-container {
     margin-top: 32px;
     width: 100%;
 }
