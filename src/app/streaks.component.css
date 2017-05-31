@@ -1,0 +1,8 @@
+.streaks-placeholder {
+    height: 80px;
+    line-height: 80px;
+    padding-left: 16px;
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #9c27b0;
+}

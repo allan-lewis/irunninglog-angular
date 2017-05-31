@@ -9,6 +9,11 @@ import { PageComponent } from './page.component';
 import { MainComponent } from './main.component';
 import { ProfileComponent } from './profile.component';
 import { LogoutComponent } from './logout.component';
+import { PingComponent } from './ping.component';
+import { StreaksComponent } from './streaks.component';
+import { ChartComponent } from './chart.component';
+import { ShoesComponent } from './shoes.component';
+import { GoalsComponent } from './goals.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -32,7 +37,12 @@ import { requestOptionsProvider } from './request-options.service';
     PageComponent,
     MainComponent,
     ProfileComponent,
-    LogoutComponent
+    LogoutComponent,
+    PingComponent,
+    StreaksComponent,
+    ChartComponent,
+    ShoesComponent,
+    GoalsComponent
   ],
   imports: [
     BrowserModule,
