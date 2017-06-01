@@ -4,6 +4,7 @@ import { AuthModel } from './auth.model';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { LoginService } from './login.service';
+import { DialogService } from './dialog.service';
 
 @Component({
   selector: 'irl-component-logout',
@@ -12,12 +13,13 @@ import { LoginService } from './login.service';
 })
 export class LogoutComponent {
 
-    constructor(public loginService : LoginService) {
+    constructor(public loginService : LoginService, public dialogService: DialogService) {
 
     }
 
     logout() {
-        this.loginService.logout();
+        this.dialogService.confirm('Are you sure?')
+      .filter(res => !!res).subscribe(res => this.loginService.logout());
     }
 
 }

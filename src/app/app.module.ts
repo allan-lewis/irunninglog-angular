@@ -14,15 +14,17 @@ import { StreaksComponent } from './streaks.component';
 import { ChartComponent } from './chart.component';
 import { ShoesComponent } from './shoes.component';
 import { GoalsComponent } from './goals.component';
+import { ConfirmDialog } from './dialog.component';  
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-import {MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule} from '@angular/material';
+import { MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule, MdDialogModule } from '@angular/material';
 
 import 'hammerjs';
 
 import { LoginService } from "./login.service";
 import { ProfileService } from "./profile.service";
+import { DialogService } from './dialog.service';
 
 import { authReducer } from './auth.reducer';
 import { profileReducer } from './profile.reducer';
@@ -42,7 +44,8 @@ import { requestOptionsProvider } from './request-options.service';
     StreaksComponent,
     ChartComponent,
     ShoesComponent,
-    GoalsComponent
+    GoalsComponent,
+    ConfirmDialog
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { requestOptionsProvider } from './request-options.service';
     MdCardModule,
     MdButtonModule,
     MdIconModule,
+    MdDialogModule,
     StoreModule.provideStore({
       auth: authReducer,
       profile: profileReducer
@@ -61,8 +65,12 @@ import { requestOptionsProvider } from './request-options.service';
   providers: [
     LoginService,
     ProfileService,
+    DialogService,
     requestOptionsProvider
   ],
+    entryComponents: [
+        ConfirmDialog,
+    ],
   bootstrap: [PageComponent]
 })
 export class AppModule { }
