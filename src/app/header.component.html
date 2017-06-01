@@ -1,12 +1,12 @@
 <md-toolbar color="primary">
     <span class="main-title">{{title}}</span>
     <span class="fill-remaining-space"></span>
-    <img class="strava-powered" src="../assets/api_logo_pwrdBy_strava_horiz_white.svg"/>
+    <irl-component-profile *ngIf="(authModel | async).authenticated === 0"></irl-component-profile>
     
-    <md-toolbar-row *ngIf="(authModel | async).authenticated === 0">
-        <irl-component-profile></irl-component-profile>
+    <md-toolbar-row>
+        <img class="strava-powered" src="../assets/api_logo_pwrdBy_strava_horiz_white.svg"/>
         <span class="fill-remaining-space"></span>
-        <irl-component-logout></irl-component-logout>
+        <irl-component-logout *ngIf="(authModel | async).authenticated === 0"></irl-component-logout>
     </md-toolbar-row>
 
 </md-toolbar>
