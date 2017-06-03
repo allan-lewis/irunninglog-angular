@@ -18,6 +18,7 @@ import { StoreModule } from '@ngrx/store';
 // ~~ COMPONENTS ===================
 
 import { ChartComponent } from './chart/chart.component';
+import { ConfirmComponent } from './confirm/confirm.component';  
 import { GoalsComponent } from './goals/goals.component';
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './header/logout.component';
@@ -25,12 +26,14 @@ import { ProfileComponent } from './header/profile.component';
 import { LoginComponent } from './login/login.component';
 import { PageComponent } from './page/page.component';
 import { PingComponent } from './ping/ping.component';
+import { ShellComponent } from './shell/shell.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { StreaksComponent } from './streaks/streaks.component';
 
 // ~~ SERVICES =====================
 
 import { AuthenticationService } from "./authentication/authentication.service";
+import { ConfirmService } from './confirm/confirm.service';
 import { ProfileService } from './header/profile.service';
 import { requestOptionsProvider } from './http/request-options.service';
 
@@ -39,15 +42,10 @@ import { requestOptionsProvider } from './http/request-options.service';
 import { authenticationModelReducer } from './state/authentication.reducer';
 import { profileModelReducer } from './state/profile.reducer';
 
-// ~~ UNORGANIZED ==================
-
-import { MainComponent } from './main.component';
-import { ConfirmDialog } from './dialog.component';  
-import { DialogService } from './dialog.service';
-
 @NgModule({
   declarations: [
     ChartComponent,
+    ConfirmComponent,
     GoalsComponent,
     HeaderComponent,
     LoginComponent,
@@ -55,11 +53,9 @@ import { DialogService } from './dialog.service';
     PageComponent,
     PingComponent,
     ProfileComponent,
+    ShellComponent,
     ShoesComponent,
-    StreaksComponent,
-
-    MainComponent,
-    ConfirmDialog
+    StreaksComponent
   ],
   imports: [
     FormsModule,
@@ -78,15 +74,14 @@ import { DialogService } from './dialog.service';
   ],
   providers: [
     AuthenticationService,
+    ConfirmService,
     ProfileService,
-    requestOptionsProvider,
-
-    DialogService
+    requestOptionsProvider
   ],
     entryComponents: [
-        ConfirmDialog,
+        ConfirmComponent,
     ],
-  bootstrap: [PageComponent]
+  bootstrap: [ShellComponent]
 })
 
 export class AppModule { }

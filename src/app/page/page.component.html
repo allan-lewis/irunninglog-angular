@@ -1,7 +1,5 @@
-<div class="page-component-body">
-    <irl-component-header [authenticationModel]="authenticationModel"></irl-component-header>
-
-    <irl-component-login *ngIf="authenticationModel.authenticated === 1"></irl-component-login>
-
-    <irl-component-main *ngIf="authenticationModel.authenticated === 0"></irl-component-main>
-</div>
+<irl-component-ping></irl-component-ping>
+<irl-component-streaks></irl-component-streaks>
+<irl-component-chart></irl-component-chart>
+<irl-component-shoes></irl-component-shoes>
+<irl-component-goals></irl-component-goals>

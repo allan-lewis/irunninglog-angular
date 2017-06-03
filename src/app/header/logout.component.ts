@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../authentication/authentication.service';
-import { DialogService } from '../dialog.service';
+import { ConfirmService } from '../confirm/confirm.service';
 
 @Component({
   selector: 'irl-component-logout',
@@ -9,12 +9,12 @@ import { DialogService } from '../dialog.service';
 })
 export class LogoutComponent {
 
-    constructor(public authenticationService : AuthenticationService, public dialogService: DialogService) {
+    constructor(public authenticationService : AuthenticationService, public confirmService: ConfirmService) {
 
     }
 
     logout() {
-        this.dialogService.confirm('Are you sure?').filter(res => !!res).subscribe(res => this.authenticationService.logout());
+        this.confirmService.confirm('Are you sure?').filter(res => !!res).subscribe(res => this.authenticationService.logout());
     }
 
 }

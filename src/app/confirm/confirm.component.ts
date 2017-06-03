@@ -2,7 +2,7 @@ import { MdDialogRef } from '@angular/material';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'confirm-dialog',
+    selector: 'irl-confirm-component',
     template: `
         <h2 md-dialog-title>Logout?</h2>
         <md-dialog-content>
@@ -14,11 +14,11 @@ import { Component } from '@angular/core';
             (click)="dialogRef.close()">Cancel</button>
     `,
 })
-export class ConfirmDialog {
+export class ConfirmComponent {
 
     public title: string;
 
-    constructor(public dialogRef: MdDialogRef<ConfirmDialog>) {
+    constructor(public dialogRef: MdDialogRef<ConfirmComponent>) {
 
     }
 }
