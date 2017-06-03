@@ -19,3 +19,7 @@
     font-weight: bold;
     font-size: 14px;
 }
+
+.error-code-value {
+    color: rgb(244,67,54);
+}

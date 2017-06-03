@@ -2,6 +2,6 @@
     <md-progress-bar [color]="color" [mode]="mode"></md-progress-bar>
 </div>
 <div>
-    <irl-component-ping-good></irl-component-ping-good>
-    <irl-component-ping-bad></irl-component-ping-bad>
+    <irl-component-ping-good *ngIf=" ping.status >= 200 && ping.status < 300" [ping]="ping"></irl-component-ping-good>
+    <irl-component-ping-bad  *ngIf="ping.status >= 300" [ping]="ping"></irl-component-ping-bad>
 </div>

@@ -36,10 +36,12 @@ import { AuthenticationService } from "./authentication/authentication.service";
 import { ConfirmService } from './confirm/confirm.service';
 import { ProfileService } from './header/profile.service';
 import { requestOptionsProvider } from './http/request-options.service';
+import { PingService } from './ping/ping.service';
 
 // ~~ REDUCERS =====================
 
 import { authenticationModelReducer } from './state/authentication.reducer';
+import { pingModelReducer } from './state/ping.reducer';
 import { profileModelReducer } from './state/profile.reducer';
 
 @NgModule({
@@ -72,12 +74,14 @@ import { profileModelReducer } from './state/profile.reducer';
     BrowserAnimationsModule,
     StoreModule.provideStore({
       authentication: authenticationModelReducer,
+      ping: pingModelReducer,
       profile: profileModelReducer
     })
   ],
   providers: [
     AuthenticationService,
     ConfirmService,
+    PingService,
     ProfileService,
     requestOptionsProvider
   ],
