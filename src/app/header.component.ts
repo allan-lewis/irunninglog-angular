@@ -1,8 +1,5 @@
-import { Component } from '@angular/core';
-import { Observable } from "rxjs";
-import { AuthModel } from './auth.model';
-import { Store } from '@ngrx/store';
-import { AppState } from './app.state';
+import { Component, Input } from '@angular/core';
+import { AuthenticationModel } from './authentication/authentication.model';
 
 @Component({
   selector: 'irl-component-header',
@@ -13,10 +10,6 @@ export class HeaderComponent {
     
     title = 'irunninglog';
 
-    authModel: Observable<AuthModel>;
-
-    constructor(store: Store<AppState>) {
-        this.authModel = store.select(state => state.auth);
-    } 
+    @Input() authenticationModel: AuthenticationModel;
      
 }

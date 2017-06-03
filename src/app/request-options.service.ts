@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseRequestOptions, RequestOptions } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
-import { AuthModel } from './auth.model';
+import { AuthenticationModel } from './authentication/authentication.model';
 
 @Injectable()
 export class DefaultRequestOptions extends BaseRequestOptions {
@@ -12,7 +12,7 @@ export class DefaultRequestOptions extends BaseRequestOptions {
 
     this.headers.set('Content-Type', 'application/json');
 
-    store.select(state => state.auth).filter(x => !!x.token).subscribe(x => this.headers.set('Authorization', 'Bearer ' + x.token));
+    store.select(state => state.authentication).filter(x => !!x.token).subscribe(x => this.headers.set('Authorization', 'Bearer ' + x.token));
   }
 
 }

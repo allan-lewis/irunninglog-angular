@@ -3,7 +3,7 @@ import { ProfileService } from './profile.service';
 import { Observable } from "rxjs";
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
-import { AuthModel } from './auth.model';
+import { AuthenticationModel } from './authentication/authentication.model';
 import { ProfileModel } from './profile.model';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
     }    
 
     ngOnInit() {
-        this.store.select(state => state.auth).filter(x => !!x.token).subscribe(x => this.profileService.load());
+        this.store.select(state => state.authentication).filter(x => !!x.token).subscribe(x => this.profileService.load());
     }
 
 }

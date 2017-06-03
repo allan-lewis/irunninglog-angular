@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from '../login.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'irl-component-login',
@@ -8,7 +8,7 @@ import { LoginService } from '../login.service';
 })
 export class LoginComponent {
 
-    constructor(public loginService: LoginService) {}
+    constructor(public authenticationService: AuthenticationService) {}
 
     login() {
         var d = new Date().getTime();
@@ -18,7 +18,7 @@ export class LoginComponent {
             return (c=='x' ? r : (r&0x3|0x8)).toString(16);
         });
 
-        this.loginService.setState(uuid);
+        this.authenticationService.setState(uuid);
 
         window.location.href = 'https://www.strava.com/oauth/authorize?client_id=17706&response_type=code&redirect_uri=' + window.location.protocol + '//' + window.location.host + '&state=' + uuid;
     }

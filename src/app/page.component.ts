@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
-import { AuthModel } from './auth.model';
+import { AuthenticationModel } from './authentication/authentication.model';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
-import { LoginService } from './login.service';
+import { AuthenticationService } from './authentication/authentication.service';
 
 @Component({
   selector: 'irl-component-page',
@@ -12,17 +12,17 @@ import { LoginService } from './login.service';
 })
 export class PageComponent implements OnInit {
 
-    authModel: Observable<AuthModel>;
+    authenticationModel: AuthenticationModel;
 
-    constructor(public loginService: LoginService, store: Store<AppState>) {
-        this.authModel = store.select(state => state.auth);
+    constructor(public authentciationService: AuthenticationService, store: Store<AppState>) {
+        store.select(state => state.authentication).filter(x => x != null).subscribe(x => this.authenticationModel = x);
     }    
     
     ngOnInit() {
-        let code = this.loginService.getCode();
+        let code = this.authentciationService.getCode();
 
         if (code) {
-            this.loginService.login(code);
+            this.authentciationService.login(code);
         } else {
             this.getCodeAndLogin();
         }
@@ -32,14 +32,14 @@ export class PageComponent implements OnInit {
         let code = this.getParameterByName('code', window.location.href);
 
         if (code) {
-            let state = this.loginService.getState();
+            let state = this.authentciationService.getState();
             if (state === this.getParameterByName('state', window.location.href)) {
-                this.loginService.login(code);
+                this.authentciationService.login(code);
             } else {
-                this.loginService.logout();
+                this.authentciationService.logout();
             }
         } else {
-            this.loginService.logout();
+            this.authentciationService.logout();
         }
     }
 

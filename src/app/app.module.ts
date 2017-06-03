@@ -2,7 +2,7 @@
 
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, Http, RequestOptions } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 // ~~ MATERIAL =====================
@@ -20,6 +20,14 @@ import { PingComponent } from './ping/ping.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { StreaksComponent } from './streaks/streaks.component';
 
+// ~~ SERVICES =====================
+
+import { AuthenticationService } from "./authentication/authentication.service";
+
+// ~~ REDUCERS =====================
+
+import { authenticationModelReducer } from './authentication/authentication.reducer';
+
 // ~~ UNORGANIZED ==================
 
 import { HeaderComponent } from './header.component';
@@ -29,11 +37,9 @@ import { ProfileComponent } from './profile.component';
 import { LogoutComponent } from './logout.component';
 import { ConfirmDialog } from './dialog.component';  
 
-import { LoginService } from "./login.service";
 import { ProfileService } from "./profile.service";
 import { DialogService } from './dialog.service';
 
-import { authReducer } from './auth.reducer';
 import { profileReducer } from './profile.reducer';
 import { StoreModule } from '@ngrx/store';
 
@@ -41,36 +47,38 @@ import { requestOptionsProvider } from './request-options.service';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
+    ChartComponent,
+    GoalsComponent,
     LoginComponent,
+    PingComponent,
+    ShoesComponent,
+    StreaksComponent,
+
+    HeaderComponent,
     PageComponent,
     MainComponent,
     ProfileComponent,
     LogoutComponent,
-    PingComponent,
-    StreaksComponent,
-    ChartComponent,
-    ShoesComponent,
-    GoalsComponent,
     ConfirmDialog
   ],
   imports: [
-    BrowserModule,
     FormsModule,
     HttpModule,
-    BrowserAnimationsModule,
-    MdToolbarModule,
-    MdCardModule,
+    BrowserModule,  
     MdButtonModule,
-    MdIconModule,
+    MdCardModule,
     MdDialogModule,
+    MdIconModule,  
+    MdToolbarModule,
+    BrowserAnimationsModule,
     StoreModule.provideStore({
-      auth: authReducer,
+      authentication: authenticationModelReducer,
       profile: profileReducer
     })
   ],
   providers: [
-    LoginService,
+    AuthenticationService,
+
     ProfileService,
     DialogService,
     requestOptionsProvider
@@ -80,4 +88,5 @@ import { requestOptionsProvider } from './request-options.service';
     ],
   bootstrap: [PageComponent]
 })
+
 export class AppModule { }
