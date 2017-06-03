@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BaseRequestOptions, RequestOptions } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { AppState } from './app.state';
-import { AuthenticationModel } from './authentication/authentication.model';
+import { AppState } from './state/app.state';
+import { AuthenticationModel } from './state/authentication.model';
 
 @Injectable()
 export class DefaultRequestOptions extends BaseRequestOptions {

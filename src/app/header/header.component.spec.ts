@@ -5,9 +5,9 @@ import { ProfileComponent } from './profile.component';
 import { LogoutComponent } from './logout.component';
 import { MdToolbarModule, MdCardModule, MdButtonModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
-import { authenticationModelReducer } from '../authentication/authentication.reducer';
-import { AuthenticationModel } from '../authentication/authentication.model';
-import { profileReducer } from '../profile.reducer';
+import { authenticationModelReducer } from '../state/authentication.reducer';
+import { AuthenticationModel } from '../state/authentication.model';
+import { profileModelReducer } from '../state/profile.reducer';
 
 let authenticationModel = new AuthenticationModel(); 
 
@@ -20,7 +20,7 @@ describe('HeaderComponent', () => {
         MdButtonModule,
         StoreModule.provideStore({
           auth: authenticationModelReducer,
-          profile: profileReducer
+          profile: profileModelReducer
         })
       ],
       declarations: [

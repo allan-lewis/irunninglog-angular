@@ -1,6 +1,6 @@
 import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { AppState } from './app.state';
+import { AppState } from './state/app.state';
 import { Observable } from 'rxjs/Observable';
 
 export class AbstractService {

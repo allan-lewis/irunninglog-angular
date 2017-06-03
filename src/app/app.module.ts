@@ -11,6 +11,10 @@ import 'hammerjs';
 import { MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule, MdDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// ~~ NGRX =========================
+
+import { StoreModule } from '@ngrx/store';
+
 // ~~ COMPONENTS ===================
 
 import { ChartComponent } from './chart/chart.component';
@@ -30,8 +34,8 @@ import { ProfileService } from './header/profile.service';
 
 // ~~ REDUCERS =====================
 
-import { authenticationModelReducer } from './authentication/authentication.reducer';
-import { profileModelReducer } from './header/profile.reducer';
+import { authenticationModelReducer } from './state/authentication.reducer';
+import { profileModelReducer } from './state/profile.reducer';
 
 // ~~ UNORGANIZED ==================
 
@@ -40,8 +44,6 @@ import { MainComponent } from './main.component';
 import { ConfirmDialog } from './dialog.component';  
 
 import { DialogService } from './dialog.service';
-
-import { StoreModule } from '@ngrx/store';
 
 import { requestOptionsProvider } from './request-options.service';
 

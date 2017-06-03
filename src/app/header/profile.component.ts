@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { Observable } from "rxjs";
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.state';
-import { ProfileModel } from './profile.model';
+import { AppState } from '../state/app.state';
+import { ProfileModel } from '../state/profile.model';
 
 @Component({
   selector: 'irl-component-profile',

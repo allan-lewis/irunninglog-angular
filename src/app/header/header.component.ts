@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AuthenticationModel } from '../authentication/authentication.model';
+import { AuthenticationModel } from '../state/authentication.model';
 
 @Component({
   selector: 'irl-component-header',

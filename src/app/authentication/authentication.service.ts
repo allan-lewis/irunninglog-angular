@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.state';
+import { AppState } from '../state/app.state';
 import { Observable } from 'rxjs/Observable';
-import { AUTHENTICATE, UNAUTHENTICATE } from './authentication.reducer';
+import { AUTHENTICATE, UNAUTHENTICATE } from '../state/authentication.reducer';
 import { AbstractService } from '../abstract.service';
 
 @Injectable()
