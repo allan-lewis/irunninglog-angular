@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from './authentication/authentication.service';
-import { DialogService } from './dialog.service';
+import { AuthenticationService } from '../authentication/authentication.service';
+import { DialogService } from '../dialog.service';
 
 @Component({
   selector: 'irl-component-logout',

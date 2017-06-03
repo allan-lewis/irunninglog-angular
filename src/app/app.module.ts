@@ -15,6 +15,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ChartComponent } from './chart/chart.component';
 import { GoalsComponent } from './goals/goals.component';
+import { HeaderComponent } from './header/header.component';
+import { LogoutComponent } from './header/logout.component';
+import { ProfileComponent } from './header/profile.component';
 import { LoginComponent } from './login/login.component';
 import { PingComponent } from './ping/ping.component';
 import { ShoesComponent } from './shoes/shoes.component';
@@ -23,24 +26,21 @@ import { StreaksComponent } from './streaks/streaks.component';
 // ~~ SERVICES =====================
 
 import { AuthenticationService } from "./authentication/authentication.service";
+import { ProfileService } from './header/profile.service';
 
 // ~~ REDUCERS =====================
 
 import { authenticationModelReducer } from './authentication/authentication.reducer';
+import { profileModelReducer } from './header/profile.reducer';
 
 // ~~ UNORGANIZED ==================
 
-import { HeaderComponent } from './header.component';
 import { PageComponent } from './page.component';
 import { MainComponent } from './main.component';
-import { ProfileComponent } from './profile.component';
-import { LogoutComponent } from './logout.component';
 import { ConfirmDialog } from './dialog.component';  
 
-import { ProfileService } from "./profile.service";
 import { DialogService } from './dialog.service';
 
-import { profileReducer } from './profile.reducer';
 import { StoreModule } from '@ngrx/store';
 
 import { requestOptionsProvider } from './request-options.service';
@@ -49,16 +49,16 @@ import { requestOptionsProvider } from './request-options.service';
   declarations: [
     ChartComponent,
     GoalsComponent,
+    HeaderComponent,
     LoginComponent,
+    LogoutComponent,
     PingComponent,
+    ProfileComponent,
     ShoesComponent,
     StreaksComponent,
 
-    HeaderComponent,
     PageComponent,
     MainComponent,
-    ProfileComponent,
-    LogoutComponent,
     ConfirmDialog
   ],
   imports: [
@@ -73,13 +73,13 @@ import { requestOptionsProvider } from './request-options.service';
     BrowserAnimationsModule,
     StoreModule.provideStore({
       authentication: authenticationModelReducer,
-      profile: profileReducer
+      profile: profileModelReducer
     })
   ],
   providers: [
     AuthenticationService,
-
     ProfileService,
+
     DialogService,
     requestOptionsProvider
   ],

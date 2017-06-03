@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from './profile.service';
 import { Observable } from "rxjs";
 import { Store } from '@ngrx/store';
-import { AppState } from './app.state';
-import { AuthenticationModel } from './authentication/authentication.model';
+import { AppState } from '../app.state';
 import { ProfileModel } from './profile.model';
 
 @Component({

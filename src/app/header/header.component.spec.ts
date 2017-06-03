@@ -5,8 +5,11 @@ import { ProfileComponent } from './profile.component';
 import { LogoutComponent } from './logout.component';
 import { MdToolbarModule, MdCardModule, MdButtonModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
-import { authReducer } from './auth.reducer';
-import { profileReducer } from './profile.reducer';
+import { authenticationModelReducer } from '../authentication/authentication.reducer';
+import { AuthenticationModel } from '../authentication/authentication.model';
+import { profileReducer } from '../profile.reducer';
+
+let authenticationModel = new AuthenticationModel(); 
 
 describe('HeaderComponent', () => {
   beforeEach(async(() => {
@@ -16,7 +19,7 @@ describe('HeaderComponent', () => {
         MdCardModule,
         MdButtonModule,
         StoreModule.provideStore({
-          auth: authReducer,
+          auth: authenticationModelReducer,
           profile: profileReducer
         })
       ],
@@ -44,6 +47,8 @@ describe('HeaderComponent', () => {
 
   it('should render title in a span tag', async(() => {
     const fixture = TestBed.createComponent(HeaderComponent);
+    let comp = fixture.componentInstance;
+    comp.authenticationModel = authenticationModel;
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('span').textContent).toContain('irunninglog');

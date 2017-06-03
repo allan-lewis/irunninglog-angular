@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { AppState } from './app.state';
+import { AppState } from '../app.state';
 import { PROFILE_SET } from './profile.reducer';
-import { AbstractService } from './abstract.service';
+import { AbstractService } from '../abstract.service';
 
 @Injectable()
 export class ProfileService extends AbstractService {
