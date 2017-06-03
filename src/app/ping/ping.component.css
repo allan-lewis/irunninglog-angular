@@ -1,8 +1,21 @@
-.ping-placeholder {
-    height: 40px;
-    line-height: 40px;
-    padding-left: 16px;
-    color: #ffffff;
+.ping-progress {
+    margin: 16px;
+}
+
+.ping-result {
+    margin: 0 16px 16px 16px;
+}
+
+.status-label, .error-code-label {
+    font-size: 12px;
+}
+
+.status-ms {
+    font-size: 12px;
+    color: rgba(0, 0, 0, .5); 
+}
+
+.status-value, .error-code-value {
     font-weight: bold;
-    background-color: #009688;
+    font-size: 14px;
 }

@@ -8,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // ~~ MATERIAL =====================
 
 import 'hammerjs';
-import { MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule, MdDialogModule } from '@angular/material';
+import { MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule, MdDialogModule, MdProgressBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ~~ NGRX =========================
@@ -25,7 +25,7 @@ import { LogoutComponent } from './header/logout.component';
 import { ProfileComponent } from './header/profile.component';
 import { LoginComponent } from './login/login.component';
 import { PageComponent } from './page/page.component';
-import { PingComponent } from './ping/ping.component';
+import { PingComponent, PingGoodComponent, PingBadComponent } from './ping/ping.component';
 import { ShellComponent } from './shell/shell.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { StreaksComponent } from './streaks/streaks.component';
@@ -52,6 +52,8 @@ import { profileModelReducer } from './state/profile.reducer';
     LogoutComponent,
     PageComponent,
     PingComponent,
+    PingBadComponent,
+    PingGoodComponent,
     ProfileComponent,
     ShellComponent,
     ShoesComponent,
@@ -65,6 +67,7 @@ import { profileModelReducer } from './state/profile.reducer';
     MdCardModule,
     MdDialogModule,
     MdIconModule,  
+    MdProgressBarModule,
     MdToolbarModule,
     BrowserAnimationsModule,
     StoreModule.provideStore({
