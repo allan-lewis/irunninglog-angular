@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
-import { AuthenticationModel } from './state/authentication.model';
+import { AuthenticationModel } from '../state/authentication.model';
 import { Store } from '@ngrx/store';
-import { AppState } from './state/app.state';
-import { AuthenticationService } from './authentication/authentication.service';
+import { AppState } from '../state/app.state';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
   selector: 'irl-component-page',

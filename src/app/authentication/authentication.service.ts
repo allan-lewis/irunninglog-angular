@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { Observable } from 'rxjs/Observable';
 import { AUTHENTICATE, UNAUTHENTICATE } from '../state/authentication.reducer';
-import { AbstractService } from '../abstract.service';
+import { AbstractService } from '../service/abstract.service';
 
 @Injectable()
 export class AuthenticationService extends AbstractService {

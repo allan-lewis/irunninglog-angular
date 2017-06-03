@@ -23,6 +23,7 @@ import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './header/logout.component';
 import { ProfileComponent } from './header/profile.component';
 import { LoginComponent } from './login/login.component';
+import { PageComponent } from './page/page.component';
 import { PingComponent } from './ping/ping.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { StreaksComponent } from './streaks/streaks.component';
@@ -31,6 +32,7 @@ import { StreaksComponent } from './streaks/streaks.component';
 
 import { AuthenticationService } from "./authentication/authentication.service";
 import { ProfileService } from './header/profile.service';
+import { requestOptionsProvider } from './http/request-options.service';
 
 // ~~ REDUCERS =====================
 
@@ -39,13 +41,9 @@ import { profileModelReducer } from './state/profile.reducer';
 
 // ~~ UNORGANIZED ==================
 
-import { PageComponent } from './page.component';
 import { MainComponent } from './main.component';
 import { ConfirmDialog } from './dialog.component';  
-
 import { DialogService } from './dialog.service';
-
-import { requestOptionsProvider } from './request-options.service';
 
 @NgModule({
   declarations: [
@@ -54,12 +52,12 @@ import { requestOptionsProvider } from './request-options.service';
     HeaderComponent,
     LoginComponent,
     LogoutComponent,
+    PageComponent,
     PingComponent,
     ProfileComponent,
     ShoesComponent,
     StreaksComponent,
 
-    PageComponent,
     MainComponent,
     ConfirmDialog
   ],
@@ -81,9 +79,9 @@ import { requestOptionsProvider } from './request-options.service';
   providers: [
     AuthenticationService,
     ProfileService,
+    requestOptionsProvider,
 
-    DialogService,
-    requestOptionsProvider
+    DialogService
   ],
     entryComponents: [
         ConfirmDialog,

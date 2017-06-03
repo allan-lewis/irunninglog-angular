@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { PROFILE_SET } from '../state/profile.reducer';
-import { AbstractService } from '../abstract.service';
+import { AbstractService } from '../service/abstract.service';
 
 @Injectable()
 export class ProfileService extends AbstractService {

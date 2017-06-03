@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BaseRequestOptions, RequestOptions } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { AppState } from './state/app.state';
-import { AuthenticationModel } from './state/authentication.model';
+import { AppState } from '../state/app.state';
+import { AuthenticationModel } from '../state/authentication.model';
 
 @Injectable()
-export class DefaultRequestOptions extends BaseRequestOptions {
+export class AppRequestOptions extends BaseRequestOptions {
 
   constructor(store: Store<AppState>) {
     super();
@@ -17,4 +17,4 @@ export class DefaultRequestOptions extends BaseRequestOptions {
 
 }
 
-export const requestOptionsProvider = { provide: RequestOptions, useClass: DefaultRequestOptions };
+export const requestOptionsProvider = { provide: RequestOptions, useClass: AppRequestOptions };
