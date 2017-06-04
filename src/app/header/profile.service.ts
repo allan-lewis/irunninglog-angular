@@ -3,18 +3,16 @@ import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { PROFILE_SET } from '../state/profile.reducer';
-import { AbstractService } from '../service/abstract.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
-export class ProfileService extends AbstractService {
+export class ProfileService {
 
-    constructor(public store: Store<AppState>, public http: Http) { 
-        super(store, http);
-    }
+    constructor(public store: Store<AppState>, public http: Http) { }
 
     load() {
         this.http.get('api/profile').catch(err => {
-            return this.error(err);
+            return Observable.throw('failed to load profile');
         }).subscribe(x => this.store.dispatch({type: PROFILE_SET, payload: x.json()}));
     }  
 

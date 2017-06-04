@@ -4,14 +4,11 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { Observable } from 'rxjs/Observable';
 import { AUTHENTICATE, UNAUTHENTICATE } from '../state/authentication.reducer';
-import { AbstractService } from '../service/abstract.service';
 
 @Injectable()
-export class AuthenticationService extends AbstractService {
+export class AuthenticationService {
   
-  constructor(public store: Store<AppState>, public http: Http) {
-      super(store, http);
-   }
+  constructor(public store: Store<AppState>, public http: Http) { }
 
   login(code: string) {
     localStorage.setItem('strava_code', code);
@@ -19,7 +16,7 @@ export class AuthenticationService extends AbstractService {
     this.http.get('api/login?code=' + code).catch(err => {
           this.logout();
 
-          return this.error(err);
+          return Observable.throw('failed to login');
         }).subscribe(x => this.response(x));
   }
 

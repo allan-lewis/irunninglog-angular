@@ -1,9 +1,5 @@
-.ping-progress {
-    margin: 16px;
-}
-
 .ping-result {
-    margin: 0 16px 16px 16px;
+    margin: 16px;
 }
 
 .status-label, .error-code-label {
