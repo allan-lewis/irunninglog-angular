@@ -45,10 +45,10 @@ export class PingComponent implements OnInit {
   selector: 'irl-component-ping-good',
   template: `
     <div>
-      <span class="status-label">Last:</span> <span class="status-value">{{ping.last | comma}}</span><span class="status-ms">ms</span>
       <span class="status-label">Avg:</span> <span class="status-value">{{ping.average | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
-      <span class="status-label">Min:</span> <span class="status-value">{{ping.max | comma}}</span><span class="status-ms">ms</span>
-      <span class="status-label">Max:</span> <span class="status-value">{{ping.min | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Last:</span> <span class="status-value">{{ping.last | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Min:</span> <span class="status-value">{{ping.min | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Max:</span> <span class="status-value">{{ping.max | comma}}</span><span class="status-ms">ms</span>
     </div>
   `,
   styleUrls: ['./ping.component.css']
