@@ -30,7 +30,7 @@ export class PingComponent implements OnInit {
 
     if (val <= 0) {
       return this.ping.status >= 300 ? 'bad' : 'none';
-    } else if (val < 250) {
+    } else if (val < 500) {
       return 'good';
     } else if (val < 1000) {
       return 'ok'
