@@ -25,16 +25,30 @@ export class PingComponent implements OnInit {
     this.pingService.load();
   }
 
+  style() {
+    let val = this.ping.average;
+
+    if (val <= 0) {
+      return this.ping.status >= 300 ? 'bad' : 'none';
+    } else if (val < 250) {
+      return 'good';
+    } else if (val < 1000) {
+      return 'ok'
+    } else {
+      return 'bad';
+    }
+  }
+
 }
 
 @Component({
   selector: 'irl-component-ping-good',
   template: `
-    <div class="ping-result">
-      <span class="status-label">Last:</span> <span class="status-value">{{ping.last}}</span><span class="status-ms">ms</span>
-      <span class="status-label">Avg:</span> <span class="status-value">{{ping.average}}</span><span class="status-ms">ms</span>
-      <span class="status-label">Min:</span> <span class="status-value">{{ping.max}}</span><span class="status-ms">ms</span>
-      <span class="status-label">Max:</span> <span class="status-value">{{ping.min}}</span><span class="status-ms">ms</span>
+    <div>
+      <span class="status-label">Last:</span> <span class="status-value">{{ping.last | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Avg:</span> <span class="status-value">{{ping.average | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Min:</span> <span class="status-value">{{ping.max | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Max:</span> <span class="status-value">{{ping.min | comma}}</span><span class="status-ms">ms</span>
     </div>
   `,
   styleUrls: ['./ping.component.css']
@@ -48,8 +62,8 @@ export class PingGoodComponent {
 @Component({
   selector: 'irl-component-ping-bad',
   template: `
-    <div class="ping-result">
-      <span class="error-code-label">Last:</span> <span class="error-code-value">{{ping.last}}</span><span class="status-ms">ms</span>
+    <div>
+      <span class="error-code-label">Last:</span> <span class="error-code-value">{{ping.last | comma}}</span><span class="status-ms">ms</span>
       <span class="error-code-label">Error Code:</span> <span class="error-code-value">{{ping.status}}</span>
     </div>
   `,

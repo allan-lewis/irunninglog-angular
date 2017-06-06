@@ -44,9 +44,14 @@ import { authenticationModelReducer } from './state/authentication.reducer';
 import { pingModelReducer } from './state/ping.reducer';
 import { profileModelReducer } from './state/profile.reducer';
 
+// ~~ PIPES ========================
+
+import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
+
 @NgModule({
   declarations: [
     ChartComponent,
+    CommaSeparatedNumberPipe,
     ConfirmComponent,
     GoalsComponent,
     HeaderComponent,

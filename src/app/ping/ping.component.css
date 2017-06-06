@@ -1,5 +1,20 @@
-.ping-result {
-    margin: 16px;
+.bad {
+    margin: 8px;
+    background-color: rgb(244,67,54);
+}
+
+.ok {
+    margin: 8px;
+    background-color: rgb(255,215,64);
+}
+
+.good {
+    margin: 8px;
+    background-color: rgb(76,175,80);
+}
+
+.none {
+    margin: 8px;
 }
 
 .status-label, .error-code-label {
@@ -14,8 +29,4 @@
 .status-value, .error-code-value {
     font-weight: bold;
     font-size: 14px;
-}
-
-.error-code-value {
-    color: rgb(244,67,54);
 }
