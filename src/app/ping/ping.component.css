@@ -17,6 +17,10 @@
     margin: 8px;
 }
 
+.none, .bad, .good, .ok {
+    padding: 12px;
+}
+
 .status-label, .error-code-label {
     font-size: 12px;
 }
