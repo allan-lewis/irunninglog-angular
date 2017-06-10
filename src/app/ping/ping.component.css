@@ -1,16 +1,16 @@
 .bad {
     margin: 8px;
-    background-color: rgb(244,67,54);
+    background-color: #e53935;
 }
 
 .ok {
     margin: 8px;
-    background-color: rgb(255,215,64);
+    background-color: #fdd835;
 }
 
 .good {
     margin: 8px;
-    background-color: rgb(76,175,80);
+    background-color: #43a047;
 }
 
 .none {
@@ -27,7 +27,7 @@
 
 .status-ms {
     font-size: 12px;
-    color: rgba(0, 0, 0, .5); 
+    color: rgba(0, 0, 0, .54); 
 }
 
 .status-value, .error-code-value {

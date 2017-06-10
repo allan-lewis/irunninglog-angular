@@ -18,13 +18,13 @@
 }
 
 .progress-card-good {
-    border-left: 8px solid rgb(76,175,80);
+    border-left: 8px solid #43a047;
 }
 
 .progress-card-ok {
-    border-left: 8px solid rgb(255,215,64);
+    border-left: 8px solid #fdd835;
 }
 
 .progress-card-bad {
-    border-left: 8px solid rgb(244,67,54);
+    border-left: 8px solid #e53935;
 }

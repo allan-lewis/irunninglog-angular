@@ -8,4 +8,11 @@ export class StreaksModel {
 
 export class StreakModel {
 
+    title: string;
+    subtitle: string;
+    lineOne: string;
+    lineTwo: string;
+    progress: string;
+    percentage: number;
+
 }
