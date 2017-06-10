@@ -26,6 +26,7 @@ import { ProfileComponent } from './header/profile.component';
 import { LoginComponent } from './login/login.component';
 import { PageComponent } from './page/page.component';
 import { PingComponent, PingGoodComponent, PingBadComponent } from './ping/ping.component';
+import { ProgressCardComponent } from './progress/progress-card.component';
 import { ShellComponent } from './shell/shell.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { StreaksComponent } from './streaks/streaks.component';
@@ -43,6 +44,7 @@ import { PingService } from './ping/ping.service';
 import { authenticationModelReducer } from './state/authentication.reducer';
 import { pingModelReducer } from './state/ping.reducer';
 import { profileModelReducer } from './state/profile.reducer';
+import { streaksModelReducer } from './state/streaks.reducer';
 
 // ~~ PIPES ========================
 
@@ -62,6 +64,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     PingBadComponent,
     PingGoodComponent,
     ProfileComponent,
+    ProgressCardComponent,
     ShellComponent,
     ShoesComponent,
     StreaksComponent
@@ -80,7 +83,8 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     StoreModule.provideStore({
       authentication: authenticationModelReducer,
       ping: pingModelReducer,
-      profile: profileModelReducer
+      profile: profileModelReducer,
+      streaks: streaksModelReducer
     })
   ],
   providers: [

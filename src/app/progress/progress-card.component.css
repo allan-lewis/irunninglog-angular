@@ -1,0 +1,30 @@
+.progress-card-title {
+    font-size: 18px;
+}
+
+.progress-content-title {
+    margin-bottom: 4px;
+}
+
+.progress-content-subtitle {
+    margin-bottom: 4px;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.progress-card-good, .progress-card-ok, .progress-card-bad {
+    width: 240px;
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+.progress-card-good {
+    border-left: 8px solid rgb(76,175,80);
+}
+
+.progress-card-ok {
+    border-left: 8px solid rgb(255,215,64);
+}
+
+.progress-card-bad {
+    border-left: 8px solid rgb(244,67,54);
+}
