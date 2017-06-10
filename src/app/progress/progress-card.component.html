@@ -4,5 +4,6 @@
     <md-card-content>
         <div class="progress-content-title">{{model.lineOne}}</div>
         <div class="progress-content-subtitle">{{model.lineTwo}}</div>
+        <md-progress-bar [color]="color()" value="{{model.percentage}}"></md-progress-bar>
     </md-card-content>
 </md-card>

@@ -38,6 +38,7 @@ import { ConfirmService } from './confirm/confirm.service';
 import { ProfileService } from './header/profile.service';
 import { requestOptionsProvider } from './http/request-options.service';
 import { PingService } from './ping/ping.service';
+import { StreaksService } from './streaks/streaks.service';
 
 // ~~ REDUCERS =====================
 
@@ -92,7 +93,8 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     ConfirmService,
     PingService,
     ProfileService,
-    requestOptionsProvider
+    requestOptionsProvider,
+    StreaksService
   ],
     entryComponents: [
         ConfirmComponent,

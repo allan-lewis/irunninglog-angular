@@ -10,7 +10,29 @@ export class ProgressCardComponent {
     @Input() model : any;
 
     style() {
-        return 'progress-card-good';
+        switch (this.model['progress']) {
+            case 'GOOD':
+                return 'progress-card-good';
+            case 'OK':
+                return 'progress-card-ok';
+            case 'BAD':
+                return 'progress-card-bad';
+            default:
+                return 'progress-card-none';
+        }
+    }
+
+    color() {
+        switch (this.model['progress']) {
+            case 'GOOD':
+                return 'primary';
+            case 'OK':
+                return 'accent';
+            case 'BAD':
+                return 'warn';
+            default:
+                return 'primary';
+        }
     }
 
 }

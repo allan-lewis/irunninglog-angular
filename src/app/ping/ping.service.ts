@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { PingModel } from '../state/ping.model';
 import { PING_UPDATE } from '../state/ping.reducer';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class PingService {

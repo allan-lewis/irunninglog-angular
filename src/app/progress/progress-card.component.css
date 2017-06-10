@@ -7,11 +7,11 @@
 }
 
 .progress-content-subtitle {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     color: rgba(0, 0, 0, 0.54);
 }
 
-.progress-card-good, .progress-card-ok, .progress-card-bad {
+.progress-card-good, .progress-card-ok, .progress-card-bad, .progress-card-none {
     width: 240px;
     margin-right: 8px;
     margin-top: 8px;
