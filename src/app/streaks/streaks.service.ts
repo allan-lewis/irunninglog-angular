@@ -12,35 +12,10 @@ export class StreaksService {
 
     constructor(public store: Store<AppState>, public http: Http) { }
 
-    STREAKS = {
-        longest: {
-            startDate: '2015-01-01',
-            endDate: '2015-10-01',
-            progress: 'GOOD',
-            days: 274,
-            runs: 274,
-            percentage: 100
-        },
-        current: {
-            startDate: '2017-06-10',
-            endDate: '2017-06-12',
-            progress: 'BAD',
-            days: 3,
-            runs: 3,
-            percentage: 1
-        },
-        thisYear: {
-            startDate: '2016-12-04',
-            endDate: '2017-06-02',
-            progress: 'OK',
-            days: 181,
-            runs: 184,
-            percentage: 68
-        }
-    };
-
     load() {
-        this.update(this.STREAKS);
+        this.http.get('api/streaks').catch(err => {
+            return Observable.throw('failed to load streaks');
+        }).subscribe(x => this.update(x.json()));
     }
 
     update(json: any) {
