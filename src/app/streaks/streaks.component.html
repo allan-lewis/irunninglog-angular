@@ -1,9 +1,9 @@
 <div class="streaks-shell">
-    <div class="streaks-title">Streaks</div>
+    <div class="streaks-title">We're going streaking!</div>
     <div class="streaks-subtitle">Most days run consecutively</div>
     <div class="streaks-container" *ngIf="model">
-        <irl-component-progress-card [model]="model.longest"></irl-component-progress-card>
-        <irl-component-progress-card [model]="model.current"></irl-component-progress-card>
-        <irl-component-progress-card [model]="model.thisYear"></irl-component-progress-card>
+        <irl-component-progress-card [model]="model.longest" *ngIf="!!model.longest"></irl-component-progress-card>
+        <irl-component-progress-card [model]="model.current" *ngIf="!!model.current"></irl-component-progress-card>
+        <irl-component-progress-card [model]="model.thisYear" *ngIf="!!model.thisYear"></irl-component-progress-card>
     </div>
 </div>

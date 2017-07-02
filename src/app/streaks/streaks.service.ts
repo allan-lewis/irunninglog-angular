@@ -27,6 +27,10 @@ export class StreaksService {
     }
 
     streakFromJson(title: string, json: any) {
+        if (!json) {
+            return null;
+        }
+
         let streak = new StreakModel();
 
         streak.title = title;
