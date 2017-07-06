@@ -1,1 +1,7 @@
-<div class="shoes-placeholder">SHOES</div>
+<div class="shoes-shell">
+    <div class="shoes-title">My shoes</div>
+    <div class="shoes-subtitle">Where the rubber meets the road</div>
+    <div class="shoes-container" *ngIf="model">
+        <irl-component-progress-card [model]="shoe" *ngFor="let shoe of model"></irl-component-progress-card>
+    </div>
+</div>

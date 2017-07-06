@@ -1,36 +1,31 @@
 import { IProgressItem } from './progress-item.model';
 
-export class StreaksModel {
+export class ShoeModel implements IProgressItem {
 
-    longest: StreakModel;
-    current: StreakModel;
-    thisYear: StreakModel;
-
-}
-
-export class StreakModel implements IProgressItem {
-
-    title: string;
-    subtitle: string;
-    lineOne: string;
-    lineTwo: string;
+    id: string;
+    name: string;
+    brand: string;
+    model: string;
+    description: string;
+    distance: string;
+    primary: boolean;
     progress: string;
     percentage: number;
-
+    
     getTitle(): string {
-        return this.title;
+        return this.name + (this.primary ? '*' : '');
     }
 
     getSubtitle(): string {
-        return this.subtitle;
+        return this.distance;
     }
 
     getLineOne(): string {
-        return this.lineOne;
+        return this.brand + ' ' + this.model;
     }
 
     getLineTwo(): string {
-        return this.lineTwo;
+        return this.description;
     }
 
     getProgress(): string {

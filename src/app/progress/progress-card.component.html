@@ -1,9 +1,9 @@
 <md-card [ngClass]="style()">
-    <md-card-title class="progress-card-title">{{model.title}}</md-card-title>
-    <md-card-subtitle>{{model.subtitle}}</md-card-subtitle>
+    <md-card-title class="progress-card-title">{{model.getTitle()}}</md-card-title>
+    <md-card-subtitle>{{model.getSubtitle()}}</md-card-subtitle>
     <md-card-content>
-        <div class="progress-content-title">{{model.lineOne}}</div>
-        <div class="progress-content-subtitle">{{model.lineTwo}}</div>
-        <md-progress-bar [color]="color()" value="{{model.percentage}}"></md-progress-bar>
+        <div class="progress-content-title">{{model.getLineOne()}}</div>
+        <div class="progress-content-subtitle">{{model.getLineTwo()}}</div>
+        <md-progress-bar [color]="color()" value="{{model.getPercentage()}}"></md-progress-bar>
     </md-card-content>
 </md-card>

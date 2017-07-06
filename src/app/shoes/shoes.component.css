@@ -1,8 +1,21 @@
-.shoes-placeholder {
-    height: 120px;
-    line-height: 120px;
-    padding-left: 16px;
-    color: #ffffff;
-    font-weight: bold;
-    background-color: #03A9F4;
+.shoes-shell {
+    margin: 8px;
+    padding: 12px;
+}
+
+.shoes-container {
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+}
+
+.shoes-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.shoes-subtitle {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.54);
+    margin-bottom: 8px;
 }

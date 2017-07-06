@@ -38,6 +38,7 @@ import { ConfirmService } from './confirm/confirm.service';
 import { ProfileService } from './header/profile.service';
 import { requestOptionsProvider } from './http/request-options.service';
 import { PingService } from './ping/ping.service';
+import { ShoesService } from './shoes/shoes.service';
 import { StreaksService } from './streaks/streaks.service';
 
 // ~~ REDUCERS =====================
@@ -45,6 +46,7 @@ import { StreaksService } from './streaks/streaks.service';
 import { authenticationModelReducer } from './state/authentication.reducer';
 import { pingModelReducer } from './state/ping.reducer';
 import { profileModelReducer } from './state/profile.reducer';
+import { shoesModelReducer } from './state/shoes.reducer';
 import { streaksModelReducer } from './state/streaks.reducer';
 
 // ~~ PIPES ========================
@@ -85,6 +87,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
       authentication: authenticationModelReducer,
       ping: pingModelReducer,
       profile: profileModelReducer,
+      shoes: shoesModelReducer,
       streaks: streaksModelReducer
     })
   ],
@@ -94,6 +97,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     PingService,
     ProfileService,
     requestOptionsProvider,
+    ShoesService,
     StreaksService
   ],
     entryComponents: [
