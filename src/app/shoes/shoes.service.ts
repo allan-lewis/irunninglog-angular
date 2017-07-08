@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
-import { ADD_SHOE } from '../state/shoes.reducer';
+import { UPDATE_SHOE } from '../state/shoes.reducer';
 import { ShoeModel } from '../state/shoe.model';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class ShoesService {
@@ -11,30 +12,26 @@ export class ShoesService {
     constructor(public store: Store<AppState>, public http: Http) { }
 
     load() {
-        let nu = new ShoeModel();
-        nu.id = 'g2222100';
-        nu.name = 'Nu';
-        nu.brand = 'Mizuno';
-        nu.model = 'Wave Inspire 11';
-        nu.description = 'Pink';
-        nu.primary = false;
-        nu.distance = '410.5 mi';
-        nu.percentage = 82;
-        nu.progress = 'BAD';
+        this.http.get('api/shoes').catch(err => {
+            return Observable.throw('failed to load shoes');
+        }).subscribe(x => this.update(x.json()));
+    }
 
-        let omicron = new ShoeModel();
-        omicron.id = 'g2276780';
-        omicron.name = 'Omicron';
-        omicron.brand = 'Mizuno';
-        omicron.model = 'Wave Inspire 13';
-        omicron.description = 'Green';
-        omicron.primary = true;
-        omicron.distance = '117 mi';
-        omicron.percentage = 23;
-        omicron.progress = 'GOOD';
+    update(json: Array<ShoeModel>) {
+        for (let entry of json) {
+            let shoe = new ShoeModel();
+            shoe.id = entry.id;
+            shoe.name = entry.name;
+            shoe.brand = entry.brand;
+            shoe.model = entry.model;
+            shoe.description = entry.description ? entry.description : '---';
+            shoe.distance = entry.distance;
+            shoe.percentage = entry.percentage;
+            shoe.progress = entry.progress;
+            shoe.primary = entry.primary;
 
-        this.store.dispatch({type: ADD_SHOE, payload: nu});
-        this.store.dispatch({type: ADD_SHOE, payload: omicron});
+            this.store.dispatch({type: UPDATE_SHOE, payload: shoe});
+        }
     }
 
 }
