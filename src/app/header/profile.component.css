@@ -34,3 +34,9 @@
     display: flex;
     flex-direction: column;
 }
+
+@media only screen and (max-width : 640px) {
+    .profile-info {
+        visibility: hidden;
+    }
+}
