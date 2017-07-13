@@ -7,7 +7,7 @@ import { StreaksService } from './streaks.service';
 @Component({
   selector: 'irl-component-streaks',
   templateUrl: './streaks.component.html',
-  styleUrls: ['./streaks.component.css']
+  styleUrls: ['./streaks.component.css', '../progress/progress-cards.css']
 })
 export class StreaksComponent implements OnInit {
 

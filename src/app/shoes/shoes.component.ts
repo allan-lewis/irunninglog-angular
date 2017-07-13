@@ -7,7 +7,7 @@ import { ShoesService } from './shoes.service';
 @Component({
   selector: 'irl-component-shoes',
   templateUrl: './shoes.component.html',
-  styleUrls: ['./shoes.component.css']
+  styleUrls: ['./shoes.component.css', '../progress/progress-cards.css']
 })
 export class ShoesComponent {
 

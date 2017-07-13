@@ -17,9 +17,9 @@ import { StoreModule } from '@ngrx/store';
 
 // ~~ COMPONENTS ===================
 
+import { ChallengesComponent } from './challenges/challenges.component';
 import { ChartComponent } from './chart/chart.component';
 import { ConfirmComponent } from './confirm/confirm.component';  
-import { GoalsComponent } from './goals/goals.component';
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './header/logout.component';
 import { ProfileComponent } from './header/profile.component';
@@ -34,6 +34,7 @@ import { StreaksComponent } from './streaks/streaks.component';
 // ~~ SERVICES =====================
 
 import { AuthenticationService } from "./authentication/authentication.service";
+import { ChallengesService } from "./challenges/challenges.service";
 import { ConfirmService } from './confirm/confirm.service';
 import { ProfileService } from './header/profile.service';
 import { requestOptionsProvider } from './http/request-options.service';
@@ -44,6 +45,7 @@ import { StreaksService } from './streaks/streaks.service';
 // ~~ REDUCERS =====================
 
 import { authenticationModelReducer } from './state/authentication.reducer';
+import { challengesModelReducer } from './state/challenges.reducer';
 import { pingModelReducer } from './state/ping.reducer';
 import { profileModelReducer } from './state/profile.reducer';
 import { shoesModelReducer } from './state/shoes.reducer';
@@ -58,7 +60,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     ChartComponent,
     CommaSeparatedNumberPipe,
     ConfirmComponent,
-    GoalsComponent,
+    ChallengesComponent,
     HeaderComponent,
     LoginComponent,
     LogoutComponent,
@@ -85,6 +87,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     BrowserAnimationsModule,
     StoreModule.provideStore({
       authentication: authenticationModelReducer,
+      challenges: challengesModelReducer,
       ping: pingModelReducer,
       profile: profileModelReducer,
       shoes: shoesModelReducer,
@@ -93,6 +96,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
   ],
   providers: [
     AuthenticationService,
+    ChallengesService,
     ConfirmService,
     PingService,
     ProfileService,

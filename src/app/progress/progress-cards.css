@@ -1,0 +1,21 @@
+.progress-cards-shell {
+    margin: 8px;
+    padding: 12px;
+}
+
+.progress-cards-container {
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+}
+
+.progress-cards-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.progress-cards-subtitle {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.54);
+    margin-bottom: 8px;
+}
