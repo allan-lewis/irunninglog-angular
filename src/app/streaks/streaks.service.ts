@@ -1,32 +1,46 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
+import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
 import { STREAKS_UPDATE } from '../state/streaks.reducer';
 import { StreakModel, StreaksModel } from '../state/streaks.model';
-import { Observable } from 'rxjs';
 import * as moment from 'moment';
 
 @Injectable()
-export class StreaksService {
+export class StreaksService extends AbstractTimedHttpService {
 
-    constructor(public store: Store<AppState>, public http: Http) { }
-
-    load() {
-        this.http.get('api/streaks').catch(err => {
-            return Observable.throw('failed to load streaks');
-        }).subscribe(x => this.update(x.json()));
+    constructor(public store: Store<AppState>, http: Http) { 
+        super(http);
     }
 
-    update(json: any) {
+    getInterval() {
+        return 30000;
+    }
+
+    getPath() {
+         return '/api/streaks'
+    };
+
+    getErrorMessage() {
+        return 'failed to load streaks';
+    }
+
+    before() {
+        return {};
+    }
+
+    failure(response: Response, before: any) { }
+
+    success(result: any, before: any) {
         let streaks = new StreaksModel();
-        streaks.longest = this.streakFromJson('Longest Streak Ever', json['longest']);
-        streaks.current = this.streakFromJson('Current Streak', json['current']);
-        streaks.thisYear = this.streakFromJson('Longest Streak This Year', json['thisYear']);
+        streaks.longest = this.streakFromJson('Longest Streak Ever', result['longest']);
+        streaks.current = this.streakFromJson('Current Streak', result['current']);
+        streaks.thisYear = this.streakFromJson('Longest Streak This Year', result['thisYear']);
         this.store.dispatch({type: STREAKS_UPDATE, payload: streaks})
     }
 
-    streakFromJson(title: string, json: any) {
+    private streakFromJson(title: string, json: any) {
         if (!json) {
             return null;
         }

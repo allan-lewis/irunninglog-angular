@@ -1,23 +1,37 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { UPDATE_SHOE } from '../state/shoes.reducer';
 import { ShoeModel } from '../state/shoe.model';
-import { Observable } from 'rxjs';
+import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
 
 @Injectable()
-export class ShoesService {
+export class ShoesService extends AbstractTimedHttpService {
 
-    constructor(public store: Store<AppState>, public http: Http) { }
-
-    load() {
-        this.http.get('api/shoes').catch(err => {
-            return Observable.throw('failed to load shoes');
-        }).subscribe(x => this.update(x.json()));
+    constructor(public store: Store<AppState>, public http: Http) { 
+        super(http);
     }
 
-    update(json: Array<ShoeModel>) {
+    getInterval() {
+        return 30000;
+    }
+
+    getPath() {
+         return '/api/shoes'
+    };
+
+    getErrorMessage() {
+        return 'failed to load shoes';
+    }
+
+    before() {
+        return {};
+    }
+
+    failure(response: Response, before: any) { }
+
+    success(json: Array<ShoeModel>, before: any) {
         for (let entry of json) {
             let shoe = new ShoeModel();
             shoe.id = entry.id;
@@ -30,7 +44,7 @@ export class ShoesService {
             shoe.progress = entry.progress;
             shoe.primary = entry.primary;
 
-            this.store.dispatch({type: UPDATE_SHOE, payload: shoe});
+            // this.store.dispatch({type: UPDATE_SHOE, payload: shoe});
         }
     }
 
