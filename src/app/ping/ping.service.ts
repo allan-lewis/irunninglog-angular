@@ -42,7 +42,7 @@ export class PingService extends AbstractTimedHttpService {
         this.store.dispatch({type: PING_UPDATE, payload: model});
     }
 
-    success(result: any, before: any) {
+    success(response: Response, before: any) {
         let last = new Date().getTime() - before['timestamp'];
 
         if (this.pings.length == 4) {
@@ -52,8 +52,7 @@ export class PingService extends AbstractTimedHttpService {
 
         let observable = Observable.from(this.pings);
         let model = new PingModel();
-        // TODO - Need status code
-        model.status = 200;
+        model.status = response.status;
         model.last = last;
         observable.min().subscribe(x => model.min = x);
         observable.max().subscribe(x => model.max = x);

@@ -31,8 +31,8 @@ export class ChallengesService extends AbstractTimedHttpService {
 
     failure(response: Response, before: any) { }
 
-    success(json: Array<ChallengeModel>, before: any) {
-        for (let entry of json) {
+    success(response: Response, before: any) {
+        for (let entry of response.json()) {
             let model = new ChallengeModel();
             model.name = entry.name;
             model.description = entry.description;

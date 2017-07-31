@@ -31,8 +31,8 @@ export class ShoesService extends AbstractTimedHttpService {
 
     failure(response: Response, before: any) { }
 
-    success(json: Array<ShoeModel>, before: any) {
-        for (let entry of json) {
+    success(response: Response, before: any) {
+        for (let entry of response.json()) {
             let shoe = new ShoeModel();
             shoe.id = entry.id;
             shoe.name = entry.name;

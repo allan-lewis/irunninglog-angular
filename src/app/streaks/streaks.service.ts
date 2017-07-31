@@ -32,7 +32,8 @@ export class StreaksService extends AbstractTimedHttpService {
 
     failure(response: Response, before: any) { }
 
-    success(result: any, before: any) {
+    success(response: Response, before: any) {
+        let result = response.json();
         let streaks = new StreaksModel();
         streaks.longest = this.streakFromJson('Longest Streak Ever', result['longest']);
         streaks.current = this.streakFromJson('Current Streak', result['current']);

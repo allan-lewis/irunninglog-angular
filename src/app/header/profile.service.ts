@@ -3,17 +3,35 @@ import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { PROFILE_SET } from '../state/profile.reducer';
-import { Observable } from 'rxjs';
+import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
 
 @Injectable()
-export class ProfileService {
+export class ProfileService extends AbstractTimedHttpService {
 
-    constructor(public store: Store<AppState>, public http: Http) { }
+    constructor(public store: Store<AppState>, public http: Http) { 
+        super(http);
+    }
 
-    load() {
-        this.http.get('api/profile').catch(err => {
-            return Observable.throw('failed to load profile');
-        }).subscribe(x => this.store.dispatch({type: PROFILE_SET, payload: x.json()}));
-    }  
+    getInterval() {
+        return 300000;
+    }
+
+    getPath() {
+         return '/api/profile'
+    };
+
+    getErrorMessage() {
+        return 'failed to load profile';
+    }
+
+    before() {
+        return {};
+    }
+
+    failure(response: Response, before: any) { }
+
+    success(response: Response, before: any) {
+        this.store.dispatch({type: PROFILE_SET, payload: response.json()});
+    }
 
 }
