@@ -44,7 +44,7 @@ export class ShoesService extends AbstractTimedHttpService {
             shoe.progress = entry.progress;
             shoe.primary = entry.primary;
 
-            // this.store.dispatch({type: UPDATE_SHOE, payload: shoe});
+            this.store.dispatch({type: UPDATE_SHOE, payload: shoe});
         }
     }
 

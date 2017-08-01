@@ -41,7 +41,7 @@ export class ChallengesService extends AbstractTimedHttpService {
             model.percentage = entry.percentage;
             model.progress = entry.progress;
 
-            // this.store.dispatch({type: UPDATE_CHALLENGE, payload: model});
+            this.store.dispatch({type: UPDATE_CHALLENGE, payload: model});
         }
     }
 
