@@ -1,15 +1,12 @@
 .bad {
-    margin: 8px;
     background-color: #e53935;
 }
 
 .ok {
-    margin: 8px;
     background-color: #fdd835;
 }
 
 .good {
-    margin: 8px;
     background-color: #43a047;
 }
 
@@ -18,7 +15,7 @@
 }
 
 .none, .bad, .good, .ok {
-    padding: 12px;
+    padding: 4px;
 }
 
 .status-label, .error-code-label {

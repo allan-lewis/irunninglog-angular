@@ -1,6 +1,4 @@
-<md-card [ngClass]="style()">
-    <md-card-content>
-        <irl-component-ping-good *ngIf="ping.status >= 200 && ping.status < 300" [ping]="ping"></irl-component-ping-good>
-        <irl-component-ping-bad  *ngIf="ping.status >= 300" [ping]="ping"></irl-component-ping-bad>
-    </md-card-content>
-</md-card>
+<div [ngClass]="style()">
+    <irl-component-ping-good *ngIf="ping.status >= 200 && ping.status < 300" [ping]="ping"></irl-component-ping-good>
+    <irl-component-ping-bad  *ngIf="ping.status >= 300" [ping]="ping"></irl-component-ping-bad>
+</div>
