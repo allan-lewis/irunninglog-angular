@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
     }    
 
     ngOnInit() {
-        this.store.select(state => state.authentication).filter(x => !!x.token).subscribe(x => this.profileService.load());
+        this.store.select(state => state.authentication).filter(x => !!x && !!x.token).subscribe(x => this.profileService.load());
     }
 
 }

@@ -53,4 +53,5 @@ describe('HeaderComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('span').textContent).toContain('irunninglog');
   }));
+  
 });

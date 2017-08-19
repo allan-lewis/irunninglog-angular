@@ -79,7 +79,7 @@ describe('ShoesComponent', () => {
 
         let response = [
             {"id":"g2276780","name":"Omicron","brand":"Mizuno","model":"Wave Inspire 13","description":"Green","percentage":60,"progress":"OK","distance":"303.3 mi","primary":true},
-            {"id":"g2276782","name":"Omicron","brand":"Mizuno","model":"Wave Inspire 13","description":"Green","percentage":60,"progress":"OK","distance":"303.3 mi","primary":true}
+            {"id":"g2276782","name":"Omicron","brand":"Mizuno","model":"Wave Inspire 13","description":"Green","percentage":60,"progress":"NONE","distance":"303.3 mi","primary":true}
         ];
 
       mockBackend.connections.subscribe(
