@@ -5,10 +5,14 @@ export abstract class AbstractTimedHttpService {
 
     constructor(public http: Http) { }
 
+    repeating = true;
+
     load() {
         this.call();
 
-        Observable.interval(this.getInterval()).subscribe(x => this.call());
+        if (this.repeating) {
+            Observable.interval(this.getInterval()).subscribe(x => this.call());
+        }
     }
 
     private call() {

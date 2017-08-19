@@ -13,7 +13,6 @@ import { AppState } from '../state/app.state';
 export class PingComponent implements OnInit {
 
   mode = 'indeterminate';
-  color = 'primary';
 
   ping: PingModel;
 
