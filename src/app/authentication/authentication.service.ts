@@ -16,8 +16,8 @@ export class AuthenticationService {
     this.http.get('api/login?code=' + code).catch(err => {
           this.logout();
 
-          return Observable.throw('failed to login');
-        }).subscribe(x => this.response(x));
+          return Observable.of('failed to login');
+        }).filter(x => x instanceof Response).map(x => <Response> x).subscribe(x => this.response(x));
   }
 
   logout() {

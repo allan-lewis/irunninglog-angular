@@ -21,4 +21,5 @@ export class ConfirmComponent {
     constructor(public dialogRef: MdDialogRef<ConfirmComponent>) {
 
     }
+    
 }
