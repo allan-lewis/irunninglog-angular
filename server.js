@@ -21,7 +21,7 @@ const forceSSL = function() {
 // middleware
 app.use(forceSSL());
 
-app.use('/api', proxy({target: 'https://irunninglog-api-int.herokuapp.com', changeOrigin: true}));
+app.use('/api', proxy({target: 'http://ec2-34-228-75-250.compute-1.amazonaws.com:8080', changeOrigin: true}));
 
 // Run the app by serving the static files
 // in the dist directory
