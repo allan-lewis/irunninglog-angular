@@ -1,0 +1,1 @@
+touch /opt/irunninglog/angular/stop
