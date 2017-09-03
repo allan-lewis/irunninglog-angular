@@ -21,4 +21,5 @@ artifacts:
         - ./app_stop.sh
         - ./app_clean.sh
         - ./appspec.yml
+        - ./nginx.conf
         - ./dist/**/*

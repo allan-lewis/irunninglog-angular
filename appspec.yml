@@ -3,6 +3,8 @@ os: linux
 files:
   - source: dist/
     destination: /opt/irunninglog/angular/doc_root
+  - source: nginx.conf
+    destination: /opt/irunninglog/angular
 hooks:
   ApplicationStop:
     - location: app_stop.sh
