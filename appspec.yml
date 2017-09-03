@@ -1,12 +1,12 @@
 version: 0.0
 os: linux
 files:
-  - source: dist
+  - source: dist/
     destination: /opt/irunninglog/angular/doc_root
-# hooks:
+hooks:
 #   ApplicationStop:
 #     - location: app_stop.sh
 #   ApplicationStart:
 #     - location: app_start.sh
-#   BeforeInstall:
-#     - location: app_clean.sh
+  BeforeInstall:
+    - location: app_clean.sh
