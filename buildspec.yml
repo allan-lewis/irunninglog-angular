@@ -17,5 +17,8 @@ phases:
             
 artifacts:
     files:
+        - ./app_start.sh
+        - ./app_stop.sh
+        - ./app_clean.sh
         - ./appspec.yml
         - ./dist/**/*

@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: dist/**/*
+  - source: dist
     destination: /opt/irunninglog/angular/doc_root
 # hooks:
 #   ApplicationStop:
