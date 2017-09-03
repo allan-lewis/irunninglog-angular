@@ -10,9 +10,12 @@ phases:
         commands:
             - echo Build started on `date`
             - ng build --aot -prod
+    post_build:
+        commands:
+            - echo Build completed on `date`
+            - chmod +x *.sh
             
 artifacts:
     files:
         - ./appspec.yml
-        - ./server.js
         - ./dist/**/*
