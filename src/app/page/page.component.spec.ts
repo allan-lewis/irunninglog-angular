@@ -18,6 +18,8 @@ import { AuthenticationModel } from '../state/authentication.model';
 import { profileModelReducer } from '../state/profile.reducer';
 import { HttpModule, Http, XHRBackend } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { SummaryComponent } from '../summary/summary.component';
+import { StatisticsService } from '../statistics/statistics.service';
 
 describe('PageComponent', () => {
   beforeEach(async(() => {
@@ -41,13 +43,15 @@ describe('PageComponent', () => {
         PingBadComponent,
         ChallengesComponent,
         ProgressCardComponent,
-        CommaSeparatedNumberPipe
+        CommaSeparatedNumberPipe,
+        SummaryComponent
       ],
       providers: [
           PingService,
           StreaksService,
           ShoesService,
           ChallengesService,
+          StatisticsService,
             {
                 provide: XHRBackend,
                 useClass: MockBackend
@@ -62,12 +66,14 @@ describe('PageComponent', () => {
       PingService,
       ChallengesService,
       StreaksService,
-      ShoesService
-    ], (mockBackend, ping: PingService, challenges: ChallengesService, streaks: StreaksService, shoes: ShoesService) => {
+      ShoesService,
+      StatisticsService
+    ], (mockBackend, ping: PingService, challenges: ChallengesService, streaks: StreaksService, shoes: ShoesService, stats: StatisticsService) => {
         ping.repeating = false;
         challenges.repeating = false;
         streaks.repeating = false;
         shoes.repeating = false;
+        stats.repeating = false;
 
         const fixture = TestBed.createComponent(PageComponent);
         expect(fixture.componentInstance).not.toBeNull();

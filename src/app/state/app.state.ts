@@ -4,6 +4,7 @@ import { PingModel } from './ping.model';
 import { ProfileModel } from './profile.model';
 import { ShoeModel } from './shoe.model';
 import { StreaksModel } from './streaks.model';
+import {SummaryModel } from './summary.model';
 
 export interface AppState {
     authentication: AuthenticationModel,
@@ -11,5 +12,6 @@ export interface AppState {
     ping: PingModel,
     profile: ProfileModel,
     shoes: Array<ShoeModel>,
-    streaks: StreaksModel
+    streaks: StreaksModel,
+    summary: SummaryModel
 }

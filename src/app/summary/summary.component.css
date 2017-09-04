@@ -1,0 +1,15 @@
+.summary-container {
+    padding: 16px 16px 0 16px;
+}
+
+.summary-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff5722;
+}
+
+.summary-value {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.54);
+    margin-right: 8px;
+}
