@@ -6,12 +6,9 @@ import { Observable } from 'rxjs';
 import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
 import { SummaryModel } from '../state/summary.model';
 import { SUMMARY_UPDATE } from '../state/summary.reducer';
-import { CommaSeparatedNumberPipe } from '../pipe/comma.pipe';
 
 @Injectable()
 export class StatisticsService extends AbstractTimedHttpService {
-
-    pipe = new CommaSeparatedNumberPipe();
 
     constructor(public store: Store<AppState>, public http: Http) { 
         super(http);
@@ -42,9 +39,10 @@ export class StatisticsService extends AbstractTimedHttpService {
 
         let model = new SummaryModel();
         let summary = json['summary'];
-        model.thisWeek = this.pipe.transform(summary['thisWeek'], null) + ' mi';
-        model.thisMonth = this.pipe.transform(summary['thisMonth'], null) + ' mi';
-        model.thisYear = this.pipe.transform(summary['thisYear'], null) + ' mi';
+        model.thisWeek = summary['thisWeek'];
+        model.thisMonth = summary['thisMonth'];
+        model.thisYear = summary['thisYear'];
+        model.allTime = summary['allTime'];
 
         this.store.dispatch({type: SUMMARY_UPDATE, payload: model});
     }
