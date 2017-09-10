@@ -2,14 +2,16 @@
     padding: 16px 16px 0 16px;
 }
 
+.summary-label, .summary-value {
+    font-size: 16px;
+}
+
 .summary-label {
-    font-size: 18px;
     font-weight: bold;
     color: #ff5722;
 }
 
 .summary-value {
-    font-size: 18px;
     color: rgba(0, 0, 0, 0.54);
     margin-right: 8px;
 }

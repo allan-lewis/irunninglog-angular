@@ -31,6 +31,7 @@ import { ShellComponent } from './shell/shell.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { StreaksComponent } from './streaks/streaks.component';
 import { SummaryComponent } from './summary/summary.component';
+import { YearlyComponent } from './yearly/yearly.component';
 
 // ~~ SERVICES =====================
 
@@ -76,7 +77,8 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     ShellComponent,
     ShoesComponent,
     StreaksComponent,
-    SummaryComponent
+    SummaryComponent,
+    YearlyComponent
   ],
   imports: [
     FormsModule,
