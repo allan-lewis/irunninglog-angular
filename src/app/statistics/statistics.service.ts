@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
 import { SummaryModel } from '../state/summary.model';
 import { SUMMARY_UPDATE } from '../state/summary.reducer';
+import { YearlyTotalModel } from '../state/yearly-total.model';
+import { UPDATE_TOTALS } from '../state/yearly-total.reducer';
 
 @Injectable()
 export class StatisticsService extends AbstractTimedHttpService {
@@ -45,6 +47,14 @@ export class StatisticsService extends AbstractTimedHttpService {
         model.allTime = summary['allTime'];
 
         this.store.dispatch({type: SUMMARY_UPDATE, payload: model});
+
+        for (let entry of response.json()['years']) {
+            let model = new YearlyTotalModel();
+            model.year = entry['year'];
+            model.total = entry['total'];
+
+            this.store.dispatch({type: UPDATE_TOTALS, payload: model});
+        }
     }
 
 }

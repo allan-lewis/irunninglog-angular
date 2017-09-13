@@ -54,6 +54,7 @@ import { profileModelReducer } from './state/profile.reducer';
 import { shoesModelReducer } from './state/shoes.reducer';
 import { streaksModelReducer } from './state/streaks.reducer';
 import { summaryModelReducer } from './state/summary.reducer';
+import { yearlyTotalModelReducer } from './state/yearly-total.reducer'; 
 
 // ~~ PIPES ========================
 
@@ -98,7 +99,8 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
       profile: profileModelReducer,
       shoes: shoesModelReducer,
       streaks: streaksModelReducer,
-      summary: summaryModelReducer
+      summary: summaryModelReducer,
+      yearlyTotals: yearlyTotalModelReducer
     })
   ],
   providers: [

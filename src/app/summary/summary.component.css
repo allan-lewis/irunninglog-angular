@@ -1,5 +1,9 @@
 .summary-container {
-    padding: 16px 16px 0 16px;
+    /*padding: 16px 16px 0 16px;*/
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between
 }
 
 .summary-label, .summary-value {

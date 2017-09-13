@@ -1,6 +1,6 @@
-.yearly-placeholder {
-    padding-left: 16px;
-    color: #ffffff;
-    font-weight: bold;
-    background-color: #9c27b0;
+.yearly-container {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between
 }
