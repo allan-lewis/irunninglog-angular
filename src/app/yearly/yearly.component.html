@@ -1,8 +1,5 @@
 <div class="yearly-container">
     <div *ngFor="let item of model">
-        <div class="yearly-item">
-            <div class="yearly-total">{{item.total}}</div>
-            <div class="yearly-year">{{item.year}}</div>
-        </div>
+        <irl-component-yearly-total [model]="item"></irl-component-yearly-total>
     </div>
 </div>

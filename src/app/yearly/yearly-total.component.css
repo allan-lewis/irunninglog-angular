@@ -1,0 +1,17 @@
+.total-d3 {
+    height: 100px;
+    width: 100px;
+}
+
+.yearly-year, .yearly-total {
+    text-align: center;
+}
+
+.yearly-year {
+    font-weight: bold;
+    color: #ff5722;
+}
+
+.yearly-total {
+    color: rgba(0, 0, 0, 0.54);
+}

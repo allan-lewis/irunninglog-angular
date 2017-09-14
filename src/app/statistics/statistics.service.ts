@@ -52,6 +52,7 @@ export class StatisticsService extends AbstractTimedHttpService {
             let model = new YearlyTotalModel();
             model.year = entry['year'];
             model.total = entry['total'];
+            model.percentage = entry['percentage'];
 
             this.store.dispatch({type: UPDATE_TOTALS, payload: model});
         }

@@ -32,6 +32,7 @@ import { ShoesComponent } from './shoes/shoes.component';
 import { StreaksComponent } from './streaks/streaks.component';
 import { SummaryComponent } from './summary/summary.component';
 import { YearlyComponent } from './yearly/yearly.component';
+import { YearlyTotalComponent } from './yearly/yearly-total.component';
 
 // ~~ SERVICES =====================
 
@@ -79,7 +80,8 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     ShoesComponent,
     StreaksComponent,
     SummaryComponent,
-    YearlyComponent
+    YearlyComponent,
+    YearlyTotalComponent
   ],
   imports: [
     FormsModule,
