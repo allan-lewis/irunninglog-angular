@@ -79,10 +79,11 @@ describe('PingService', () => {
 
       let response = {
           summary: {
-              thisWeek: '63',
-              thisMonth: '38.5',
-              thisYear: '1441'
-          }
+              thisWeek: '63 mi',
+              thisMonth: '38.5 mi',
+              thisYear: '1,441 mi'
+          },
+          years: []
       };
 
       mockBackend.connections.subscribe(

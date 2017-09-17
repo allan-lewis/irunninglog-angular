@@ -6,6 +6,8 @@ import { ChallengesService } from '../challenges/challenges.service';
 import { ShoesComponent } from '../shoes/shoes.component';
 import { ShoesService } from '../shoes/shoes.service';
 import { StreaksComponent } from '../streaks/streaks.component';
+import { YearlyComponent } from '../yearly/yearly.component';
+import { YearlyTotalComponent } from '../yearly/yearly-total.component';
 import { StreaksService } from '../streaks/streaks.service';
 import { PingComponent, PingGoodComponent, PingBadComponent } from '../ping/ping.component';
 import { PingService } from '../ping/ping.service';
@@ -44,7 +46,9 @@ describe('PageComponent', () => {
         ChallengesComponent,
         ProgressCardComponent,
         CommaSeparatedNumberPipe,
-        SummaryComponent
+        SummaryComponent,
+        YearlyComponent,
+        YearlyTotalComponent
       ],
       providers: [
           PingService,
