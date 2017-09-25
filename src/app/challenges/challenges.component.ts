@@ -15,7 +15,6 @@ export class ChallengesComponent {
 
   constructor(public store: Store<AppState>, service: ChallengesService) {
     this.store.select(state => state.challenges).filter(x => !!x).subscribe(x => this.model = x);
-    service.load(); 
   }
 
 }

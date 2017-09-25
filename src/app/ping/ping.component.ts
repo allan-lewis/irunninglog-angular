@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PingModel } from '../state/ping.model'
 import { PingService } from './ping.service';
@@ -10,7 +10,7 @@ import { AppState } from '../state/app.state';
   templateUrl: './ping.component.html',
   styleUrls: ['./ping.component.css']
 })
-export class PingComponent implements OnInit {
+export class PingComponent {
 
   mode = 'indeterminate';
 
@@ -18,10 +18,6 @@ export class PingComponent implements OnInit {
 
   constructor(public pingService: PingService, public store: Store<AppState>) {
     this.store.select(state => state.ping).subscribe(x => this.ping = x);
-  }
-
-  ngOnInit() {
-    this.pingService.load();
   }
 
   style() {

@@ -29,8 +29,6 @@ describe('PingService', () => {
       XHRBackend,
       PingService
     ], (mockBackend, service: PingService) => {
-        service.repeating = false;
-        
         expect(service.getInterval()).toBe(15000);
     })
   ));
@@ -40,8 +38,6 @@ describe('PingService', () => {
       XHRBackend,
       PingService
     ], (mockBackend, service: PingService) => {
-        service.repeating = false;
-        
         service.success(new Response(
             new ResponseOptions({ status: 200, body: {timestamp: new Date().getTime()} })
           ), {});

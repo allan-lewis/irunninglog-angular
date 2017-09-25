@@ -40,8 +40,6 @@ describe('ChallengesComponent', () => {
       XHRBackend,
       ChallengesService
     ], (mockBackend, service: ChallengesService) => {
-        service.repeating = false;
-
         expect(service.getInterval()).toBe(30000);
 
         const fixture = TestBed.createComponent(ChallengesComponent);
@@ -55,8 +53,6 @@ describe('ChallengesComponent', () => {
       XHRBackend,
       ChallengesService
     ], (mockBackend, service: ChallengesService) => {
-        service.repeating = false;
-
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           let error = new Error();
@@ -75,8 +71,6 @@ describe('ChallengesComponent', () => {
       XHRBackend,
       ChallengesService
     ], (mockBackend, service: ChallengesService) => {
-        service.repeating = false;
-
         let response = [{"name":"From the Earth to the Moon","description":"Average distance","distanceTotal":"238,855 mi","distanceDone":"7,379.7 mi","percentage":3,"progress":"BAD"}];
 
       mockBackend.connections.subscribe(

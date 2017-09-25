@@ -10,8 +10,10 @@ import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { StoreModule, Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
+import { AUTHENTICATE } from '../state/authentication.reducer';
+import { authenticationModelReducer } from '../state/authentication.reducer';
 
-describe('ShoesComponent', () => {
+describe('SummaryComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [     
@@ -19,6 +21,7 @@ describe('ShoesComponent', () => {
         MdCardModule,
         MdProgressBarModule,
         StoreModule.provideStore({
+          authentication: authenticationModelReducer,
           summary: summaryModelReducer
         })
       ],
@@ -41,8 +44,6 @@ describe('ShoesComponent', () => {
       StatisticsService,
       Store
     ], (mockBackend, service: StatisticsService, store: Store<AppState>) => {
-        service.repeating = false;
-
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           connection.mockRespond(new Response(
@@ -57,8 +58,9 @@ describe('ShoesComponent', () => {
           ));
         });
 
+        store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
+
         const fixture = TestBed.createComponent(SummaryComponent);
-        fixture.componentInstance.ngOnInit();
         fixture.detectChanges();
         expect(fixture.componentInstance).not.toBeNull();
 

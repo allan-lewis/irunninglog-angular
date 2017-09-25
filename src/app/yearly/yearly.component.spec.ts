@@ -8,6 +8,8 @@ import { yearlyTotalModelReducer } from '../state/yearly-total.reducer';
 
 import { TestBed, inject, fakeAsync, async } from '@angular/core/testing';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { AUTHENTICATE } from '../state/authentication.reducer';
+import { authenticationModelReducer } from '../state/authentication.reducer';
 
 import { StoreModule, Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
@@ -20,6 +22,7 @@ describe('YearlyTotalComponent', () => {
         MdCardModule,
         MdProgressBarModule,
         StoreModule.provideStore({
+          authentication: authenticationModelReducer,
           yearlyTotals: yearlyTotalModelReducer
         })
       ],
@@ -43,8 +46,6 @@ describe('YearlyTotalComponent', () => {
       StatisticsService,
       Store
     ], (mockBackend, service: StatisticsService, store: Store<AppState>) => {
-        service.repeating = false;
-
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           connection.mockRespond(new Response(
@@ -59,7 +60,7 @@ describe('YearlyTotalComponent', () => {
           ));
         });
 
-        service.load();
+        store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         const fixture = TestBed.createComponent(YearlyComponent);
         fixture.detectChanges();

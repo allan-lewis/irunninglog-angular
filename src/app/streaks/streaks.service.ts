@@ -11,7 +11,7 @@ import * as moment from 'moment';
 export class StreaksService extends AbstractTimedHttpService {
 
     constructor(public store: Store<AppState>, http: Http) { 
-        super(http);
+        super(store, true, http);
     }
 
     getInterval() {

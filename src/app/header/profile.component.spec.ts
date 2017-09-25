@@ -42,8 +42,6 @@ describe('ProfileComponent', () => {
       ProfileService,
       Store
     ], (mockBackend, service: ProfileService, store: Store<AppState>) => {
-        service.repeating = false;
-
         expect(service.getInterval()).toBe(300000);
 
         let response = {};
@@ -71,8 +69,6 @@ describe('ProfileComponent', () => {
       ProfileService,
       Store
     ], (mockBackend, service: ProfileService, store: Store<AppState>) => {
-        service.repeating = false;
-
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           let error = new Error();

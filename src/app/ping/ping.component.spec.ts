@@ -3,8 +3,6 @@ import { TestBed, inject } from '@angular/core/testing';
 import { CommaSeparatedNumberPipe } from '../pipe/comma.pipe';
 import { PingComponent, PingGoodComponent, PingBadComponent } from './ping.component';
 import { PingService } from './ping.service';
-import { StoreModule } from '@ngrx/store';
-import { authenticationModelReducer } from '../state/authentication.reducer';
 import { AuthenticationModel } from '../state/authentication.model';
 import { pingModelReducer } from '../state/ping.reducer';
 import { HttpModule, Http, XHRBackend } from '@angular/http';
@@ -14,6 +12,11 @@ import {BaseRequestOptions, ConnectionBackend, RequestOptions} from '@angular/ht
 import {Response, ResponseOptions, RequestMethod} from '@angular/http';
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import { By }              from '@angular/platform-browser';
+
+import { StoreModule, Store } from '@ngrx/store';
+import { AppState } from '../state/app.state';
+import { AUTHENTICATE } from '../state/authentication.reducer';
+import { authenticationModelReducer } from '../state/authentication.reducer';
 
 let authenticationModel = new AuthenticationModel(); 
 
@@ -25,7 +28,7 @@ describe('PingComponent', () => {
       imports: [     
         HttpModule,
         StoreModule.provideStore({
-          auth: authenticationModelReducer,
+          authentication: authenticationModelReducer,
           ping: pingModelReducer
         })
       ],
@@ -48,12 +51,12 @@ describe('PingComponent', () => {
  it('should ping successfully', fakeAsync(
     inject([
       XHRBackend,
-      PingService
-    ], (mockBackend, service: PingService) => {
+      PingService,
+      Store
+    ], (mockBackend, service: PingService, store: Store<AppState>) => {
 
 
         expect(true).toBeTruthy();
-        service.repeating = false;
 
       const expectedUrl = '/api/ping';
 
@@ -67,10 +70,10 @@ describe('PingComponent', () => {
           ));
         });
 
+      store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
+
     const fixture = TestBed.createComponent(PingComponent);
-    // fixture.componentInstance.ngOnInit();
     fixture.detectChanges();
-    // const ping = fixture.componentInstance.ping;
     expect(fixture.componentInstance.ping.status).toBe(200);
     tick(1000);
     })
@@ -79,12 +82,12 @@ describe('PingComponent', () => {
  it('should ping with a 503 error', fakeAsync(
     inject([
       XHRBackend,
-      PingService
-    ], (mockBackend, service: PingService) => {
+      PingService,
+      Store
+    ], (mockBackend, service: PingService, store: Store<AppState>) => {
 
 
         expect(true).toBeTruthy();
-        service.repeating = false;
 
       const expectedUrl = '/api/ping';
 
@@ -96,10 +99,9 @@ describe('PingComponent', () => {
           let error = new Error();
           error['status'] = 503;
           connection.mockError(error);
-        //   connection.mockRespond(new Response(
-        //     new ResponseOptions({ status: 503 })
-        //   ));
         });
+
+      store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
     const fixture = TestBed.createComponent(PingComponent);
     // fixture.componentInstance.ngOnInit();

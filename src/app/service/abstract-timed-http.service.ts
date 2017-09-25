@@ -1,18 +1,21 @@
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/app.state';
+import { AuthenticationState } from '../state/authentication.model';
 
 export abstract class AbstractTimedHttpService {
 
-    constructor(public http: Http) { }
+    // TODO - Remove 'repeating'
+    constructor(store: Store<AppState>, repeating: boolean, public http: Http) {
+        store.select(state => state.authentication).filter(x => !!x && x.authenticated == AuthenticationState.Authenticated).subscribe(x => {
+            this.call();
 
-    repeating = true;
-
-    load() {
-        this.call();
-
-        if (this.repeating) {
-            Observable.interval(this.getInterval()).subscribe(x => this.call());
-        }
+            // TODO - Use a provider to make this configurable/testable
+            if (repeating) {
+                // Observable.interval(this.getInterval()).subscribe(x => this.call());
+            }
+        });
     }
 
     private call() {

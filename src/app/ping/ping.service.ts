@@ -13,7 +13,7 @@ export class PingService extends AbstractTimedHttpService {
     private pings: number [] = [];
 
     constructor(public store: Store<AppState>, public http: Http) { 
-        super(http);
+        super(store, true, http);
     }
 
     getInterval() {

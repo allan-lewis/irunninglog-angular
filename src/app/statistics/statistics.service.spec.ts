@@ -7,14 +7,15 @@ import { Response, ResponseOptions, RequestMethod} from '@angular/http';
 import { StoreModule, Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { AUTHENTICATE } from '../state/authentication.reducer';
 
-describe('PingService', () => {
+describe('StatisticsService', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
         StoreModule.provideStore({
-          auth: authenticationModelReducer,
+          authentication: authenticationModelReducer,
           summary: summaryModelReducer
         })
       ],
@@ -35,9 +36,7 @@ describe('PingService', () => {
       XHRBackend,
       StatisticsService
     ], (mockBackend, service: StatisticsService) => {
-        service.repeating = false;
-        
-        expect(service.getInterval()).toBe(15000);
+        expect(service.getInterval()).toBe(30000);
         expect(service.getPath()).toBe('/api/stats');
         expect(service.getErrorMessage()).toBe('failed to load statistics');
     })
@@ -49,8 +48,6 @@ describe('PingService', () => {
       StatisticsService,
       Store
     ], (mockBackend, service: StatisticsService, store: Store<AppState>) => {
-        service.repeating = false;
-
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           let error = new Error();
@@ -58,7 +55,7 @@ describe('PingService', () => {
           connection.mockError(error);
         });
 
-        service.load();
+        store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         store.select(state => state.summary).subscribe(x => {
             expect(x.thisWeek).toBe('--');
@@ -74,9 +71,6 @@ describe('PingService', () => {
       StatisticsService,
       Store
     ], (mockBackend, service: StatisticsService, store: Store<AppState>) => {
-        service.repeating = false;
-
-
       let response = {
           summary: {
               thisWeek: '63 mi',
@@ -93,7 +87,7 @@ describe('PingService', () => {
           ));
         });
 
-        service.load();
+      store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         store.select(state => state.summary).subscribe(x => {
             expect(x.thisWeek).toBe('63 mi');

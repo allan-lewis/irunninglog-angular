@@ -73,12 +73,6 @@ describe('PageComponent', () => {
       ShoesService,
       StatisticsService
     ], (mockBackend, ping: PingService, challenges: ChallengesService, streaks: StreaksService, shoes: ShoesService, stats: StatisticsService) => {
-        ping.repeating = false;
-        challenges.repeating = false;
-        streaks.repeating = false;
-        shoes.repeating = false;
-        stats.repeating = false;
-
         const fixture = TestBed.createComponent(PageComponent);
         expect(fixture.componentInstance).not.toBeNull();
     })

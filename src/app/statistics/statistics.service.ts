@@ -13,11 +13,11 @@ import { UPDATE_TOTALS } from '../state/yearly-total.reducer';
 export class StatisticsService extends AbstractTimedHttpService {
 
     constructor(public store: Store<AppState>, public http: Http) { 
-        super(http);
+        super(store, true, http);
     }
 
     getInterval() {
-        return 15000;
+        return 30000;
     }
 
     getPath() {
@@ -37,6 +37,7 @@ export class StatisticsService extends AbstractTimedHttpService {
     }
 
     success(response: Response, before: any) {
+        console.log('SUCCESS', response.json());
         let json = response.json();
 
         let model = new SummaryModel();

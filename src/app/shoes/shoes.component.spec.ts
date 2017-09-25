@@ -1,11 +1,14 @@
 import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angular/http';
 import { MdCardModule, MdProgressBarModule } from '@angular/material';
-import { StoreModule } from '@ngrx/store';
 
+import { StoreModule, Store } from '@ngrx/store';
 import { ShoesComponent } from './shoes.component';
 import { ShoesService } from './shoes.service';
 import { ProgressCardComponent } from '../progress/progress-card.component';
 import { shoesModelReducer } from '../state/shoes.reducer';
+import { AUTHENTICATE } from '../state/authentication.reducer';
+import { authenticationModelReducer } from '../state/authentication.reducer';
+import { AppState } from '../state/app.state';
 
 import { TestBed, inject, fakeAsync, async } from '@angular/core/testing';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -18,6 +21,7 @@ describe('ShoesComponent', () => {
         MdCardModule,
         MdProgressBarModule,
         StoreModule.provideStore({
+          authentication: authenticationModelReducer,
           shoes: shoesModelReducer
         })
       ],
@@ -38,11 +42,12 @@ describe('ShoesComponent', () => {
  it('should load the component', fakeAsync(
     inject([
       XHRBackend,
-      ShoesService
-    ], (mockBackend, service: ShoesService) => {
-        service.repeating = false;
-
+      ShoesService,
+      Store
+    ], (mockBackend, service: ShoesService, store: Store<AppState>) => {
         expect(service.getInterval()).toBe(30000);
+
+        store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         const fixture = TestBed.createComponent(ShoesComponent);
         fixture.detectChanges();
@@ -53,16 +58,17 @@ describe('ShoesComponent', () => {
  it('should handle a service error correctly', fakeAsync(
     inject([
       XHRBackend,
-      ShoesService
-    ], (mockBackend, service: ShoesService) => {
-        service.repeating = false;
-
+      ShoesService,
+      Store
+    ], (mockBackend, service: ShoesService, store: Store<AppState>) => {
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           let error = new Error();
           error['status'] = 503;
           connection.mockError(error);
         });
+
+        store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         const fixture = TestBed.createComponent(ShoesComponent);
         fixture.detectChanges();
@@ -73,10 +79,9 @@ describe('ShoesComponent', () => {
  it('should handle a successful response correctly', fakeAsync(
     inject([
       XHRBackend,
-      ShoesService
-    ], (mockBackend, service: ShoesService) => {
-        service.repeating = false;
-
+      ShoesService,
+      Store
+    ], (mockBackend, service: ShoesService, store: Store<AppState>) => {
         let response = [
             {"id":"g2276780","name":"Omicron","brand":"Mizuno","model":"Wave Inspire 13","description":"Green","percentage":60,"progress":"OK","distance":"303.3 mi","primary":true},
             {"id":"g2276782","name":"Omicron","brand":"Mizuno","model":"Wave Inspire 13","description":null,"percentage":60,"progress":"NONE","distance":"303.3 mi","primary":true}
@@ -88,6 +93,8 @@ describe('ShoesComponent', () => {
             new ResponseOptions({ status: 200, body: response })
           ));
         });
+
+        store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         const fixture = TestBed.createComponent(ShoesComponent);
         fixture.detectChanges();

@@ -15,7 +15,6 @@ export class ShoesComponent {
 
   constructor(public store: Store<AppState>, shoesService: ShoesService) {
     this.store.select(state => state.shoes).filter(x => !!x).subscribe(x => this.model = x);
-    shoesService.load();
   }
 
 }

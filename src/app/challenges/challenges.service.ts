@@ -10,7 +10,7 @@ import { AbstractTimedHttpService } from '../service/abstract-timed-http.service
 export class ChallengesService extends AbstractTimedHttpService {
 
     constructor(public store: Store<AppState>, public http: Http) { 
-        super(http);
+        super(store, true, http);
     }
 
     getInterval() {
