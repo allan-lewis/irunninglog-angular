@@ -3,13 +3,13 @@ import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { PROFILE_SET } from '../state/profile.reducer';
-import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
+import { AbstractTimedHttpService, Scheduler } from '../service/abstract-timed-http.service';
 
 @Injectable()
 export class ProfileService extends AbstractTimedHttpService {
 
-    constructor(public store: Store<AppState>, public http: Http) { 
-        super(store, true, http);
+    constructor(public store: Store<AppState>, scheduler: Scheduler, public http: Http) { 
+        super(store, scheduler, http);
     }
 
     getInterval() {

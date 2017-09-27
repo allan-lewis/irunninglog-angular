@@ -3,7 +3,7 @@ import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { Observable } from 'rxjs';
-import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
+import { AbstractTimedHttpService, Scheduler } from '../service/abstract-timed-http.service';
 import { SummaryModel } from '../state/summary.model';
 import { SUMMARY_UPDATE } from '../state/summary.reducer';
 import { YearlyTotalModel } from '../state/yearly-total.model';
@@ -12,8 +12,8 @@ import { UPDATE_TOTALS } from '../state/yearly-total.reducer';
 @Injectable()
 export class StatisticsService extends AbstractTimedHttpService {
 
-    constructor(public store: Store<AppState>, public http: Http) { 
-        super(store, true, http);
+    constructor(public store: Store<AppState>, scheduler: Scheduler, public http: Http) { 
+        super(store, scheduler, http);
     }
 
     getInterval() {

@@ -4,13 +4,13 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { ChallengeModel } from '../state/challenge.model'
 import { UPDATE_CHALLENGE } from '../state/challenges.reducer';
-import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
+import { AbstractTimedHttpService, Scheduler } from '../service/abstract-timed-http.service';
 
 @Injectable()
 export class ChallengesService extends AbstractTimedHttpService {
 
-    constructor(public store: Store<AppState>, public http: Http) { 
-        super(store, true, http);
+    constructor(public store: Store<AppState>, scheduler: Scheduler, public http: Http) { 
+        super(store, scheduler, http);
     }
 
     getInterval() {

@@ -1,20 +1,32 @@
+import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { AuthenticationState } from '../state/authentication.model';
 
+export abstract class Scheduler {
+
+    abstract schedule(): void;
+
+}
+
+@Injectable()
+export class NoOpScheduler implements Scheduler {
+    
+    schedule() {
+        // Nothing to do here
+    }
+
+}
+
 export abstract class AbstractTimedHttpService {
 
-    // TODO - Remove 'repeating'
-    constructor(store: Store<AppState>, repeating: boolean, public http: Http) {
+    constructor(store: Store<AppState>, scheduler: Scheduler, public http: Http) {
         store.select(state => state.authentication).filter(x => !!x && x.authenticated == AuthenticationState.Authenticated).subscribe(x => {
             this.call();
 
-            // TODO - Use a provider to make this configurable/testable
-            if (repeating) {
-                // Observable.interval(this.getInterval()).subscribe(x => this.call());
-            }
+            scheduler.schedule();
         });
     }
 

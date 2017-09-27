@@ -4,7 +4,8 @@ import { StoreModule } from '@ngrx/store';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { pingModelReducer } from '../state/ping.reducer';
 import { HttpModule, Http, XHRBackend } from '@angular/http';
-import {Response, ResponseOptions, RequestMethod} from '@angular/http';
+import { Response, ResponseOptions, RequestMethod } from '@angular/http';
+import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
 
 describe('PingService', () => {
   beforeEach(async(() => {
@@ -19,7 +20,8 @@ describe('PingService', () => {
       declarations: [
       ],
       providers: [
-          PingService,
+        PingService,
+        [{provide: Scheduler, useClass: NoOpScheduler}]
       ]
     }).compileComponents();
   }));

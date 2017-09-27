@@ -10,6 +10,7 @@ import { profileModelReducer } from '../state/profile.reducer';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { AUTHENTICATE } from '../state/authentication.reducer';
 import { AppState } from '../state/app.state';
+import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
 
 let authenticationModel = new AuthenticationModel(); 
 
@@ -31,7 +32,8 @@ describe('ProfileComponent', () => {
           {
           provide: XHRBackend,
           useClass: MockBackend
-        }
+        },
+        [{provide: Scheduler, useClass: NoOpScheduler}]
       ]
     }).compileComponents();
   }));

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
-import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
+import { AbstractTimedHttpService, Scheduler } from '../service/abstract-timed-http.service';
 import { STREAKS_UPDATE } from '../state/streaks.reducer';
 import { StreakModel, StreaksModel } from '../state/streaks.model';
 import * as moment from 'moment';
@@ -10,8 +10,8 @@ import * as moment from 'moment';
 @Injectable()
 export class StreaksService extends AbstractTimedHttpService {
 
-    constructor(public store: Store<AppState>, http: Http) { 
-        super(store, true, http);
+    constructor(public store: Store<AppState>, scheduler: Scheduler, http: Http) { 
+        super(store, scheduler, http);
     }
 
     getInterval() {

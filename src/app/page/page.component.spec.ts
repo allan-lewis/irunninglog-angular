@@ -22,6 +22,7 @@ import { HttpModule, Http, XHRBackend } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { SummaryComponent } from '../summary/summary.component';
 import { StatisticsService } from '../statistics/statistics.service';
+import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
 
 describe('PageComponent', () => {
   beforeEach(async(() => {
@@ -59,7 +60,8 @@ describe('PageComponent', () => {
             {
                 provide: XHRBackend,
                 useClass: MockBackend
-            }
+            },
+        [{provide: Scheduler, useClass: NoOpScheduler}]
       ]
     }).compileComponents();
   }));

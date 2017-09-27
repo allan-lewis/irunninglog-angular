@@ -12,6 +12,7 @@ import { AppState } from '../state/app.state';
 
 import { TestBed, inject, fakeAsync, async } from '@angular/core/testing';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
 
 describe('ShoesComponent', () => {
   beforeEach(async(() => {
@@ -34,7 +35,8 @@ describe('ShoesComponent', () => {
         {
           provide: XHRBackend,
           useClass: MockBackend
-        }
+        },
+        [{provide: Scheduler, useClass: NoOpScheduler}]
       ]
     }).compileComponents();
   }));

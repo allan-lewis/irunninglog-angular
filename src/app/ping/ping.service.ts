@@ -5,15 +5,15 @@ import { AppState } from '../state/app.state';
 import { PingModel } from '../state/ping.model';
 import { PING_UPDATE } from '../state/ping.reducer';
 import { Observable } from 'rxjs';
-import { AbstractTimedHttpService } from '../service/abstract-timed-http.service';
+import { AbstractTimedHttpService, Scheduler } from '../service/abstract-timed-http.service';
 
 @Injectable()
 export class PingService extends AbstractTimedHttpService {
 
     private pings: number [] = [];
 
-    constructor(public store: Store<AppState>, public http: Http) { 
-        super(store, true, http);
+    constructor(public store: Store<AppState>, scheduler: Scheduler, public http: Http) { 
+        super(store, scheduler, http);
     }
 
     getInterval() {

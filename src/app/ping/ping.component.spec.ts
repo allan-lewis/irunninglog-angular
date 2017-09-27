@@ -17,6 +17,7 @@ import { StoreModule, Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { AUTHENTICATE } from '../state/authentication.reducer';
 import { authenticationModelReducer } from '../state/authentication.reducer';
+import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
 
 let authenticationModel = new AuthenticationModel(); 
 
@@ -43,7 +44,8 @@ describe('PingComponent', () => {
         {
           provide: XHRBackend,
           useClass: MockBackend
-        }
+        },
+        [{provide: Scheduler, useClass: NoOpScheduler}]
       ]
     }).compileComponents();
   }));

@@ -9,6 +9,7 @@ import { challengesModelReducer } from '../state/challenges.reducer';
 
 import { TestBed, inject, fakeAsync, async } from '@angular/core/testing';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
 
 describe('ChallengesComponent', () => {
   beforeEach(async(() => {
@@ -30,7 +31,8 @@ describe('ChallengesComponent', () => {
         {
           provide: XHRBackend,
           useClass: MockBackend
-        }
+        },
+        [{provide: Scheduler, useClass: NoOpScheduler}]
       ]
     }).compileComponents();
   }));
