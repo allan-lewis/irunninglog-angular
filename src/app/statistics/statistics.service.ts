@@ -37,7 +37,6 @@ export class StatisticsService extends AbstractTimedHttpService {
     }
 
     success(response: Response, before: any) {
-        console.log('SUCCESS', response.json());
         let json = response.json();
 
         let model = new SummaryModel();

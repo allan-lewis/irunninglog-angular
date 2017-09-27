@@ -7,15 +7,24 @@ import { AuthenticationState } from '../state/authentication.model';
 
 export abstract class Scheduler {
 
-    abstract schedule(): void;
+    abstract schedule(interval: number, func: () => void): void;
 
 }
 
 @Injectable()
 export class NoOpScheduler implements Scheduler {
     
-    schedule() {
+    schedule(interval: number, func: () => void) {
         // Nothing to do here
+    }
+
+}
+
+@Injectable()
+export class IntervalScheduler implements Scheduler {
+
+    schedule(interval: number, func: () => void) {
+        Observable.interval(interval).subscribe(x => { func(); });
     }
 
 }
@@ -26,7 +35,7 @@ export abstract class AbstractTimedHttpService {
         store.select(state => state.authentication).filter(x => !!x && x.authenticated == AuthenticationState.Authenticated).subscribe(x => {
             this.call();
 
-            scheduler.schedule();
+            scheduler.schedule(this.getInterval(), () => this.call());
         });
     }
 

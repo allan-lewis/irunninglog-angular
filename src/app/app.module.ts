@@ -43,6 +43,7 @@ import { ProfileService } from './header/profile.service';
 import { requestOptionsProvider } from './http/request-options.service';
 import { PingService } from './ping/ping.service';
 import { ShoesService } from './shoes/shoes.service';
+import { Scheduler, IntervalScheduler } from './service/abstract-timed-http.service';
 import { StatisticsService } from './statistics/statistics.service';
 import { StreaksService } from './streaks/streaks.service';
 
@@ -114,7 +115,8 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     requestOptionsProvider,
     ShoesService,
     StatisticsService,
-    StreaksService
+    StreaksService,
+    {provide: Scheduler, useClass: IntervalScheduler}
   ],
     entryComponents: [
         ConfirmComponent,
