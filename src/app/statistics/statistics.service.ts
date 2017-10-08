@@ -6,8 +6,10 @@ import { Observable } from 'rxjs';
 import { AbstractTimedHttpService, Scheduler } from '../service/abstract-timed-http.service';
 import { SummaryModel } from '../state/summary.model';
 import { SUMMARY_UPDATE } from '../state/summary.reducer';
+import { DataPoint } from '../state/data-point.model';
 import { YearlyTotalModel } from '../state/yearly-total.model';
 import { UPDATE_TOTALS } from '../state/yearly-total.reducer';
+import { UPDATE_DATA_POINTS } from '../state/data-point.reducer';
 
 @Injectable()
 export class StatisticsService extends AbstractTimedHttpService {
@@ -56,6 +58,16 @@ export class StatisticsService extends AbstractTimedHttpService {
 
             this.store.dispatch({type: UPDATE_TOTALS, payload: model});
         }
+
+        let array: Array<DataPoint> = [];
+        for (let entry of json['dataSets']['points']['points']) {
+            let dataPoint = new DataPoint();
+            dataPoint.label = entry['label'];
+            dataPoint.value = Number(entry['value']);
+            array.push(dataPoint);
+        }
+
+        this.store.dispatch({type: UPDATE_DATA_POINTS, payload: array});
     }
 
 }

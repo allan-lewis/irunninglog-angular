@@ -51,6 +51,7 @@ import { StreaksService } from './streaks/streaks.service';
 
 import { authenticationModelReducer } from './state/authentication.reducer';
 import { challengesModelReducer } from './state/challenges.reducer';
+import { dataPointModelReducer } from './state/data-point.reducer';
 import { pingModelReducer } from './state/ping.reducer';
 import { profileModelReducer } from './state/profile.reducer';
 import { shoesModelReducer } from './state/shoes.reducer';
@@ -98,6 +99,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     StoreModule.provideStore({
       authentication: authenticationModelReducer,
       challenges: challengesModelReducer,
+      dataPoints: dataPointModelReducer,
       ping: pingModelReducer,
       profile: profileModelReducer,
       shoes: shoesModelReducer,

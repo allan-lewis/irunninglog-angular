@@ -55,7 +55,8 @@ describe('SummaryComponent', () => {
                     thisMonth: '100 mi',
                     thisYear: '1,000 mi'
                 },
-                years: []
+                years: [],
+                dataSets: {points: {points: []}}
             } })
           ));
         });

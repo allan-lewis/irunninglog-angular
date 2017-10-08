@@ -57,7 +57,8 @@ describe('YearlyTotalComponent', () => {
                     thisMonth: '100',
                     thisYear: '1000'
                 },
-                years: [{year: 2017, total: '1,500 mi'}]
+                years: [{year: 2017, total: '1,500 mi'}],
+                dataSets: {points: {points: []}}
             } })
           ));
         });
