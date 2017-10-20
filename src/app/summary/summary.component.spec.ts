@@ -56,7 +56,10 @@ describe('SummaryComponent', () => {
                     thisYear: '1,000 mi'
                 },
                 years: [],
-                dataSets: {points: {points: []}}
+                dataSets: {
+                  points: {points: []},
+                  totals: {points: []}
+                }
             } })
           ));
         });

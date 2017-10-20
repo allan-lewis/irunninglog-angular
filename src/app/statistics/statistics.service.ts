@@ -10,6 +10,7 @@ import { DataPoint } from '../state/data-point.model';
 import { YearlyTotalModel } from '../state/yearly-total.model';
 import { UPDATE_TOTALS } from '../state/yearly-total.reducer';
 import { UPDATE_DATA_POINTS } from '../state/data-point.reducer';
+import { UPDATE_DATA_TOTALS } from '../state/data-point.reducer';
 
 @Injectable()
 export class StatisticsService extends AbstractTimedHttpService {
@@ -59,15 +60,28 @@ export class StatisticsService extends AbstractTimedHttpService {
             this.store.dispatch({type: UPDATE_TOTALS, payload: model});
         }
 
-        let array: Array<DataPoint> = [];
+        let index = 0;
+        let points: Array<DataPoint> = [];
         for (let entry of json['dataSets']['points']['points']) {
             let dataPoint = new DataPoint();
             dataPoint.label = entry['label'];
             dataPoint.value = Number(entry['value']);
-            array.push(dataPoint);
+            dataPoint.index = index++;
+            points.push(dataPoint);
         }
 
-        this.store.dispatch({type: UPDATE_DATA_POINTS, payload: array});
+        index = 0;
+        let totals: Array<DataPoint> = [];
+        for (let entry of json['dataSets']['totals']['points']) {
+            let dataPoint = new DataPoint();
+            dataPoint.label = entry['label'];
+            dataPoint.value = Number(entry['value']);
+            dataPoint.index = index++;
+            totals.push(dataPoint);
+        }
+
+        this.store.dispatch({type: UPDATE_DATA_POINTS, payload: points});
+        this.store.dispatch({type: UPDATE_DATA_TOTALS, payload: totals});
     }
 
 }

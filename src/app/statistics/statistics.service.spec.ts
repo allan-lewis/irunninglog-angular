@@ -80,7 +80,10 @@ describe('StatisticsService', () => {
               thisYear: '1,441 mi'
           },
           years: [],
-          dataSets: {points: {points: []}}
+          dataSets: {
+            points: {points: []},
+            totals: {points: []}
+          }
       };
 
       mockBackend.connections.subscribe(

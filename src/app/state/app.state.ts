@@ -11,7 +11,7 @@ import { YearlyTotalModel } from './yearly-total.model';
 export interface AppState {
     authentication: AuthenticationModel,
     challenges: Array<ChallengeModel>,
-    dataPoints: Array<DataPoint>,
+    dataPoints: Array<Array<DataPoint>>,
     ping: PingModel,
     profile: ProfileModel,
     shoes: Array<ShoeModel>,
