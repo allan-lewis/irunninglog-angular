@@ -41,12 +41,18 @@
   display: none;
   min-width: 80px;
   height: auto;
-  background: none repeat scroll 0 0 #ffffff;
-  border: 1px solid #6F257F;
-  padding: 14px;
+  font-size: 10px;
+  background: none repeat scroll 0 0 #eee;
+  border: 1px solid #999;
+  padding: 2px;
   text-align: center;
 }
 
+.toolTipLabel {
+    font-weight: bold;
+    color: #ff5722;
+    margin-bottom: 4px;
+}
 
 .d3-tip {
   line-height: 1;
