@@ -32,6 +32,7 @@ export class ChartComponent implements OnInit, OnChanges {
   private line: any;
   private chart: any;
   private dimensions: any = {width: 0, height: 0};
+  private tooltip: any;
 
   constructor(public store: Store<AppState>) {
     this.store.select(state => state.dataPoints).filter(x => !!x).subscribe(x => {
@@ -100,6 +101,8 @@ export class ChartComponent implements OnInit, OnChanges {
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
       .call(d3.axisLeft(this.yScaleLeft));
 
+    this.tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
     // this.yAxisRight = this.svg.append('g')
     //   .attr('class', 'axis axis-y-right')
     //   .attr('transform', `translate(${this.width + this.margin.right}, ${this.margin.top})`)
@@ -137,9 +140,8 @@ export class ChartComponent implements OnInit, OnChanges {
       .attr('width', d => this.xScale.bandwidth())
       .attr('height', d => this.height - this.yScaleLeft(d['value']));
 
-    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
-
     let topp = this.chartContainer.nativeElement.offsetTop;
+    var tt = this.tooltip;
 
     // add new bars
     update.enter()
@@ -150,15 +152,16 @@ export class ChartComponent implements OnInit, OnChanges {
       .attr('width', this.xScale.bandwidth())
       .attr('height', 0)
       .on("mouseover", function () {
-        tooltip.style("display", "inline-block");
+        tt.style("display", "inline-block");
       })
       .on("mouseout", function (d) {
-        tooltip.style("display", "none");
+        tt.style("display", "none");
       })
       .on("mousemove", function (d) {
-        const x = this.x.baseVal.value - 8;
+        const x = this.x.baseVal.value + 32 - 40 + this.width.baseVal.value / 2;
         const y = this.y.baseVal.value;
-        tooltip
+
+        tt
           .style("left", x + "px")
           .style("top", topp + y + 4 + "px")
           .html('<div class="toolTipLabel">' + (d.label) + '</div><div class="toolTipValue">' + (d.value) + '</div>');
