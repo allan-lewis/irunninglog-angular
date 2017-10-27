@@ -51,14 +51,6 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
 
     this.margin = {top: 20, right: 50, bottom: 30, left: 50};
 
-    this.width = this.htmlElement.offsetWidth - this.margin.left - this.margin.right;
-    this.height = this.htmlElement.offsetHeight - this.margin.top - this.margin.bottom;
-
-    this.xScale = D3.scaleTime().range([0, this.width]);
-    this.yScale = D3.scaleLinear().range([this.height, 0]);
-    this.yScale2 = D3.scaleLinear().range([this.height, 0]);
-    this.buildChart();
-
     Observable.interval(100).subscribe((x) => {
       let width = this.htmlElement.offsetWidth - this.margin.left - this.margin.right;
       let height = this.htmlElement.offsetHeight - this.margin.top - this.margin.bottom;
@@ -78,6 +70,13 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
   }
 
   private buildChart() {
+    this.width = this.htmlElement.offsetWidth - this.margin.left - this.margin.right;
+    this.height = this.htmlElement.offsetHeight - this.margin.top - this.margin.bottom;
+
+    this.xScale = D3.scaleTime().range([0, this.width]);
+    this.yScale = D3.scaleLinear().range([this.height, 0]);
+    this.yScale2 = D3.scaleLinear().range([this.height, 0]);
+
     this.xAxis = D3.axisBottom(this.xScale);
     this.yAxis = D3.axisLeft(this.yScale);
     this.yAxis2 = D3.axisRight(this.yScale2);
