@@ -1,7 +1,9 @@
 export class DataPoint {
 
-    label: string;
-    value: number;
-    index: number;
+    date: string;
+    monthly: number;
+    monthlyFormatted: string;
+    cumulative: number;
+    cumulativeFormatted: number;
 
 }

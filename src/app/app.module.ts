@@ -23,6 +23,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './header/logout.component';
 import { ProfileComponent } from './header/profile.component';
+import { LineChartComponent } from './chart/line-chart.component';
 import { LoginComponent } from './login/login.component';
 import { PageComponent } from './page/page.component';
 import { PingComponent, PingGoodComponent, PingBadComponent } from './ping/ping.component';
@@ -51,7 +52,7 @@ import { StreaksService } from './streaks/streaks.service';
 
 import { authenticationModelReducer } from './state/authentication.reducer';
 import { challengesModelReducer } from './state/challenges.reducer';
-import { dataPointModelReducer } from './state/data-point.reducer';
+import { dataSetModelReducer } from './state/data-set.reducer';
 import { pingModelReducer } from './state/ping.reducer';
 import { profileModelReducer } from './state/profile.reducer';
 import { shoesModelReducer } from './state/shoes.reducer';
@@ -70,6 +71,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     ConfirmComponent,
     ChallengesComponent,
     HeaderComponent,
+    LineChartComponent,
     LoginComponent,
     LogoutComponent,
     PageComponent,
@@ -99,7 +101,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     StoreModule.provideStore({
       authentication: authenticationModelReducer,
       challenges: challengesModelReducer,
-      dataPoints: dataPointModelReducer,
+      dataSet: dataSetModelReducer,
       ping: pingModelReducer,
       profile: profileModelReducer,
       shoes: shoesModelReducer,

@@ -7,10 +7,10 @@ import { AbstractTimedHttpService, Scheduler } from '../service/abstract-timed-h
 import { SummaryModel } from '../state/summary.model';
 import { SUMMARY_UPDATE } from '../state/summary.reducer';
 import { DataPoint } from '../state/data-point.model';
+import { DataSet } from '../state/data-set.model';
 import { YearlyTotalModel } from '../state/yearly-total.model';
 import { UPDATE_TOTALS } from '../state/yearly-total.reducer';
-import { UPDATE_DATA_POINTS } from '../state/data-point.reducer';
-import { UPDATE_DATA_TOTALS } from '../state/data-point.reducer';
+import { UPDATE_DATA_SET } from '../state/data-set.reducer';
 
 @Injectable()
 export class StatisticsService extends AbstractTimedHttpService {
@@ -60,28 +60,22 @@ export class StatisticsService extends AbstractTimedHttpService {
             this.store.dispatch({type: UPDATE_TOTALS, payload: model});
         }
 
-        let index = 0;
-        let points: Array<DataPoint> = [];
-        for (let entry of json['dataSets']['points']['points']) {
-            let dataPoint = new DataPoint();
-            dataPoint.label = entry['label'];
-            dataPoint.value = Number(entry['value']);
-            dataPoint.index = index++;
-            points.push(dataPoint);
+        let dataPoints: Array<DataPoint> = [];
+        for (let entry of response.json()['dataSet']['points']) {
+            let point = new DataPoint();
+            point.date = entry.date;
+            point.monthly = Number(entry.values.monthly);
+            point.monthlyFormatted = entry.values.monthlyFormatted;
+            point.cumulative = Number(entry.values.cumulative);
+            point.cumulativeFormatted = entry.values.cumulativeFormatted;
+
+            dataPoints.push(point);
         }
 
-        index = 0;
-        let totals: Array<DataPoint> = [];
-        for (let entry of json['dataSets']['totals']['points']) {
-            let dataPoint = new DataPoint();
-            dataPoint.label = entry['label'];
-            dataPoint.value = Number(entry['value']);
-            dataPoint.index = index++;
-            totals.push(dataPoint);
-        }
+        let dataSet = new DataSet();
+        dataSet.points = dataPoints;
 
-        this.store.dispatch({type: UPDATE_DATA_POINTS, payload: points});
-        this.store.dispatch({type: UPDATE_DATA_TOTALS, payload: totals});
+        this.store.dispatch({type: UPDATE_DATA_SET, payload: dataSet});
     }
 
 }

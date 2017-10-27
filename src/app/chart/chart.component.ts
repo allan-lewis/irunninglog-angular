@@ -35,19 +35,18 @@ export class ChartComponent implements OnInit, OnChanges {
   private tooltip: any;
 
   constructor(public store: Store<AppState>) {
-    this.store.select(state => state.dataPoints).filter(x => !!x).subscribe(x => {
-      this.data = x[0];
-      this.totals = x[1];
+    // this.store.select(state => state.dataPoints).filter(x => !!x).subscribe(x => {
+    //   this.data = x[0];
+    //   this.totals = x[1];
 
-      if (this.data.length > 0 && this.totals.length > 0) {
-        this.ngOnChanges();
-      }
-    });
+    //   if (this.data.length > 0 && this.totals.length > 0) {
+    //     this.ngOnChanges();
+    //   }
+    // });
   }
 
   ngOnInit() {
     this.setupAxes();
-
 
     Observable.interval(100).subscribe((x) => {
       let width = this.chartContainer.nativeElement.offsetWidth;

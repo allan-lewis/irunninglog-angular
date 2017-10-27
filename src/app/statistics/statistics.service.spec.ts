@@ -80,9 +80,8 @@ describe('StatisticsService', () => {
               thisYear: '1,441 mi'
           },
           years: [],
-          dataSets: {
-            points: {points: []},
-            totals: {points: []}
+          dataSet: {
+            points: []
           }
       };
 
