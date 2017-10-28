@@ -1,5 +1,5 @@
-import {Component, OnInit, OnChanges, ViewChild, ElementRef, ViewEncapsulation} from '@angular/core';
-import {DataPoint} from '../state/data-point.model';
+import { Component, AfterViewInit, OnChanges, ViewChild, ElementRef, ViewEncapsulation, Input } from '@angular/core';
+import {DataSet} from '../state/data-set.model';
 import {Store} from '@ngrx/store';
 import {AppState} from '../state/app.state';
 import {Observable} from 'rxjs';
@@ -11,13 +11,13 @@ import * as d3 from 'd3';
   styleUrls: ['./chart.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class ChartComponent implements OnInit, OnChanges {
+export class ChartComponent implements AfterViewInit, OnChanges {  
+  
+  @Input()
+  dataSet: DataSet;
 
   @ViewChild('chart')
   private chartContainer: ElementRef;
-
-  private data: Array<DataPoint> = [];
-  private totals: Array<DataPoint> = [];
 
   private margin: any = {top: 40, bottom: 32, left: 32, right: 32};
   private width: number;
@@ -34,18 +34,9 @@ export class ChartComponent implements OnInit, OnChanges {
   private dimensions: any = {width: 0, height: 0};
   private tooltip: any;
 
-  constructor(public store: Store<AppState>) {
-    // this.store.select(state => state.dataPoints).filter(x => !!x).subscribe(x => {
-    //   this.data = x[0];
-    //   this.totals = x[1];
+  constructor() { }
 
-    //   if (this.data.length > 0 && this.totals.length > 0) {
-    //     this.ngOnChanges();
-    //   }
-    // });
-  }
-
-  ngOnInit() {
+  ngAfterViewInit() {
     this.setupAxes();
 
     Observable.interval(100).subscribe((x) => {
@@ -64,8 +55,10 @@ export class ChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.updateAxes();
-    this.drawBars();
+    if (this.chartContainer) {
+      // this.updateAxes();
+      // this.drawBars();
+    }
   }
 
   private setupAxes() {
@@ -83,8 +76,8 @@ export class ChartComponent implements OnInit, OnChanges {
     this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
 
     const xDomain = [];
-    const yDomainLeft = [0, d3.max(this.data, d => d[1])];
-    const yDomainRight = [0, d3.max(this.totals, d => d[1])];
+    const yDomainLeft = [0, d3.max(this.dataSet.points, d => d.monthly)];
+    const yDomainRight = [0, d3.max(this.dataSet.points, d => d.cumulative)];
 
     this.xScale = d3.scaleBand().padding(0.1).domain(xDomain).rangeRound([0, this.width]);
     this.yScaleLeft = d3.scaleLinear().domain(yDomainLeft).range([this.height, 0]);
@@ -111,15 +104,15 @@ export class ChartComponent implements OnInit, OnChanges {
 
   private updateAxes() {
     const numTicks = Math.floor(this.width / 50);
-    const factor = this.data.length == 0 ? 0 : Math.floor(this.data.length / numTicks) + 1;
+    const factor = this.dataSet.points.length == 0 ? 0 : Math.floor(this.dataSet.points.length / numTicks) + 1;
 
     const tickFilter = function (d, i) {
       return i % factor == 0;
     };
 
-    this.xScale.domain(this.data.map(d => d['label']));
-    this.yScaleLeft.domain([0, d3.max(this.data, d => d['value'])]);
-    this.yScaleRight.domain([0, d3.max(this.totals, d => d['value'])]);
+    this.xScale.domain(this.dataSet.points.map(d => d.date));
+    this.yScaleLeft.domain([0, d3.max(this.dataSet.points, d => d.monthly)]);
+    this.yScaleRight.domain([0, d3.max(this.dataSet.points, d => d.cumulative)]);
     this.xAxis.transition().call(d3.axisBottom(this.xScale).tickValues(this.xScale.domain().filter(tickFilter)));
     this.yAxisLeft.transition().call(d3.axisLeft(this.yScaleLeft));
     // this.yAxisRight.transition().call(d3.axisRight(this.yScaleRight));
@@ -127,7 +120,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
   private drawBars() {
     const update = this.chart.selectAll('.bar')
-      .data(this.data);
+      .data(this.dataSet.points);
 
     // remove exiting bars
     update.exit().remove();
