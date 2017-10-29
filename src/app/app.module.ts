@@ -18,7 +18,6 @@ import { StoreModule } from '@ngrx/store';
 // ~~ COMPONENTS ===================
 
 import { ChallengesComponent } from './challenges/challenges.component';
-import { ChartComponent } from './chart/chart.component';
 import { ConfirmComponent } from './confirm/confirm.component';  
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './header/logout.component';
@@ -66,7 +65,6 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
 
 @NgModule({
   declarations: [
-    ChartComponent,
     CommaSeparatedNumberPipe,
     ConfirmComponent,
     ChallengesComponent,

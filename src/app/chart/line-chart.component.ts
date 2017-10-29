@@ -35,6 +35,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
   private width;
   private height;
   private xScale;
+  private xScale2;
   private yScale;
   private yScale2;
   private xAxis;
@@ -42,6 +43,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
   private yAxis2;
   private htmlElement: HTMLElement;
   private dimensions: any = {width: 0, height: 0};
+  private chart: any;
 
   constructor() { }
 
@@ -69,11 +71,13 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     }
   }
 
+  // TODO - Split this up
   private buildChart() {
     this.width = this.htmlElement.offsetWidth - this.margin.left - this.margin.right;
     this.height = this.htmlElement.offsetHeight - this.margin.top - this.margin.bottom;
 
     this.xScale = D3.scaleTime().range([0, this.width]);
+    this.xScale2 = D3.scaleBand().padding(0.1).domain([]).rangeRound([0, this.width]);
     this.yScale = D3.scaleLinear().range([this.height, 0]);
     this.yScale2 = D3.scaleLinear().range([this.height, 0]);
 
@@ -96,9 +100,10 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
       .append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
+    self.xScale2.domain(this.dataSet.points.map(d => formatDate(d.date)));
     self.xScale.domain(D3.extent(this.dataSet.points, function(d: any) { return formatDate(d.date); }));
-    self.yScale.domain(D3.extent(this.dataSet.points, function(d: any) { return d.monthly; }));
-    self.yScale2.domain(D3.extent(this.dataSet.points, function(d: any) { return d.cumulative; }));
+    self.yScale.domain([0, D3.max(this.dataSet.points, d => d.monthly)]);
+    self.yScale2.domain([0, D3.max(this.dataSet.points, d => d.cumulative)]);
 
     self.svg.append('g')
         .attr('class', 'x axis')
@@ -124,6 +129,35 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
         .attr('dy', '.71em')
         .style('text-anchor', 'end')
         .text('Total miles');
+
+    this.chart = this.svg.append('g')
+      .attr('class', 'bars');
+
+    const update = this.chart.selectAll('.chart-bar')
+      .data(this.dataSet.points);
+
+    // remove exiting bars
+    update.exit().remove();
+
+    // update existing bars
+    this.chart.selectAll('.chart-bar').transition()
+      .attr('x', d => this.xScale2(formatDate(d.date)))
+      .attr('y', d => this.yScale(d.monthly))
+      .attr('width', d => this.xScale2.bandwidth())
+      .attr('height', d => this.height - this.yScale(d.monthly));
+
+    // add new bars
+    update.enter()
+      .append('rect')
+      .attr('class', 'chart-bar')
+      .attr('x', d => self.xScale2(formatDate(d.date)))
+      .attr('y', d => self.yScale(0))
+      .attr('width', self.xScale2.bandwidth())
+      .attr('height', 0)
+      .transition()
+      .delay((d, i) => i * 10)
+      .attr('y', d => self.yScale(d.monthly))
+      .attr('height', d => self.height - self.yScale(d.monthly));
 
     self.svg.append('path')
         .datum(this.dataSet.points)

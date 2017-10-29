@@ -1,6 +1,5 @@
 import { async, fakeAsync, tick, TestBed, inject} from '@angular/core/testing';
 import { PageComponent } from './page.component';
-import { ChartComponent } from '../chart/chart.component';
 import { LineChartComponent } from '../chart/line-chart.component';
 import { ChallengesComponent } from '../challenges/challenges.component';
 import { ChallengesService } from '../challenges/challenges.service';
@@ -39,7 +38,6 @@ describe('PageComponent', () => {
       ],
       declarations: [
         PageComponent,
-        ChartComponent,
         LineChartComponent,
         ShoesComponent,
         StreaksComponent,

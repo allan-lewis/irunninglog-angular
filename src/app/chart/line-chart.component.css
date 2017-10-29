@@ -9,6 +9,10 @@
   shape-rendering: crispEdges;
 }
 
+.chart-bar {
+    fill: #ff5722;
+}
+
 .axis text {
   fill: #ff5722;
 }
@@ -16,5 +20,9 @@
 .line {
   fill: none;
   stroke: #999999;
-  stroke-width: 2px;
+  stroke-width: 3px;
+}
+
+.bars {
+  fill: lightgoldenrodyellow;
 }
