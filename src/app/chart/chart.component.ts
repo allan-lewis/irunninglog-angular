@@ -5,12 +5,12 @@ import {AppState} from '../state/app.state';
 import {Observable} from 'rxjs';
 import * as d3 from 'd3';
 
-@Component({
-  selector: 'irl-component-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
-  encapsulation: ViewEncapsulation.None
-})
+// @Component({
+//   selector: 'irl-component-chart',
+//   templateUrl: './chart.component.html',
+//   styleUrls: ['./chart.component.css'],
+//   encapsulation: ViewEncapsulation.None
+// })
 export class ChartComponent implements AfterViewInit, OnChanges {  
   
   @Input()
