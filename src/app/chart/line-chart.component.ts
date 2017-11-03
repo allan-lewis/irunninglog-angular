@@ -12,8 +12,9 @@ import { DataSet } from '../state/data-set.model';
 import { Observable } from 'rxjs';
 
 import * as D3 from 'd3';
+import * as moment from 'moment';
 
-const formatDate = D3.timeParse('%m-%d-%Y');
+// const formatDate = D3.timeParse('%m-%d-%Y');
 
 @Component({
   selector: 'irl-component-line-chart',
@@ -71,17 +72,27 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     }
   }
 
+  private formatDate(string: String) {
+    return moment(string, 'MM-DD-YYYY').format('MMM \'YY');
+  }
+
   // TODO - Split this up
   private buildChart() {
+    const numTicks = Math.floor(this.width / 50);
+    const factor = this.dataSet.points.length == 0 ? 0 : Math.floor(this.dataSet.points.length / numTicks) + 1;
+
+    const tickFilter = function (d, i) {
+      return i % factor == 0;
+    };
+
     this.width = this.htmlElement.offsetWidth - this.margin.left - this.margin.right;
     this.height = this.htmlElement.offsetHeight - this.margin.top - this.margin.bottom;
 
     this.xScale = D3.scaleTime().range([0, this.width]);
-    this.xScale2 = D3.scaleBand().padding(0.1).domain([]).rangeRound([0, this.width]);
+    this.xScale2 = D3.scaleBand().padding(0.1).align(.5).domain([]).round(false).range([1, this.width]);
     this.yScale = D3.scaleLinear().range([this.height, 0]);
     this.yScale2 = D3.scaleLinear().range([this.height, 0]);
 
-    this.xAxis = D3.axisBottom(this.xScale);
     this.yAxis = D3.axisLeft(this.yScale);
     this.yAxis2 = D3.axisRight(this.yScale2);
 
@@ -91,7 +102,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
 
     let line = D3.line()
       .curve(D3.curveBasis)
-      .x(function(d: any) { return self.xScale(formatDate(d.date)); })
+      .x(function(d: any) { return self.xScale(D3.timeParse('%m-%d-%Y')(d.date)); })
       .y(function(d: any) { return self.yScale2(d.cumulative); });
 
     this.svg = this.host.append('svg')
@@ -100,10 +111,12 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
       .append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
-    self.xScale2.domain(this.dataSet.points.map(d => formatDate(d.date)));
-    self.xScale.domain(D3.extent(this.dataSet.points, function(d: any) { return formatDate(d.date); }));
+    self.xScale2.domain(this.dataSet.points.map(d => this.formatDate(d.date)));
+    self.xScale.domain(D3.extent(this.dataSet.points, function(d: any) { return D3.timeParse('%m-%d-%Y')(d.date); }));
     self.yScale.domain([0, D3.max(this.dataSet.points, d => d.monthly)]);
     self.yScale2.domain([0, D3.max(this.dataSet.points, d => d.cumulative)]);
+
+    this.xAxis = D3.axisBottom(this.xScale2).tickValues(this.xScale2.domain().filter(tickFilter));
 
     self.svg.append('g')
         .attr('class', 'x axis')
@@ -141,7 +154,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
 
     // update existing bars
     this.chart.selectAll('.chart-bar').transition()
-      .attr('x', d => this.xScale2(formatDate(d.date)))
+      .attr('x', d => this.xScale2(this.formatDate(d.date)))
       .attr('y', d => this.yScale(d.monthly))
       .attr('width', d => this.xScale2.bandwidth())
       .attr('height', d => this.height - this.yScale(d.monthly));
@@ -150,7 +163,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     update.enter()
       .append('rect')
       .attr('class', 'chart-bar')
-      .attr('x', d => self.xScale2(formatDate(d.date)))
+      .attr('x', d => self.xScale2(this.formatDate(d.date)))
       .attr('y', d => self.yScale(0))
       .attr('width', self.xScale2.bandwidth())
       .attr('height', 0)
