@@ -22,7 +22,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './header/logout.component';
 import { ProfileComponent } from './header/profile.component';
-import { LineChartComponent } from './chart/line-chart.component';
+import { CompositeChartComponent } from './chart/composite-chart.component';
 import { LoginComponent } from './login/login.component';
 import { PageComponent } from './page/page.component';
 import { PingComponent, PingGoodComponent, PingBadComponent } from './ping/ping.component';
@@ -69,7 +69,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     ConfirmComponent,
     ChallengesComponent,
     HeaderComponent,
-    LineChartComponent,
+    CompositeChartComponent,
     LoginComponent,
     LogoutComponent,
     PageComponent,

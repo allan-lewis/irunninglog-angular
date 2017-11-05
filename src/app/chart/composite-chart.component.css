@@ -1,0 +1,46 @@
+.container {
+    height: 400px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #95a5a6;
+  shape-rendering: crispEdges;
+}
+
+.chart-bar {
+    fill: #ff5722;
+}
+
+.chart-bar:hover {
+    fill: darkorange;
+}
+
+.axis text {
+  fill: #ff5722;
+}
+
+.line {
+  fill: none;
+  stroke: #999999;
+  stroke-width: 3px;
+}
+
+.toolTip {
+  position: absolute;
+  display: none;
+  width: 80px;
+  height: auto;
+  font-size: 10px;
+  background: none repeat scroll 0 0 #eee;
+  border: 1px solid #999;
+  padding: 2px;
+  text-align: center;
+}
+
+.toolTipLabel {
+    font-weight: bold;
+    color: #ff5722;
+    margin-bottom: 4px;
+}

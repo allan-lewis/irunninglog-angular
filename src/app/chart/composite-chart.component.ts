@@ -7,12 +7,12 @@ import { DataPoint } from '../state/data-point.model';
 import { DataSet } from '../state/data-set.model';
 
 @Component({
-  selector: 'irl-component-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.css'],
+  selector: 'irl-component-composite-chart',
+  templateUrl: './composite-chart.component.html',
+  styleUrls: ['./composite-chart.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class LineChartComponent implements OnChanges, AfterViewInit {
+export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
   @Input()
   dataSet: DataSet;
@@ -24,6 +24,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
   private host: any;
   private margin: any;
   private dimensions: any;
+  private tooltip: any;
 
   constructor() {
     console.log('LineChartComponent:constructor');
@@ -36,7 +37,7 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
     
     this.host = D3.select(this.htmlElement);
 
-    this.margin = {top: 20, right: 50, bottom: 30, left: 50};
+    this.margin = {top: 40, right: 50, bottom: 30, left: 50};
 
     this.drawChart();
 
@@ -67,6 +68,8 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
 
   private doDrawChart(): void {
     this.host.html('');    
+
+    this.tooltip = D3.select("body").append("div").attr("class", "toolTip");
 
     let width = this.htmlElement.offsetWidth - this.margin.left - this.margin.right;
     let height = this.htmlElement.offsetHeight - this.margin.top - this.margin.bottom;
@@ -154,6 +157,8 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
       .attr('width', d => xScale.bandwidth())
       .attr('height', d => height - yScale(d.monthly));
 
+    let self = this;
+
     update.enter()
       .append('rect')
       .attr('class', 'chart-bar')
@@ -161,6 +166,22 @@ export class LineChartComponent implements OnChanges, AfterViewInit {
       .attr('y', d => yScale(0))
       .attr('width', xScale.bandwidth())
       .attr('height', 0)
+      .on("mouseover", function () {
+        self.tooltip.style("display", "inline-block");
+      })
+      .on("mouseout", function (d) {
+        self.tooltip.style("display", "none");
+      })
+      .on("mousemove", function (d) {
+        const x = this.x.baseVal.value + self.margin.left + this.width.baseVal.value / 2;
+        const y = this.y.baseVal.value;
+        const topp = self.element.nativeElement.offsetTop;
+
+        self.tooltip
+          .style("left", x - 40 + "px")
+          .style("top", topp + 4 + y + "px")
+          .html('<div class="toolTipLabel">' + (self.formatDate(d.date)) + '</div><div class="toolTipValue">' + (d.monthlyFormatted) + '</div>');
+      })
       .transition()
       .delay((d, i) => i * 10)
       .attr('y', d => yScale(d.monthly))

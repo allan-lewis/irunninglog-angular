@@ -1,6 +1,6 @@
 import { async, fakeAsync, tick, TestBed, inject} from '@angular/core/testing';
 import { PageComponent } from './page.component';
-import { LineChartComponent } from '../chart/line-chart.component';
+import { CompositeChartComponent } from '../chart/composite-chart.component';
 import { ChallengesComponent } from '../challenges/challenges.component';
 import { ChallengesService } from '../challenges/challenges.service';
 import { ShoesComponent } from '../shoes/shoes.component';
