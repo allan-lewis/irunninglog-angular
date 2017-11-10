@@ -11,6 +11,7 @@ import { MockBackend, MockConnection } from '@angular/http/testing';
 import { AUTHENTICATE } from '../state/authentication.reducer';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
+import { YearlyTotalsModel } from '../state/yearly-total.model';
 
 import { StoreModule, Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
@@ -68,12 +69,8 @@ describe('YearlyTotalComponent', () => {
         store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         const fixture = TestBed.createComponent(YearlyComponent);
-        fixture.detectChanges();
+        fixture.componentInstance.model = new YearlyTotalsModel();
         expect(fixture.componentInstance).not.toBeNull();
-
-        store.select(state => state.yearlyTotals).subscribe(x => {
-          expect(x.length).toBe(1);
-        });
     })
   ));
 

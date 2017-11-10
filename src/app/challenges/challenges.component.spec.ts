@@ -6,6 +6,7 @@ import { ChallengesComponent } from './challenges.component';
 import { ChallengesService } from './challenges.service';
 import { ProgressCardComponent } from '../progress/progress-card.component';
 import { challengesModelReducer } from '../state/challenges.reducer';
+import { ChallengesModel } from '../state/challenges.model';
 
 import { TestBed, inject, fakeAsync, async } from '@angular/core/testing';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -83,7 +84,7 @@ describe('ChallengesComponent', () => {
         });
 
         const fixture = TestBed.createComponent(ChallengesComponent);
-        fixture.detectChanges();
+        fixture.componentInstance.model = new ChallengesModel();
         expect(fixture.componentInstance).not.toBeNull();
         expect(fixture.componentInstance.model).toBeTruthy();
     })

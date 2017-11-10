@@ -27,11 +27,11 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   private tooltip: any;
 
   constructor() {
-    console.log('LineChartComponent:constructor');
+    console.log('CompositeChartComponent:constructor');
   }
 
   ngAfterViewInit(): void {
-    console.log('LineChartComponent:ngAfterViewInit');
+    console.log('CompositeChartComponent:ngAfterViewInit');
 
     this.htmlElement = this.element.nativeElement;
     
@@ -55,7 +55,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   }
 
   ngOnChanges(): void {
-    console.log('LineChartComponent:ngOnChanges');
+    console.log('CompositeChartComponent:ngOnChanges');
 
     this.drawChart();
   }

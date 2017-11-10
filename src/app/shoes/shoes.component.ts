@@ -15,15 +15,15 @@ export class ShoesComponent implements OnChanges, AfterViewInit {
   shoes: ShoesModel;
 
   constructor() {
-    console.log('ShoesComponent:constructor');
+    // console.log('ShoesComponent:constructor');
   }
 
   ngAfterViewInit(): void {
-    console.log('ShoesComponent:ngAfterViewInit');
+    // console.log('ShoesComponent:ngAfterViewInit');
   }
 
   ngOnChanges(): void {
-    console.log('ShoesComponent:ngOnChanges');
+    // console.log('ShoesComponent:ngOnChanges');
   }
 
 }

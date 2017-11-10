@@ -5,6 +5,7 @@ import { StreaksComponent } from './streaks.component';
 import { StreaksService } from './streaks.service';
 import { ProgressCardComponent } from '../progress/progress-card.component';
 import { streaksModelReducer } from '../state/streaks.reducer';
+import { StreakModel, StreaksModel } from '../state/streaks.model';
 
 import { TestBed, inject, fakeAsync, async } from '@angular/core/testing';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -92,7 +93,7 @@ describe('StreaksComponent', () => {
         store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         const fixture = TestBed.createComponent(StreaksComponent);
-        fixture.detectChanges();
+        fixture.componentInstance.model = new StreaksModel();
         expect(fixture.componentInstance).toBeTruthy();
         expect(fixture.componentInstance.model).toBeTruthy();
         expect(fixture.componentInstance.model.current).toBeFalsy();
@@ -119,7 +120,13 @@ describe('StreaksComponent', () => {
         store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         const fixture = TestBed.createComponent(StreaksComponent);
-        fixture.detectChanges();
+        
+        let streaks = new StreaksModel();
+        streaks.current = new StreakModel();
+        streaks.longest = new StreakModel();
+        streaks.thisYear = new StreakModel();
+        fixture.componentInstance.model = streaks;
+
         expect(fixture.componentInstance).toBeTruthy();
         expect(fixture.componentInstance.model).toBeTruthy();
         expect(fixture.componentInstance.model.current).toBeTruthy();

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChallengesService } from './challenges.service';
-import { ChallengeModel } from '../state/challenge.model';
+import { ChallengesModel } from '../state/challenges.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 
@@ -11,10 +11,19 @@ import { AppState } from '../state/app.state';
 })
 export class ChallengesComponent {
 
-  model: Array<ChallengeModel>;
+  @Input()
+  model: ChallengesModel;
 
-  constructor(public store: Store<AppState>, service: ChallengesService) {
-    this.store.select(state => state.challenges).filter(x => !!x).subscribe(x => this.model = x);
+  constructor() {
+    // console.log('ChallengesComponent:constructor');
+  }
+
+  ngAfterViewInit(): void {
+    // console.log('ChallengesComponent:ngAfterViewInit');
+  }
+
+  ngOnChanges(): void {
+    // console.log('ChallengesComponent:ngOnChanges');
   }
 
 }

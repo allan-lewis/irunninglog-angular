@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { YearlyTotalModel } from '../state/yearly-total.model';
+import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
+import { YearlyTotalsModel } from '../state/yearly-total.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { StatisticsService } from '../statistics/statistics.service';
@@ -9,12 +9,21 @@ import { StatisticsService } from '../statistics/statistics.service';
   templateUrl: './yearly.component.html',
   styleUrls: ['./yearly.component.css']
 })
-export class YearlyComponent {
+export class YearlyComponent implements OnChanges, AfterViewInit {
 
-  model: Array<YearlyTotalModel>;
+  @Input()
+  model: YearlyTotalsModel;
 
-  constructor(public service: StatisticsService, public store: Store<AppState>) {
-    this.store.select(state => state.yearlyTotals).subscribe(x => this.model = x);
+  constructor() {
+    // console.log('YearlyComponent:constructor');
+  }
+
+  ngAfterViewInit(): void {
+    // console.log('YearlyComponent:ngAfterViewInit');
+  }
+
+  ngOnChanges(): void {
+    // console.log('YearlyComponent:ngOnChanges');
   }
 
 }

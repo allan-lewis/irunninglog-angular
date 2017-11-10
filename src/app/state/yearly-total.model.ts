@@ -5,3 +5,9 @@ export class YearlyTotalModel {
     percentage: number;
 
 }
+
+export class YearlyTotalsModel {
+
+    totals: Array<YearlyTotalModel> = [];
+
+}
