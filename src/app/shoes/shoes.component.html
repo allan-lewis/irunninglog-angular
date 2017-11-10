@@ -1,7 +1,7 @@
 <div class="progress-cards-shell">
     <div class="progress-cards-title">My shoes</div>
     <div class="progress-cards-subtitle">Where the rubber meets the road</div>
-    <div class="progress-cards-container" *ngIf="model">
-        <irl-component-progress-card [model]="shoe" *ngFor="let shoe of model"></irl-component-progress-card>
+    <div class="progress-cards-container">
+        <irl-component-progress-card [model]="shoe" *ngFor="let shoe of shoes.shoes"></irl-component-progress-card>
     </div>
 </div>

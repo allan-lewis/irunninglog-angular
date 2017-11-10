@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ShoeModel } from '../state/shoe.model';
+import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
+import { ShoesModel } from '../state/shoes.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 import { ShoesService } from './shoes.service';
@@ -9,12 +9,21 @@ import { ShoesService } from './shoes.service';
   templateUrl: './shoes.component.html',
   styleUrls: ['./shoes.component.css', '../progress/progress-cards.css']
 })
-export class ShoesComponent {
+export class ShoesComponent implements OnChanges, AfterViewInit {
 
-  model: Array<ShoeModel>;
+  @Input()
+  shoes: ShoesModel;
 
-  constructor(public store: Store<AppState>, shoesService: ShoesService) {
-    this.store.select(state => state.shoes).filter(x => !!x).subscribe(x => this.model = x);
+  constructor() {
+    console.log('ShoesComponent:constructor');
+  }
+
+  ngAfterViewInit(): void {
+    console.log('ShoesComponent:ngAfterViewInit');
+  }
+
+  ngOnChanges(): void {
+    console.log('ShoesComponent:ngOnChanges');
   }
 
 }

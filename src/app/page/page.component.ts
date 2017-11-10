@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { StatisticsService } from '../statistics/statistics.service';
-import { DataSet } from '../state/data-set.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
+import { DataSet } from '../state/data-set.model';
+import { ShoesModel } from '../state/shoes.model';
+import { ShoesService } from '../shoes/shoes.service';
+import { StatisticsService } from '../statistics/statistics.service';
 
 @Component({
   selector: 'irl-component-page',
@@ -12,11 +14,15 @@ import { AppState } from '../state/app.state';
 export class PageComponent {
 
   dataSet: DataSet;
+  shoes: ShoesModel;
 
-  constructor(private statisticsService: StatisticsService, private store: Store<AppState>) {
-    this.store.select(state => state.dataSet).filter(x => !!x).subscribe(x => {
-      this.dataSet = x;
-    });
+  constructor(statisticsService: StatisticsService,
+              shoesService: ShoesService,
+              private store: Store<AppState>) {
+
+    this.store.select(state => state.dataSet).filter(x => !!x).subscribe(x => this.dataSet = x);
+
+    this.store.select(state => state.shoes).filter(x => !!x).subscribe(x => this.shoes = x);
   }
 
 }

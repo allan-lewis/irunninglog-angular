@@ -38,7 +38,6 @@ describe('PageComponent', () => {
       ],
       declarations: [
         PageComponent,
-        LineChartComponent,
         ShoesComponent,
         StreaksComponent,
         PingComponent,
@@ -49,7 +48,8 @@ describe('PageComponent', () => {
         CommaSeparatedNumberPipe,
         SummaryComponent,
         YearlyComponent,
-        YearlyTotalComponent
+        YearlyTotalComponent,
+        CompositeChartComponent
       ],
       providers: [
           PingService,

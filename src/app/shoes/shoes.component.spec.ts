@@ -6,6 +6,8 @@ import { ShoesComponent } from './shoes.component';
 import { ShoesService } from './shoes.service';
 import { ProgressCardComponent } from '../progress/progress-card.component';
 import { shoesModelReducer } from '../state/shoes.reducer';
+import { ShoesModel } from '../state/shoes.model';
+import { ShoeModel } from '../state/shoe.model';
 import { AUTHENTICATE } from '../state/authentication.reducer';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { AppState } from '../state/app.state';
@@ -44,15 +46,12 @@ describe('ShoesComponent', () => {
  it('should load the component', fakeAsync(
     inject([
       XHRBackend,
-      ShoesService,
-      Store
-    ], (mockBackend, service: ShoesService, store: Store<AppState>) => {
+      ShoesService
+    ], (mockBackend, service: ShoesService) => {
         expect(service.getInterval()).toBe(30000);
 
-        store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
-
         const fixture = TestBed.createComponent(ShoesComponent);
-        fixture.detectChanges();
+        fixture.componentInstance.shoes = new ShoesModel();
         expect(fixture.componentInstance).not.toBeNull();
     })
   ));
@@ -60,9 +59,8 @@ describe('ShoesComponent', () => {
  it('should handle a service error correctly', fakeAsync(
     inject([
       XHRBackend,
-      ShoesService,
-      Store
-    ], (mockBackend, service: ShoesService, store: Store<AppState>) => {
+      ShoesService
+    ], (mockBackend, service: ShoesService) => {
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           let error = new Error();
@@ -70,10 +68,8 @@ describe('ShoesComponent', () => {
           connection.mockError(error);
         });
 
-        store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
-
         const fixture = TestBed.createComponent(ShoesComponent);
-        fixture.detectChanges();
+        fixture.componentInstance.shoes = new ShoesModel();
         expect(fixture.componentInstance).not.toBeNull();
     })
   ));
@@ -83,26 +79,18 @@ describe('ShoesComponent', () => {
       XHRBackend,
       ShoesService,
       Store
-    ], (mockBackend, service: ShoesService, store: Store<AppState>) => {
-        let response = [
-            {"id":"g2276780","name":"Omicron","brand":"Mizuno","model":"Wave Inspire 13","description":"Green","percentage":60,"progress":"OK","distance":"303.3 mi","primary":true},
-            {"id":"g2276782","name":"Omicron","brand":"Mizuno","model":"Wave Inspire 13","description":null,"percentage":60,"progress":"NONE","distance":"303.3 mi","primary":true}
-        ];
-
-      mockBackend.connections.subscribe(
-        (connection: MockConnection) => {
-          connection.mockRespond(new Response(
-            new ResponseOptions({ status: 200, body: response })
-          ));
-        });
-
-        store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
-
+    ], (mockBackend) => {
         const fixture = TestBed.createComponent(ShoesComponent);
-        fixture.detectChanges();
+
+        let shoes = new ShoesModel();
+        shoes.shoes.push(new ShoeModel());
+        shoes.shoes.push(new ShoeModel());
+        fixture.componentInstance.shoes = shoes;
+
         expect(fixture.componentInstance).not.toBeNull();
-        expect(fixture.componentInstance.model).toBeTruthy();
-        expect(fixture.componentInstance.model.length).toBe(2);
+        expect(fixture.componentInstance.shoes).toBeTruthy();
+        expect(fixture.componentInstance.shoes.shoes).toBeTruthy();
+        expect(fixture.componentInstance.shoes.shoes.length).toBe(2);
     })
   ));
 
