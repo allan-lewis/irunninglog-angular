@@ -1,13 +1,17 @@
+import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angular/http';
 import { TestBed, async } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 import { ProfileComponent } from './profile.component';
+import { ProfileService } from './profile.service';
 import { LogoutComponent } from './logout.component';
 import { MdToolbarModule, MdCardModule, MdButtonModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { AuthenticationModel } from '../state/authentication.model';
 import { profileModelReducer } from '../state/profile.reducer';
+import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 let authenticationModel = new AuthenticationModel(); 
 
@@ -15,6 +19,7 @@ describe('HeaderComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [     
+        HttpModule,  
         MdToolbarModule,
         MdCardModule,
         MdButtonModule,
@@ -29,6 +34,12 @@ describe('HeaderComponent', () => {
         LogoutComponent
       ],
       providers: [
+        ProfileService,        
+          {
+          provide: XHRBackend,
+          useClass: MockBackend
+        },
+        [{provide: Scheduler, useClass: NoOpScheduler}]
       ]
     }).compileComponents();
   }));

@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import { ProfileService } from './profile.service';
-import { Observable } from "rxjs";
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
+import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
 import { ProfileModel } from '../state/profile.model';
 
 @Component({
@@ -10,12 +6,21 @@ import { ProfileModel } from '../state/profile.model';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements AfterViewInit, OnChanges {
 
-    profile : Observable<ProfileModel>;
+  @Input()
+  profile: ProfileModel;
 
-    constructor(public profileService: ProfileService, public store: Store<AppState>) { 
-        this.profile = this.store.select(state => state.profile);
-    }    
+  constructor() {
+    // console.log('ProfileComponent:constructor');
+  }
+
+  ngAfterViewInit(): void {
+    // console.log('ProfileComponent:ngAfterViewInit');
+  }
+
+  ngOnChanges(): void {
+    // console.log('ProfileComponent:ngOnChanges');
+  }
 
 }

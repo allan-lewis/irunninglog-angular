@@ -5,6 +5,7 @@ import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
 import { StoreModule, Store } from '@ngrx/store';
 import { authenticationModelReducer } from '../state/authentication.reducer';
+import { ProfileModel } from '../state/profile.model';
 import { AuthenticationModel, AuthenticationState } from '../state/authentication.model';
 import { profileModelReducer } from '../state/profile.reducer';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -58,7 +59,7 @@ describe('ProfileComponent', () => {
         store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
         
         const fixture = TestBed.createComponent(ProfileComponent);
-        fixture.detectChanges();
+        fixture.componentInstance.profile = new ProfileModel();
 
         expect(fixture.componentInstance).not.toBeNull();
         expect(fixture.componentInstance.profile).toBeTruthy();
@@ -81,7 +82,7 @@ describe('ProfileComponent', () => {
         store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
         const fixture = TestBed.createComponent(ProfileComponent);
-        fixture.detectChanges();
+        fixture.componentInstance.profile = new ProfileModel();
         expect(fixture.componentInstance).not.toBeNull();
     })
   ));
