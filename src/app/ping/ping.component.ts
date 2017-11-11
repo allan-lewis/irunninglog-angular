@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PingModel } from '../state/ping.model'
 import { PingService } from './ping.service';
@@ -10,14 +10,23 @@ import { AppState } from '../state/app.state';
   templateUrl: './ping.component.html',
   styleUrls: ['./ping.component.css']
 })
-export class PingComponent {
+export class PingComponent implements AfterViewInit, OnChanges {
 
   mode = 'indeterminate';
 
+  @Input()
   ping: PingModel;
 
-  constructor(public pingService: PingService, public store: Store<AppState>) {
-    this.store.select(state => state.ping).subscribe(x => this.ping = x);
+  constructor() {
+    // console.log('PingComponent:constructor');
+  }
+
+  ngAfterViewInit(): void {
+    // console.log('PingComponent:ngAfterViewInit');
+  }
+
+  ngOnChanges(): void {
+    // console.log('PingComponent:ngOnChanges');
   }
 
   style() {

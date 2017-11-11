@@ -5,6 +5,7 @@ import { PingComponent, PingGoodComponent, PingBadComponent } from './ping.compo
 import { PingService } from './ping.service';
 import { AuthenticationModel } from '../state/authentication.model';
 import { pingModelReducer } from '../state/ping.reducer';
+import { PingModel } from '../state/ping.model';
 import { HttpModule, Http, XHRBackend } from '@angular/http';
 import {Injectable, ReflectiveInjector} from '@angular/core';
 import {async, fakeAsync, tick} from '@angular/core/testing';
@@ -72,10 +73,13 @@ describe('PingComponent', () => {
           ));
         });
 
-      store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
 
     const fixture = TestBed.createComponent(PingComponent);
-    fixture.detectChanges();
+    
+    let ping = new PingModel();
+    ping.status = 200;
+    fixture.componentInstance.ping = ping;
+
     expect(fixture.componentInstance.ping.status).toBe(200);
     tick(1000);
     })
@@ -103,19 +107,21 @@ describe('PingComponent', () => {
           connection.mockError(error);
         });
 
-      store.dispatch({type: AUTHENTICATE, payload: {id: 123, token: 'token'}});
-
     const fixture = TestBed.createComponent(PingComponent);
-    // fixture.componentInstance.ngOnInit();
-    fixture.detectChanges();
-    // const ping = fixture.componentInstance.ping;
+    
+    let ping = new PingModel();
+    ping.status = 503;
+    fixture.componentInstance.ping = ping;
+
     expect(fixture.componentInstance.ping.status).toBe(503);
-    tick(1000);
     })
   ));
 
   it('should verify styles', fakeAsync(() => {
     const fixture = TestBed.createComponent(PingComponent);
+
+    let ping = new PingModel();
+    fixture.componentInstance.ping = ping;
 
     expect(fixture.componentInstance.style()).toBe('none');
 
