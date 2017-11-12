@@ -26,10 +26,6 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   private dimensions: any;
   private tooltip: any;
 
-  constructor() {
-    console.log('CompositeChartComponent:constructor');
-  }
-
   ngAfterViewInit(): void {
     console.log('CompositeChartComponent:ngAfterViewInit');
 

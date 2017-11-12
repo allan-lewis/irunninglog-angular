@@ -9,21 +9,13 @@ import { StreaksService } from './streaks.service';
   templateUrl: './streaks.component.html',
   styleUrls: ['./streaks.component.css', '../progress/progress-cards.css']
 })
-export class StreaksComponent implements OnChanges, AfterViewInit {
+export class StreaksComponent implements OnChanges {
 
   @Input()
   model: StreaksModel;  
-  
-  constructor() {
-    // console.log('StreaksComponent:constructor');
-  }
-
-  ngAfterViewInit(): void {
-    // console.log('StreaksComponent:ngAfterViewInit');
-  }
 
   ngOnChanges(): void {
-    // console.log('StreaksComponent:ngOnChanges');
+    console.log('StreaksComponent:ngOnChanges');
   }
 
 }

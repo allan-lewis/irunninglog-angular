@@ -9,21 +9,13 @@ import { ShoesService } from './shoes.service';
   templateUrl: './shoes.component.html',
   styleUrls: ['./shoes.component.css', '../progress/progress-cards.css']
 })
-export class ShoesComponent implements OnChanges, AfterViewInit {
+export class ShoesComponent implements OnChanges {
 
   @Input()
   shoes: ShoesModel;
 
-  constructor() {
-    // console.log('ShoesComponent:constructor');
-  }
-
-  ngAfterViewInit(): void {
-    // console.log('ShoesComponent:ngAfterViewInit');
-  }
-
   ngOnChanges(): void {
-    // console.log('ShoesComponent:ngOnChanges');
+    console.log('ShoesComponent:ngOnChanges');
   }
 
 }

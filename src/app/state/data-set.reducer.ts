@@ -9,7 +9,7 @@ export function dataSetModelReducer(state: DataSet = {points: []}, action: Actio
         let before = JSON.stringify(state);
         let after = JSON.stringify(action.payload);
 
-        return before == after ? state : action.payload;
+        return before == after ? state : Object.assign({}, action.payload);
     default:
         return state;
   }

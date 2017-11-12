@@ -9,21 +9,13 @@ import { StatisticsService } from '../statistics/statistics.service';
   templateUrl: './yearly.component.html',
   styleUrls: ['./yearly.component.css']
 })
-export class YearlyComponent implements OnChanges, AfterViewInit {
+export class YearlyComponent implements OnChanges {
 
   @Input()
   model: YearlyTotalsModel;
 
-  constructor() {
-    // console.log('YearlyComponent:constructor');
-  }
-
-  ngAfterViewInit(): void {
-    // console.log('YearlyComponent:ngAfterViewInit');
-  }
-
   ngOnChanges(): void {
-    // console.log('YearlyComponent:ngOnChanges');
+    console.log('YearlyComponent:ngOnChanges');
   }
 
 }

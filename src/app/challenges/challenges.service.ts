@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
-import { ChallengeModel } from '../state/challenge.model'
+import { ChallengeModel } from '../state/challenge.model';
+import { ChallengesModel } from '../state/challenges.model'
 import { UPDATE_CHALLENGE } from '../state/challenges.reducer';
 import { AbstractTimedHttpService, Scheduler } from '../service/abstract-timed-http.service';
 
@@ -32,6 +33,8 @@ export class ChallengesService extends AbstractTimedHttpService {
     failure(response: Response, before: any) { }
 
     success(response: Response, before: any) {
+        let challenges = new ChallengesModel();
+
         for (let entry of response.json()) {
             let model = new ChallengeModel();
             model.name = entry.name;
@@ -41,8 +44,10 @@ export class ChallengesService extends AbstractTimedHttpService {
             model.percentage = entry.percentage;
             model.progress = entry.progress;
 
-            this.store.dispatch({type: UPDATE_CHALLENGE, payload: model});
+            challenges.challenges.push(model);
         }
+
+        this.store.dispatch({type: UPDATE_CHALLENGE, payload: challenges});
     }
 
 }

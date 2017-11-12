@@ -10,20 +10,12 @@ import { AppState } from '../state/app.state';
   templateUrl: './ping.component.html',
   styleUrls: ['./ping.component.css']
 })
-export class PingComponent implements AfterViewInit, OnChanges {
+export class PingComponent implements OnChanges {
 
   mode = 'indeterminate';
 
   @Input()
   ping: PingModel;
-
-  constructor() {
-    // console.log('PingComponent:constructor');
-  }
-
-  ngAfterViewInit(): void {
-    // console.log('PingComponent:ngAfterViewInit');
-  }
 
   ngOnChanges(): void {
     // console.log('PingComponent:ngOnChanges');

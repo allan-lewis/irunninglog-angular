@@ -1,9 +1,9 @@
 <div class="profile-container">
     <div class="profile-info">
-        <span class="title-text">{{(profile | async).firstName}} {{(profile | async).lastName}}</span>
-        <span class="sub-title-text">{{(profile | async).username}}</span>
+        <span class="title-text">{{profile.firstName}} {{profile.lastName}}</span>
+        <span class="sub-title-text">{{profile.username}}</span>
     </div>
-    <div class="avatar-container" *ngIf="(profile | async).avatar">
-        <img class="avatar-img" src="{{(profile | async).avatar}}"/>
+    <div class="avatar-container" *ngIf="profile.avatar">
+        <img class="avatar-img" src="{{profile.avatar}}"/>
     </div>
 </div>

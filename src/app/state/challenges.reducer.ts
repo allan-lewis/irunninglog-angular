@@ -1,16 +1,15 @@
 import { Action } from '@ngrx/store';
-import { ChallengeModel } from './challenge.model';
+import { ChallengesModel } from './challenges.model';
 
 export const UPDATE_CHALLENGE = '1dae628e-8e7d-4a8f-9cc4-1abc8895981b';
 
-let map = new Map<String, ChallengeModel>();
-
-export function challengesModelReducer(state: Array<ChallengeModel> = [], action: Action) {
+export function challengesModelReducer(state: ChallengesModel = { challenges: [] }, action: Action) {
   switch (action.type) {
     case UPDATE_CHALLENGE:
-      map.set(action.payload['name'], action.payload);
+        let before = JSON.stringify(state);
+        let after = JSON.stringify(action.payload);
 
-      return Array.from(map.values());
+        return before == after ? state : Object.assign({}, action.payload);
     default:
       return state;
   }

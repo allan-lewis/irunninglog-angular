@@ -1,7 +1,7 @@
 <div class="progress-cards-shell">
     <div class="progress-cards-title">Distance challenges</div>
     <div class="progress-cards-subtitle">How far have you run?</div>
-    <div class="progress-cards-container" *ngIf="model">
-        <irl-component-progress-card [model]="item" *ngFor="let item of model"></irl-component-progress-card>
+    <div class="progress-cards-container">
+        <irl-component-progress-card [model]="item" *ngFor="let item of model.challenges"></irl-component-progress-card>
     </div>
 </div>

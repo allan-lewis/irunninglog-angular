@@ -8,7 +8,7 @@ import { SummaryModel } from '../state/summary.model';
 import { SUMMARY_UPDATE } from '../state/summary.reducer';
 import { DataPoint } from '../state/data-point.model';
 import { DataSet } from '../state/data-set.model';
-import { YearlyTotalModel } from '../state/yearly-total.model';
+import { YearlyTotalModel, YearlyTotalsModel } from '../state/yearly-total.model';
 import { UPDATE_TOTALS } from '../state/yearly-total.reducer';
 import { UPDATE_DATA_SET } from '../state/data-set.reducer';
 
@@ -51,14 +51,18 @@ export class StatisticsService extends AbstractTimedHttpService {
 
         this.store.dispatch({type: SUMMARY_UPDATE, payload: model});
 
+        let totals = new YearlyTotalsModel();
+
         for (let entry of response.json()['years']) {
             let model = new YearlyTotalModel();
             model.year = entry['year'];
             model.total = entry['total'];
             model.percentage = entry['percentage'];
-
-            this.store.dispatch({type: UPDATE_TOTALS, payload: model});
+            
+            totals.totals.push(model);
         }
+
+        this.store.dispatch({type: UPDATE_TOTALS, payload: totals});
 
         let dataPoints: Array<DataPoint> = [];
         for (let entry of response.json()['dataSet']['points']) {

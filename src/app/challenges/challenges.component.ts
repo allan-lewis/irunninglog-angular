@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ChallengesService } from './challenges.service';
 import { ChallengesModel } from '../state/challenges.model';
 import { Store } from '@ngrx/store';
@@ -9,21 +9,13 @@ import { AppState } from '../state/app.state';
   templateUrl: './challenges.component.html',
   styleUrls: ['./challenges.component.css', '../progress/progress-cards.css']
 })
-export class ChallengesComponent {
+export class ChallengesComponent implements OnChanges {
 
   @Input()
   model: ChallengesModel;
 
-  constructor() {
-    // console.log('ChallengesComponent:constructor');
-  }
-
-  ngAfterViewInit(): void {
-    // console.log('ChallengesComponent:ngAfterViewInit');
-  }
-
   ngOnChanges(): void {
-    // console.log('ChallengesComponent:ngOnChanges');
+    console.log('ChallengesComponent:ngOnChanges');
   }
 
 }

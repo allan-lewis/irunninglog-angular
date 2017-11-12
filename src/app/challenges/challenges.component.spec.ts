@@ -46,7 +46,7 @@ describe('ChallengesComponent', () => {
         expect(service.getInterval()).toBe(30000);
 
         const fixture = TestBed.createComponent(ChallengesComponent);
-        fixture.detectChanges();
+        fixture.componentInstance.model = new ChallengesModel();
         expect(fixture.componentInstance).not.toBeNull();
     })
   ));
@@ -64,7 +64,7 @@ describe('ChallengesComponent', () => {
         });
 
         const fixture = TestBed.createComponent(ChallengesComponent);
-        fixture.detectChanges();
+        fixture.componentInstance.model = new ChallengesModel();
         expect(fixture.componentInstance).not.toBeNull();
     })
   ));
