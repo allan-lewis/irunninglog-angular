@@ -15,7 +15,7 @@ export class StreaksComponent implements OnChanges {
   model: StreaksModel;  
 
   ngOnChanges(): void {
-    console.log('StreaksComponent:ngOnChanges');
+    // console.log('StreaksComponent:ngOnChanges');
   }
 
 }

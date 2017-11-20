@@ -15,7 +15,7 @@ export class YearlyComponent implements OnChanges {
   model: YearlyTotalsModel;
 
   ngOnChanges(): void {
-    console.log('YearlyComponent:ngOnChanges');
+    // console.log('YearlyComponent:ngOnChanges');
   }
 
 }

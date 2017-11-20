@@ -15,7 +15,7 @@ export class ChallengesComponent implements OnChanges {
   model: ChallengesModel;
 
   ngOnChanges(): void {
-    console.log('ChallengesComponent:ngOnChanges');
+    // console.log('ChallengesComponent:ngOnChanges');
   }
 
 }

@@ -13,10 +13,10 @@ import { StatisticsService } from '../statistics/statistics.service';
 export class SummaryComponent implements OnChanges {
 
   @Input()
-  summary: SummaryModel;
+  model: SummaryModel;
 
   ngOnChanges(): void {
-    console.log('SummaryComponent:ngOnChanges');
+    // console.log('SummaryComponent:ngOnChanges');
   }
 
 }

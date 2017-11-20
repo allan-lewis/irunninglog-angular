@@ -15,7 +15,7 @@ import { DataSet } from '../state/data-set.model';
 export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
   @Input()
-  dataSet: DataSet;
+  model: DataSet;
 
   @ViewChild('container') 
   element: ElementRef;
@@ -27,7 +27,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   private tooltip: any;
 
   ngAfterViewInit(): void {
-    console.log('CompositeChartComponent:ngAfterViewInit');
+    // console.log('CompositeChartComponent:ngAfterViewInit');
 
     this.htmlElement = this.element.nativeElement;
     
@@ -51,13 +51,13 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   }
 
   ngOnChanges(): void {
-    console.log('CompositeChartComponent:ngOnChanges');
+    // console.log('CompositeChartComponent:ngOnChanges');
 
     this.drawChart();
   }
 
   private drawChart(): void {
-    if (this.dataSet.points.length > 0) {
+    if (this.model.points.length > 0) {
       this.doDrawChart();
     } 
   }
@@ -83,10 +83,10 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
     let self = this;
 
-    xScaleCumulative.domain(D3.extent(this.dataSet.points, function(d: any) { return self.parseDate(d.date); }));
-    xScaleMonthly.domain(this.dataSet.points.map(d => this.formatDate(d.date)));
-    yScaleLeft.domain([0, D3.max(this.dataSet.points, d => d.monthly)]);
-    yScaleRight.domain([0, D3.max(this.dataSet.points, d => d.cumulative)]);
+    xScaleCumulative.domain(D3.extent(this.model.points, function(d: any) { return self.parseDate(d.date); }));
+    xScaleMonthly.domain(this.model.points.map(d => this.formatDate(d.date)));
+    yScaleLeft.domain([0, D3.max(this.model.points, d => d.monthly)]);
+    yScaleRight.domain([0, D3.max(this.model.points, d => d.cumulative)]);
 
     this.drawXAxis(svg, xScaleMonthly, width, height);
 
@@ -99,7 +99,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
   private drawXAxis(svg: any, scale: any, width: number, height: number): void {    
     const numTicks = Math.floor(width / 50);
-    const factor = this.dataSet.points.length == 0 ? 0 : Math.floor(this.dataSet.points.length / numTicks) + 1;
+    const factor = this.model.points.length == 0 ? 0 : Math.floor(this.model.points.length / numTicks) + 1;
 
     const tickFilter = function (d, i) {
       return i % factor == 0;
@@ -143,7 +143,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
       .attr('class', 'bars');
 
     const update = chart.selectAll('.chart-bar')
-      .data(this.dataSet.points);
+      .data(this.model.points);
 
     update.exit().remove();
 
@@ -193,7 +193,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
       .y(function(d: any) { return yScale(d.cumulative); });
 
     svg.append('path')
-      .datum(this.dataSet.points)
+      .datum(this.model.points)
       .attr('class', 'line')
       .attr('d', line);
   }

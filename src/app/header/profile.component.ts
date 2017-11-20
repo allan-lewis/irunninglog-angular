@@ -13,7 +13,7 @@ export class ProfileComponent implements OnChanges {
   profile: ProfileModel;
 
   ngOnChanges(): void {
-    console.log('ProfileComponent:ngOnChanges');
+    // console.log('ProfileComponent:ngOnChanges');
   }
 
 }

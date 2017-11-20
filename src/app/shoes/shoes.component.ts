@@ -15,7 +15,7 @@ export class ShoesComponent implements OnChanges {
   shoes: ShoesModel;
 
   ngOnChanges(): void {
-    console.log('ShoesComponent:ngOnChanges');
+    // console.log('ShoesComponent:ngOnChanges');
   }
 
 }

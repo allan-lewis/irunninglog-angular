@@ -27,6 +27,7 @@ import { LoginComponent } from './login/login.component';
 import { PageComponent } from './page/page.component';
 import { PingComponent, PingGoodComponent, PingBadComponent } from './ping/ping.component';
 import { ProgressCardComponent } from './progress/progress-card.component';
+import { ProgressListComponent } from './progress/progress-list.component';
 import { ShellComponent } from './shell/shell.component';
 import { ShoesComponent } from './shoes/shoes.component';
 import { StreaksComponent } from './streaks/streaks.component';
@@ -42,6 +43,7 @@ import { ConfirmService } from './confirm/confirm.service';
 import { ProfileService } from './header/profile.service';
 import { requestOptionsProvider } from './http/request-options.service';
 import { PingService } from './ping/ping.service';
+import { ProgressListService } from './progress/progress-list.service';
 import { ShoesService } from './shoes/shoes.service';
 import { Scheduler, IntervalScheduler } from './service/abstract-timed-http.service';
 import { StatisticsService } from './statistics/statistics.service';
@@ -54,6 +56,7 @@ import { challengesModelReducer } from './state/challenges.reducer';
 import { dataSetModelReducer } from './state/data-set.reducer';
 import { pingModelReducer } from './state/ping.reducer';
 import { profileModelReducer } from './state/profile.reducer';
+import { progressListReducer } from './state/progress-list.reducer';
 import { shoesModelReducer } from './state/shoes.reducer';
 import { streaksModelReducer } from './state/streaks.reducer';
 import { summaryModelReducer } from './state/summary.reducer';
@@ -78,6 +81,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     PingGoodComponent,
     ProfileComponent,
     ProgressCardComponent,
+    ProgressListComponent,
     ShellComponent,
     ShoesComponent,
     StreaksComponent,
@@ -102,6 +106,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
       dataSet: dataSetModelReducer,
       ping: pingModelReducer,
       profile: profileModelReducer,
+      progress: progressListReducer,
       shoes: shoesModelReducer,
       streaks: streaksModelReducer,
       summary: summaryModelReducer,
@@ -114,6 +119,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     ConfirmService,
     PingService,
     ProfileService,
+    ProgressListService,
     requestOptionsProvider,
     ShoesService,
     StatisticsService,

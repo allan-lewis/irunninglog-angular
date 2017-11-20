@@ -16,7 +16,7 @@ export class YearlyTotalComponent implements OnChanges {
   @ViewChild('chart') private chartContainer: ElementRef;
 
   ngOnChanges() {
-    console.log('YearlyTotalComponent:ngOnChanges');
+    // console.log('YearlyTotalComponent:ngOnChanges');
     this.drawChart();
   }
 
