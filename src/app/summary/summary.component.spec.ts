@@ -65,9 +65,9 @@ describe('SummaryComponent', () => {
         });
 
         const fixture = TestBed.createComponent(SummaryComponent);
-        fixture.componentInstance.summary = new SummaryModel();
+        fixture.componentInstance.model = new SummaryModel();
         expect(fixture.componentInstance).not.toBeNull();
-        expect(fixture.componentInstance.summary).toBeTruthy();
+        expect(fixture.componentInstance.model).toBeTruthy();
     })
   ));
 

@@ -12,6 +12,8 @@ import { StreaksService } from '../streaks/streaks.service';
 import { PingComponent, PingGoodComponent, PingBadComponent } from '../ping/ping.component';
 import { PingService } from '../ping/ping.service';
 import { ProgressCardComponent } from '../progress/progress-card.component';
+import { ProgressListComponent } from '../progress/progress-list.component';
+import { ProgressListService } from '../progress/progress-list.service';
 import { CommaSeparatedNumberPipe } from '../pipe/comma.pipe';
 import { MdToolbarModule, MdCardModule, MdButtonModule, MdProgressBarModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
@@ -45,6 +47,7 @@ describe('PageComponent', () => {
         PingBadComponent,
         ChallengesComponent,
         ProgressCardComponent,
+        ProgressListComponent,
         CommaSeparatedNumberPipe,
         SummaryComponent,
         YearlyComponent,
@@ -52,6 +55,7 @@ describe('PageComponent', () => {
         CompositeChartComponent
       ],
       providers: [
+          ProgressListService,
           PingService,
           StreaksService,
           ShoesService,
