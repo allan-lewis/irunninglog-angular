@@ -16,6 +16,7 @@ export class StreakModel implements IProgressItem {
     lineTwo: string;
     progress: string;
     percentage: number;
+    order: number;
 
     getTitle(): string {
         return this.title;
@@ -42,7 +43,7 @@ export class StreakModel implements IProgressItem {
     }
 
     getOrder() {
-        return this.title === 'Current Streak' ? 1000 : this.getPercentage();
+        return this.order;
     }
 
 }
