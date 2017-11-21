@@ -41,4 +41,8 @@ export class StreakModel implements IProgressItem {
         return this.percentage;
     }
 
+    getOrder() {
+        return this.title === 'Current Streak' ? 1000 : this.getPercentage();
+    }
+
 }

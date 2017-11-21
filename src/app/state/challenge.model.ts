@@ -33,4 +33,8 @@ export class ChallengeModel implements IProgressItem {
         return this.percentage;
     }
 
+    getOrder() {
+        return -1 * this.getPercentage();
+    }
+
 }

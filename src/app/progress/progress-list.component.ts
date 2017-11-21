@@ -11,7 +11,7 @@ export class ProgressListComponent implements OnChanges {
     @Input() model : Array<IProgressItem>;
 
     ngOnChanges() {
-      console.log('ProgressListComponent:ngOnChanges', this.model);
+      // console.log('ProgressListComponent:ngOnChanges');
     }
 
 }

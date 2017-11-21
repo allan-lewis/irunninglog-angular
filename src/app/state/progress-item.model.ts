@@ -6,5 +6,6 @@ export interface IProgressItem {
     getLineTwo(): string;
     getProgress(): string;
     getPercentage(): number;
+    getOrder(): number;
 
 }

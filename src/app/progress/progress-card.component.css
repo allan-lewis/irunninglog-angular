@@ -12,7 +12,7 @@
 }
 
 .progress-card-good, .progress-card-ok, .progress-card-bad, .progress-card-none {
-    width: 240px;
+    /*width: 240px;*/
     margin-right: 8px;
     margin-top: 8px;
 }

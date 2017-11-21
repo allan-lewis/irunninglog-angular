@@ -1,8 +1,10 @@
 import { Action } from '@ngrx/store';
 import { IProgressItem } from './progress-item.model';
+import { ChallengeModel } from './challenge.model';
 import { ChallengesModel } from './challenges.model';
+import { ShoeModel } from './shoe.model';
 import { ShoesModel } from './shoes.model';
-import { StreaksModel } from './streaks.model';
+import { StreaksModel, StreakModel } from './streaks.model';
  
 export const UPDATE_CHALLENGES = '7ab68622-18e1-4f12-a2b6-494febdc2dbd';
 export const UPDATE_SHOES = 'a75e69f9-82c4-42f8-a9cc-be5de90686fa';
@@ -26,11 +28,35 @@ export function progressListReducer(state: Array<IProgressItem> = [], action: Ac
 function mergeStreaks(state: Array<IProgressItem>, streaks: StreaksModel): Array<IProgressItem> {
     let returnVal = [];
 
+    for (let entry of state) {
+        if (!(entry instanceof StreakModel)) {
+            returnVal.push(entry);
+        }
+    }
+
+    returnVal.push(streaks.current);
+    returnVal.push(streaks.longest);
+    returnVal.push(streaks.thisYear);
+
+    returnVal.sort(sort);
+
     return JSON.stringify(returnVal) === JSON.stringify(state) ? state : returnVal;
 }
 
 function mergeShoes(state: Array<IProgressItem>, shoes: ShoesModel): Array<IProgressItem> {
     let returnVal = [];
+
+    for (let entry of state) {
+        if (!(entry instanceof ShoeModel)) {
+            returnVal.push(entry);
+        }
+    }
+
+    for (let entry of shoes.shoes) {
+        returnVal.push(entry);
+    }
+
+    returnVal.sort(sort);
 
     return JSON.stringify(returnVal) === JSON.stringify(state) ? state : returnVal;
 }
@@ -38,6 +64,28 @@ function mergeShoes(state: Array<IProgressItem>, shoes: ShoesModel): Array<IProg
 function mergeChallenges(state: Array<IProgressItem>, challenges: ChallengesModel): Array<IProgressItem> {
     let returnVal = [];
 
+    for (let entry of state) {
+        if (!(entry instanceof ChallengeModel)) {
+            returnVal.push(entry);
+        }
+    }
+
+    for (let entry of challenges.challenges) {
+        returnVal.push(entry);
+    }
+
+    returnVal.sort(sort);
+
     return JSON.stringify(returnVal) === JSON.stringify(state) ? state : returnVal;
+}
+
+function sort(a: IProgressItem, b: IProgressItem): number {
+    if (a.getOrder() > b.getOrder()) {
+        return -1;
+    } else if (b.getOrder() > a.getOrder()) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
