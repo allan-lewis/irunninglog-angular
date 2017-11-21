@@ -11,6 +11,10 @@ export class ShoeModel implements IProgressItem {
     primary: boolean;
     progress: string;
     percentage: number;
+
+    getType() {
+        return "Shoes";
+    }
     
     getTitle(): string {
         return this.name + (this.primary ? '*' : '');

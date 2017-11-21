@@ -18,6 +18,10 @@ export class StreakModel implements IProgressItem {
     percentage: number;
     order: number;
 
+    getType() {
+        return "Streak";
+    }
+
     getTitle(): string {
         return this.title;
     }

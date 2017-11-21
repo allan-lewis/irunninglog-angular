@@ -12,9 +12,21 @@
 }
 
 .progress-card-good, .progress-card-ok, .progress-card-bad, .progress-card-none {
-    /*width: 240px;*/
-    /*margin-right: 8px;
-    margin-top: 8px;*/
+    /*height: 158px;*/
+}
+
+md-card {
+    padding: 16px;
+}
+
+md-card-title {
+    margin-bottom: 8px;
+}
+
+.progress-card-type {
+    font-size: 14px;
+    font-variant: small-caps;
+    color: rgba(0, 0, 0, 0.34);
 }
 
 .progress-card-good {

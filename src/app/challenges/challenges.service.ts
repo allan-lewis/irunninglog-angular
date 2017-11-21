@@ -41,6 +41,7 @@ export class ChallengesService extends AbstractTimedHttpService {
             model.description = entry.description;
             model.distanceTotal = entry.distanceTotal;
             model.distanceDone = entry.distanceDone;
+            model.distanceInt = entry.distanceInt;
             model.percentage = entry.percentage;
             model.progress = entry.progress;
 

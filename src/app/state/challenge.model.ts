@@ -6,8 +6,13 @@ export class ChallengeModel implements IProgressItem {
     description: string;
     distanceTotal: string;
     distanceDone: string;
+    distanceInt: number;
     percentage: number;
     progress: string;
+
+    getType() {
+        return "Challenge";
+    }
 
     getTitle() {
         return this.name;
@@ -34,7 +39,7 @@ export class ChallengeModel implements IProgressItem {
     }
 
     getOrder() {
-        return this.percentage === 100 ? 0 : this.percentage;
+        return this.percentage === 100 ? this.distanceInt / 1000000 : this.percentage;
     }
 
 }
