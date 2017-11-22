@@ -1,8 +1,5 @@
-import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ShoesModel } from '../state/shoes.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
-import { ShoesService } from './shoes.service';
 
 @Component({
   selector: 'irl-component-shoes',

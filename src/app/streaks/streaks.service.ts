@@ -40,7 +40,7 @@ export class StreaksService extends AbstractTimedHttpService {
         streaks.thisYear = this.streakFromJson('Longest Streak This Year', result['thisYear']);
 
         if (streaks.current) {
-            streaks.current.order = 900;
+            streaks.current.order = 102;
         }
 
         if (streaks.longest) {
@@ -48,7 +48,7 @@ export class StreaksService extends AbstractTimedHttpService {
         }
 
         if (streaks.thisYear) {
-            streaks.thisYear.order = 99;
+            streaks.thisYear.order = 101;
         }
 
         this.store.dispatch({type: STREAKS_UPDATE, payload: streaks})
@@ -69,6 +69,10 @@ export class StreaksService extends AbstractTimedHttpService {
         streak.percentage = json['percentage'];
 
         return streak;
+    }
+
+    streaks() {
+        return this.store.select(state => state.streaks).filter(x => !!x);
     }
 
 }

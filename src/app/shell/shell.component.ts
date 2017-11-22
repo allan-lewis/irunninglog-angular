@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs";
 import { AuthenticationModel } from '../state/authentication.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
 import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
@@ -14,15 +11,15 @@ export class ShellComponent implements OnInit {
 
     authenticationModel: AuthenticationModel;
 
-    constructor(public authentciationService: AuthenticationService, store: Store<AppState>) {
-        store.select(state => state.authentication).filter(x => x != null).subscribe(x => this.authenticationModel = x);
+    constructor(public authenticationService: AuthenticationService) {
+        authenticationService.authenticationModel().subscribe(x => this.authenticationModel = x);
     }    
     
     ngOnInit() {
-        let code = this.authentciationService.getCode();
+        let code = this.authenticationService.getCode();
 
         if (code) {
-            this.authentciationService.login(code);
+            this.authenticationService.login(code);
         } else {
             this.getCodeAndLogin();
         }
@@ -32,14 +29,14 @@ export class ShellComponent implements OnInit {
         let code = this.getParameterByName('code', window.location.href);
 
         if (code) {
-            let state = this.authentciationService.getState();
+            let state = this.authenticationService.getState();
             if (state === this.getParameterByName('state', window.location.href)) {
-                this.authentciationService.login(code);
+                this.authenticationService.login(code);
             } else {
-                this.authentciationService.logout();
+                this.authenticationService.logout();
             }
         } else {
-            this.authentciationService.logout();
+            this.authenticationService.logout();
         }
     }
 

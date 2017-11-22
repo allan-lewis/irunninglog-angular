@@ -61,4 +61,8 @@ export class PingService extends AbstractTimedHttpService {
         this.store.dispatch({type: PING_UPDATE, payload: model});
     }
 
+    ping() {
+        return this.store.select(state => state.ping).filter(x => !!x);
+    }
+
 }

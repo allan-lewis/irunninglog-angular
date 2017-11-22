@@ -1,8 +1,5 @@
-import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
+import { Component, Input, OnChanges } from '@angular/core';
 import { StreaksModel } from '../state/streaks.model';
-import { StreaksService } from './streaks.service';
 
 @Component({
   selector: 'irl-component-streaks',
@@ -12,7 +9,7 @@ import { StreaksService } from './streaks.service';
 export class StreaksComponent implements OnChanges {
 
   @Input()
-  model: StreaksModel;  
+  model: StreaksModel;
 
   ngOnChanges(): void {
     // console.log('StreaksComponent:ngOnChanges');

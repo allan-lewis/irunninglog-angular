@@ -1,9 +1,8 @@
 import { async, fakeAsync, tick, TestBed, inject} from '@angular/core/testing';
 import { AuthenticationService } from './authentication.service';
 import { authenticationModelReducer } from '../state/authentication.reducer';
-import { pingModelReducer } from '../state/ping.reducer';
-import { HttpModule, Http, XHRBackend } from '@angular/http';
-import {Response, ResponseOptions, RequestMethod} from '@angular/http';
+import { HttpModule, XHRBackend } from '@angular/http';
+import {Response, ResponseOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { StoreModule, Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
@@ -12,7 +11,7 @@ import { AuthenticationState } from '../state/authentication.model';
 describe('AuthenticationService', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [     
+      imports: [
         HttpModule,
         StoreModule.provideStore({
           authentication: authenticationModelReducer
@@ -48,7 +47,7 @@ describe('AuthenticationService', () => {
       AuthenticationService,
       Store
     ], (mockBackend, service: AuthenticationService, store: Store<AppState>) => {
-        
+
       let response = {id: 'id', token: 'token'};
 
       mockBackend.connections.subscribe(
@@ -76,7 +75,7 @@ describe('AuthenticationService', () => {
       AuthenticationService,
       Store
     ], (mockBackend, service: AuthenticationService, store: Store<AppState>) => {
-        
+
       mockBackend.connections.subscribe(
         (connection: MockConnection) => {
           let error = new Error();

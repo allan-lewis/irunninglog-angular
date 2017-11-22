@@ -8,7 +8,7 @@ import { AbstractTimedHttpService, Scheduler } from '../service/abstract-timed-h
 @Injectable()
 export class ProfileService extends AbstractTimedHttpService {
 
-    constructor(public store: Store<AppState>, scheduler: Scheduler, public http: Http) { 
+    constructor(public store: Store<AppState>, scheduler: Scheduler, public http: Http) {
         super(store, scheduler, http);
     }
 
@@ -32,6 +32,10 @@ export class ProfileService extends AbstractTimedHttpService {
 
     success(response: Response, before: any) {
         this.store.dispatch({type: PROFILE_SET, payload: response.json()});
+    }
+
+    profile() {
+      return this.store.select(state => state.profile).filter(x => !!x);
     }
 
 }

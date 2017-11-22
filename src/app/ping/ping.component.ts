@@ -2,8 +2,6 @@ import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PingModel } from '../state/ping.model'
 import { PingService } from './ping.service';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
 
 @Component({
   selector: 'irl-component-ping',

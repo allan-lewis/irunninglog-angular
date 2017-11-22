@@ -1,8 +1,5 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 import { SummaryModel } from '../state/summary.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
-import { StatisticsService } from '../statistics/statistics.service';
 
 @Component({
   selector: 'irl-component-summary',

@@ -65,4 +65,8 @@ export class ShoesService extends AbstractTimedHttpService {
         this.store.dispatch({type: UPDATE_SHOE, payload: shoes});
     }
 
+    shoes() {
+        return this.store.select(state => state.shoes).filter(x => !!x);
+    }
+
 }

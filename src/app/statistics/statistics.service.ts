@@ -82,4 +82,16 @@ export class StatisticsService extends AbstractTimedHttpService {
         this.store.dispatch({type: UPDATE_DATA_SET, payload: dataSet});
     }
 
+    summary() {
+        return this.store.select(state => state.summary).filter(x => !!x);
+    }
+
+    yearlyTotals() {
+        return this.store.select(state => state.yearlyTotals).filter(x => !!x);
+    }
+
+    dataSet() {
+        return this.store.select(state => state.dataSet).filter(x => !!x);
+    }
+
 }

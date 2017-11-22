@@ -44,4 +44,8 @@ export class AuthenticationService {
     this.store.dispatch({type: AUTHENTICATE, payload: {id: json['id'], token: json['token']}});
   }
 
+  authenticationModel() {
+    return this.store.select(state => state.authentication).filter(x => x != null);
+  }
+
 }

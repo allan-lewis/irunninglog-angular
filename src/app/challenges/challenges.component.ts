@@ -1,8 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ChallengesService } from './challenges.service';
 import { ChallengesModel } from '../state/challenges.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
 
 @Component({
   selector: 'irl-component-challenges',

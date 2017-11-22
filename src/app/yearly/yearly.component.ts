@@ -1,8 +1,5 @@
-import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { YearlyTotalsModel } from '../state/yearly-total.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
-import { StatisticsService } from '../statistics/statistics.service';
 
 @Component({
   selector: 'irl-component-yearly',

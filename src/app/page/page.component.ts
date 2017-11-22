@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
 import { ChallengesModel } from '../state/challenges.model';
 import { DataSet } from '../state/data-set.model';
 import { PingModel } from '../state/ping.model';
@@ -38,22 +36,22 @@ export class PageComponent {
               statisticsService: StatisticsService,
               shoesService: ShoesService,
               streaksService: StreaksService,
-              progressListService: ProgressListService,
-              private store: Store<AppState>) {
+              progressListService: ProgressListService) {
 
-    this.store.select(state => state.dataSet).filter(x => !!x).subscribe(x => this.dataSet = x);
 
-    this.store.select(state => state.shoes).filter(x => !!x).subscribe(x => this.shoes = x);
+    shoesService.shoes().subscribe(x => this.shoes = x);
 
-    this.store.select(state => state.streaks).filter(x => !!x).subscribe(x => this.streaks = x);
+    streaksService.streaks().subscribe(x => this.streaks = x);
 
-    this.store.select(state => state.challenges).filter(x => !!x).subscribe(x => this.challenges = x);
+    challengesService.challenges().subscribe(x => this.challenges = x);
+    
+    statisticsService.dataSet().subscribe(x => this.dataSet = x);
 
-    this.store.select(state => state.yearlyTotals).filter(x => !!x).subscribe(x => this.yearlyTotals = x);
+    statisticsService.yearlyTotals().subscribe(x => this.yearlyTotals = x);
 
-    this.store.select(state => state.summary).filter(x => !!x).subscribe(x => this.summary = x);
+    statisticsService.summary().subscribe(x => this.summary = x)
 
-    this.store.select(state => state.ping).filter(x => !!x).subscribe(x => this.ping = x);
+    pingService.ping().subscribe(x => this.ping = x);
 
     progressListService.progressList().subscribe(x => this.progressList = x);
   }

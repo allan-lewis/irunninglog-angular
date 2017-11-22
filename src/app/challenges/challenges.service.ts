@@ -51,4 +51,8 @@ export class ChallengesService extends AbstractTimedHttpService {
         this.store.dispatch({type: UPDATE_CHALLENGE, payload: challenges});
     }
 
+    challenges() {
+        return this.store.select(state => state.challenges).filter(x => !!x);
+    }
+
 }

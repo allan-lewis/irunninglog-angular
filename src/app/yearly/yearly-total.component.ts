@@ -1,8 +1,5 @@
-import { Component, OnInit, OnChanges, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnChanges, Input, ViewChild, ElementRef } from '@angular/core';
 import { YearlyTotalModel } from '../state/yearly-total.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.state';
-import { StatisticsService } from '../statistics/statistics.service';
 import * as d3 from 'd3';
 
 @Component({
@@ -23,8 +20,8 @@ export class YearlyTotalComponent implements OnChanges {
   drawChart() {
       const element = this.chartContainer.nativeElement;
 
-      const svg = d3.select(element).append('svg')		      
-        .attr('width', element.offsetWidth)		      
+      const svg = d3.select(element).append('svg')
+        .attr('width', element.offsetWidth)
         .attr('height', element.offsetHeight);
 
       const circle = svg.append('circle')

@@ -34,9 +34,17 @@ function mergeStreaks(state: Array<IProgressItem>, streaks: StreaksModel): Array
         }
     }
 
-    returnVal.push(streaks.current);
-    returnVal.push(streaks.longest);
-    returnVal.push(streaks.thisYear);
+    if (streaks.current) {
+        returnVal.push(streaks.current);
+    }
+
+    if (streaks.longest) {
+        returnVal.push(streaks.longest);
+    }
+
+    if (streaks.thisYear) {
+        returnVal.push(streaks.thisYear);
+    }
 
     returnVal.sort(sort);
 
