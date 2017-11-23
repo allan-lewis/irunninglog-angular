@@ -12,7 +12,9 @@
 }
 
 .progress-card-good, .progress-card-ok, .progress-card-bad, .progress-card-none {
-    /*height: 158px;*/
+    margin-bottom: 16px;
+    margin-left: 16px;
+    margin-right: 16px;
 }
 
 md-card {
