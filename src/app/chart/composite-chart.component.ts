@@ -33,7 +33,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
     
     this.host = D3.select(this.htmlElement);
 
-    this.margin = {top: 40, right: 50, bottom: 30, left: 50};
+    this.margin = {top: 40, right: 32, bottom: 30, left: 32};
 
     this.drawChart();
 
@@ -115,7 +115,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
   private drawYAxes(svg: any, scaleLeft: any, scaleRight: any, width: number): void {
     let yAxisLeft = D3.axisLeft(scaleLeft);
-    let yAxisRight = D3.axisRight(scaleRight);
+    let yAxisRight = D3.axisRight(scaleRight).tickFormat(D3.format(".0s"));
     
     svg.append('g')
         .attr('class', 'y axis')
