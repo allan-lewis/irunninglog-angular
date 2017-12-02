@@ -30,7 +30,7 @@ export class YearlyTotalComponent implements OnChanges {
       .append('g')
       .attr('transform', 'translate(' + w / 2 + ',' + h / 2 + ')');
 
-    var outerRadius = (w / 2) - 10;
+    var outerRadius = (w / 2) - 4;
     var innerRadius = outerRadius - 8;
 
     var color = ['#ec1561', '#2a3a46', '#202b33'];
@@ -54,6 +54,15 @@ export class YearlyTotalComponent implements OnChanges {
       .datum({ endAngle: (this.model.percentage / 100) * (2 * Math.PI) })
       .attr('d', arcLine)
       .attr('style', 'fill: #ff5722');
+
+    var middleTextCount = svg.append('text')
+      .datum(this.model.percentage)
+      .text(function (d) {
+        return d + '%';
+      })
+      .attr('class', 'yearly-total-percentage')
+      .attr('text-anchor', 'middle')
+      .attr('dy', '6px');
   }
 
 }
