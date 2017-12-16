@@ -15,7 +15,7 @@
 }
 
 .chart-bar:hover {
-    fill: darkorange;
+    fill: #ffab00;
 }
 
 .axis text {
@@ -24,7 +24,7 @@
 
 .line {
   fill: none;
-  stroke: #999999;
+  stroke: #ffab00;
   stroke-width: 3px;
 }
 
@@ -44,4 +44,9 @@
     font-weight: bold;
     color: #ff5722;
     margin-bottom: 4px;
+}
+
+.dot {
+    fill: #ffab00;
+    stroke: #fff;
 }

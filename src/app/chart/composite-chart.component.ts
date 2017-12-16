@@ -76,14 +76,13 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
       .append('g')
       .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
-    let xScaleCumulative = D3.scaleTime().range([0, width]);
     let xScaleMonthly = D3.scaleBand().padding(0.1).align(.5).domain([]).round(false).range([1, width]);
+
     let yScaleLeft = D3.scaleLinear().range([height, 0]);
     let yScaleRight = D3.scaleLinear().range([height, 0]);
 
     let self = this;
 
-    xScaleCumulative.domain(D3.extent(this.model.points, function(d: any) { return self.parseDate(d.date); }));
     xScaleMonthly.domain(this.model.points.map(d => this.formatDate(d.date)));
     yScaleLeft.domain([0, D3.max(this.model.points, d => d.monthly)]);
     yScaleRight.domain([0, D3.max(this.model.points, d => d.cumulative)]);
@@ -94,7 +93,13 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
     this.drawBars(svg, xScaleMonthly, yScaleLeft, height);
 
+    let factor = xScaleMonthly.bandwidth() / 2;
+    let xScaleCumulative = D3.scaleTime().range([factor, width - factor]);
+    xScaleCumulative.domain(D3.extent(this.model.points, function(d: any) { return self.parseDate(d.date); }));
+
     this.drawLine(svg, xScaleCumulative, yScaleRight);
+
+    this.drawDots(svg, xScaleMonthly, yScaleRight);
   }
 
   private drawXAxis(svg: any, scale: any, width: number, height: number): void {    
@@ -202,6 +207,28 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
       .datum(this.model.points)
       .attr('class', 'line')
       .attr('d', line);
+  }
+
+  private drawDots(svg: any, xScale: any, yScale: any) {
+    let self = this;
+
+    svg.selectAll(".dot")
+        .data(this.model.points)
+        .enter()
+        .append("circle") // Uses the enter().append() method      
+        .on("mousemove", function (d) {
+
+        })
+              .on("mouseover", function () {
+        self.tooltip.style("display", "inline-block");
+      })
+      .on("mouseout", function (d) {
+        self.tooltip.style("display", "none");
+      })
+        .attr("class", "dot") // Assign a class for styling
+        .attr("cx", function(d, i) { return xScale(self.formatDate(d.date)) + xScale.bandwidth() / 2 })
+        .attr("cy", function(d) { return yScale(d.cumulative) })
+        .attr("r", 5);
   }
 
   private parseDate(string: string): Date {
