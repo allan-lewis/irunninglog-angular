@@ -17,7 +17,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   @Input()
   model: DataSet;
 
-  @ViewChild('container') 
+  @ViewChild('container')
   element: ElementRef;
 
   private htmlElement: HTMLElement;
@@ -30,10 +30,10 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
     // console.log('CompositeChartComponent:ngAfterViewInit');
 
     this.htmlElement = this.element.nativeElement;
-    
+
     this.host = D3.select(this.htmlElement);
 
-    this.margin = {top: 40, right: 32, bottom: 30, left: 32};
+    this.margin = { top: 40, right: 32, bottom: 30, left: 32 };
 
     this.drawChart();
 
@@ -41,10 +41,10 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
     Observable.interval(100).subscribe((x) => {
       if (!self.dimensions) {
-        self.dimensions = {width: this.htmlElement.offsetWidth, height: this.htmlElement.offsetHeight};
+        self.dimensions = { width: this.htmlElement.offsetWidth, height: this.htmlElement.offsetHeight };
       } else if (self.dimensions.width != this.htmlElement.offsetWidth || self.dimensions.height != this.htmlElement.offsetHeight) {
-        self.dimensions = {width: this.htmlElement.offsetWidth, height: this.htmlElement.offsetHeight};
-        
+        self.dimensions = { width: this.htmlElement.offsetWidth, height: this.htmlElement.offsetHeight };
+
         self.drawChart();
       }
     });
@@ -59,17 +59,17 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   private drawChart(): void {
     if (this.model.points.length > 0) {
       this.doDrawChart();
-    } 
+    }
   }
 
   private doDrawChart(): void {
-    this.host.html('');    
+    this.host.html('');
 
     this.tooltip = D3.select("body").append("div").attr("class", "toolTip");
 
     let width = this.htmlElement.offsetWidth - this.margin.left - this.margin.right;
     let height = this.htmlElement.offsetHeight - this.margin.top - this.margin.bottom;
-    
+
     let svg = this.host.append('svg')
       .attr('width', width + this.margin.left + this.margin.right)
       .attr('height', height + this.margin.top + this.margin.bottom)
@@ -95,52 +95,52 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
     let factor = xScaleMonthly.bandwidth() / 2;
     let xScaleCumulative = D3.scaleTime().range([factor, width - factor]);
-    xScaleCumulative.domain(D3.extent(this.model.points, function(d: any) { return self.parseDate(d.date); }));
+    xScaleCumulative.domain(D3.extent(this.model.points, function (d: any) { return self.parseDate(d.date); }));
 
     this.drawLine(svg, xScaleCumulative, yScaleRight);
 
     this.drawDots(svg, xScaleMonthly, yScaleRight);
   }
 
-  private drawXAxis(svg: any, scale: any, width: number, height: number): void {    
+  private drawXAxis(svg: any, scale: any, width: number, height: number): void {
     const numTicks = Math.floor(width / 50);
     const factor = this.model.points.length == 0 ? 0 : Math.floor(this.model.points.length / numTicks) + 1;
 
     const tickFilter = function (d, i) {
       return i % factor == 0;
     };
-    
+
     let xAxis = D3.axisBottom(scale).tickValues(scale.domain().filter(tickFilter));
 
     svg.append('g')
-        .attr('class', 'x axis')
-        .attr('transform', 'translate(0,' + height + ')')
-        .call(xAxis);
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(xAxis);
   }
 
   private drawYAxes(svg: any, scaleLeft: any, scaleRight: any, width: number): void {
     let yAxisLeft = D3.axisLeft(scaleLeft);
     let yAxisRight = D3.axisRight(scaleRight).tickFormat(D3.format(".0s"));
-    
-    svg.append('g')
-        .attr('class', 'y axis')
-        .attr('transform', `translate(${width}, 0)`)
-        .call(yAxisRight)
-        .append('text')
-        .attr('y', -12)
-        .attr('dy', '.71em')
-        .style('text-anchor', 'end')
-        .text('Total miles');
 
     svg.append('g')
-        .attr('class', 'y axis')
-        .call(yAxisLeft)
-        .append('text')
-        .attr('y', -12)
-        .attr('x', 71)
-        .attr('dy', '.71em')
-        .style('text-anchor', 'end')
-        .text('Miles per month');
+      .attr('class', 'y axis')
+      .attr('transform', `translate(${width}, 0)`)
+      .call(yAxisRight)
+      .append('text')
+      .attr('y', -12)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .text('Total miles');
+
+    svg.append('g')
+      .attr('class', 'y axis')
+      .call(yAxisLeft)
+      .append('text')
+      .attr('y', -12)
+      .attr('x', 71)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .text('Miles per month');
   }
 
   private drawBars(svg: any, xScale: any, yScale: any, height: number): void {
@@ -178,11 +178,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
         const y = this.y.baseVal.value;
         const topp = self.element.nativeElement.offsetTop;
 
-        if (x + 30 > self.htmlElement.offsetWidth - 24) {
-          x = self.htmlElement.offsetWidth - 54;
-        } else if (x - 30 < 24) {
-          x = 54;
-        }
+        x = self.fixXPosition(x);
 
         self.tooltip
           .style("left", x - 30 + "px")
@@ -200,8 +196,8 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
     let line = D3.line()
       .curve(D3.curveBasis)
-      .x(function(d: any) { return xScale(self.parseDate(d.date)); })
-      .y(function(d: any) { return yScale(d.cumulative); });
+      .x(function (d: any) { return xScale(self.parseDate(d.date)); })
+      .y(function (d: any) { return yScale(d.cumulative); });
 
     svg.append('path')
       .datum(this.model.points)
@@ -213,22 +209,31 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
     let self = this;
 
     svg.selectAll(".dot")
-        .data(this.model.points)
-        .enter()
-        .append("circle") // Uses the enter().append() method      
-        .on("mousemove", function (d) {
+      .data(this.model.points)
+      .enter()
+      .append("circle") // Uses the enter().append() method      
+      .on("mousemove", function (d) {
+        let x = this.cx.baseVal.value + self.margin.left;
+        const y = this.cy.baseVal.value;
+        const topp = self.element.nativeElement.offsetTop;
 
-        })
-              .on("mouseover", function () {
+        x = self.fixXPosition(x);
+
+        self.tooltip
+          .style("left", x - 30 + "px")
+          .style("top", topp + y + "px")
+          .html('<div class="toolTipLabel">' + (self.formatDate(d.date)) + '</div><div class="toolTipValue">' + (d.monthlyFormatted) + '</div>');
+      })
+      .on("mouseover", function () {
         self.tooltip.style("display", "inline-block");
       })
       .on("mouseout", function (d) {
         self.tooltip.style("display", "none");
       })
-        .attr("class", "dot") // Assign a class for styling
-        .attr("cx", function(d, i) { return xScale(self.formatDate(d.date)) + xScale.bandwidth() / 2 })
-        .attr("cy", function(d) { return yScale(d.cumulative) })
-        .attr("r", 5);
+      .attr("class", "dot") // Assign a class for styling
+      .attr("cx", function (d, i) { return xScale(self.formatDate(d.date)) + xScale.bandwidth() / 2 })
+      .attr("cy", function (d) { return yScale(d.cumulative) })
+      .attr("r", 5);
   }
 
   private parseDate(string: string): Date {
@@ -237,6 +242,16 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
   private formatDate(string: string): string {
     return moment(string, 'MM-DD-YYYY').format('MMM \'YY');
+  }
+
+  private fixXPosition(x: number) {
+      if (x + 30 > this.htmlElement.offsetWidth - 24) {
+        x = this.htmlElement.offsetWidth - 54;
+      } else if (x - 30 < 24) {
+        x = 54;
+      }
+
+      return x;
   }
 
 }
