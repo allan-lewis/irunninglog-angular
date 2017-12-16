@@ -169,12 +169,18 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
         self.tooltip.style("display", "none");
       })
       .on("mousemove", function (d) {
-        const x = this.x.baseVal.value + self.margin.left + this.width.baseVal.value / 2;
+        let x = this.x.baseVal.value + self.margin.left + this.width.baseVal.value / 2;
         const y = this.y.baseVal.value;
         const topp = self.element.nativeElement.offsetTop;
 
+        if (x + 30 > self.htmlElement.offsetWidth - 24) {
+          x = self.htmlElement.offsetWidth - 54;
+        } else if (x - 30 < 24) {
+          x = 54;
+        }
+
         self.tooltip
-          .style("left", x - 40 + "px")
+          .style("left", x - 30 + "px")
           .style("top", topp + 4 + y + "px")
           .html('<div class="toolTipLabel">' + (self.formatDate(d.date)) + '</div><div class="toolTipValue">' + (d.monthlyFormatted) + '</div>');
       })
