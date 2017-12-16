@@ -181,7 +181,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
         self.tooltip
           .style("left", x - 30 + "px")
-          .style("top", topp + 4 + y + "px")
+          .style("top", topp + y + "px")
           .html('<div class="toolTipLabel">' + (self.formatDate(d.date)) + '</div><div class="toolTipValue">' + (d.monthlyFormatted) + '</div>');
       })
       .transition()
