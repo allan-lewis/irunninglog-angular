@@ -175,14 +175,15 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
       })
       .on("mousemove", function (d) {
         let x = this.x.baseVal.value + self.margin.left + this.width.baseVal.value / 2;
-        const y = this.y.baseVal.value;
-        const topp = self.element.nativeElement.offsetTop;
+        let y = this.y.baseVal.value;
+        // const topp = self.element.nativeElement.offsetTop;
 
         x = self.fixXPosition(x);
+        y = self.fixYPosition(y, 0);
 
         self.tooltip
           .style("left", x - 30 + "px")
-          .style("top", topp + y + "px")
+          .style("top", y + "px")
           .html('<div class="toolTipLabel">' + (self.formatDate(d.date)) + '</div><div class="toolTipValue">' + (d.monthlyFormatted) + '</div>');
       })
       .transition()
@@ -214,14 +215,14 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
       .append("circle") // Uses the enter().append() method      
       .on("mousemove", function (d) {
         let x = this.cx.baseVal.value + self.margin.left;
-        const y = this.cy.baseVal.value;
-        const topp = self.element.nativeElement.offsetTop;
+        let y = this.cy.baseVal.value;
 
         x = self.fixXPosition(x);
+        y = self.fixYPosition(y, 4);
 
         self.tooltip
           .style("left", x - 30 + "px")
-          .style("top", Math.max(topp, topp + y - 8)  + "px")
+          .style("top", y + "px")
           .html('<div class="toolTipLabel">' + (self.formatDate(d.date)) + '</div><div class="toolTipValue">' + (d.monthlyFormatted) + '</div>');
       })
       .on("mouseover", function () {
@@ -244,7 +245,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
     return moment(string, 'MM-DD-YYYY').format('MMM \'YY');
   }
 
-  private fixXPosition(x: number) {
+  private fixXPosition(x: number): number {
       if (x + 30 > this.htmlElement.offsetWidth - 24) {
         x = this.htmlElement.offsetWidth - 54;
       } else if (x - 30 < 24) {
@@ -252,6 +253,10 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
       }
 
       return x;
+  }
+
+  private fixYPosition(y: number, offset: number): number {
+      return Math.max(this.element.nativeElement.offsetTop, this.element.nativeElement.offsetTop + y - offset);
   }
 
 }
