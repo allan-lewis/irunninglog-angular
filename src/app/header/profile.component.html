@@ -1,7 +1,7 @@
 <div class="profile-container">
     <div class="profile-info">
-        <span class="title-text">{{profile.firstName}} {{profile.lastName}}</span>
-        <span class="sub-title-text">{{profile.username}}</span>
+        <div class="title-text">{{profile.firstName}} {{profile.lastName}}</div>
+        <div class="sub-title-text">{{profile.username}}</div>
     </div>
     <div class="avatar-container" *ngIf="profile.avatar">
         <img class="avatar-img" src="{{profile.avatar}}"/>
