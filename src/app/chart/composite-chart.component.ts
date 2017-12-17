@@ -33,7 +33,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
     this.host = D3.select(this.htmlElement);
 
-    this.margin = { top: 40, right: 32, bottom: 30, left: 32 };
+    this.margin = { top: 44, right: 32, bottom: 30, left: 32 };
 
     this.drawChart();
 
