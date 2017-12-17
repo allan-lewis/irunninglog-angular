@@ -221,7 +221,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
         self.tooltip
           .style("left", x - 30 + "px")
-          .style("top", topp + y + "px")
+          .style("top", Math.max(topp, topp + y - 8)  + "px")
           .html('<div class="toolTipLabel">' + (self.formatDate(d.date)) + '</div><div class="toolTipValue">' + (d.monthlyFormatted) + '</div>');
       })
       .on("mouseover", function () {
