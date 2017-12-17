@@ -99,18 +99,11 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
     this.drawLine(svg, xScaleCumulative, yScaleRight);
 
-    this.drawDots(svg, xScaleMonthly, yScaleRight);
+    this.drawDots(svg, xScaleMonthly, yScaleRight, width);
   }
 
   private drawXAxis(svg: any, scale: any, width: number, height: number): void {
-    const numTicks = Math.floor(width / 50);
-    const factor = this.model.points.length == 0 ? 0 : Math.floor(this.model.points.length / numTicks) + 1;
-
-    const tickFilter = function (d, i) {
-      return i % factor == 0;
-    };
-
-    let xAxis = D3.axisBottom(scale).tickValues(scale.domain().filter(tickFilter));
+    let xAxis = D3.axisBottom(scale).tickValues(scale.domain().filter(this.filterData(width)));
 
     svg.append('g')
       .attr('class', 'x axis')
@@ -206,13 +199,14 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
       .attr('d', line);
   }
 
-  private drawDots(svg: any, xScale: any, yScale: any) {
+  private drawDots(svg: any, xScale: any, yScale: any, width: number) {
     let self = this;
 
     svg.selectAll(".dot")
       .data(this.model.points)
       .enter()
-      .append("circle") // Uses the enter().append() method      
+      .append("circle") // Uses the enter().append() method   
+      .filter(self.filterData(width))   
       .on("mousemove", function (d) {
         let x = this.cx.baseVal.value + self.margin.left;
         let y = this.cy.baseVal.value;
@@ -257,6 +251,15 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
 
   private fixYPosition(y: number, offset: number): number {
       return Math.max(this.element.nativeElement.offsetTop, this.element.nativeElement.offsetTop + y - offset);
+  }
+
+  private filterData(width: number) {
+    const numTicks = Math.floor(width / 50);
+    const factor = this.model.points.length == 0 ? 0 : Math.floor(this.model.points.length / numTicks) + 1;
+
+    return function (d, i) {
+      return i % factor == 0;
+    };
   }
 
 }
