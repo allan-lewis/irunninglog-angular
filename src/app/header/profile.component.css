@@ -8,7 +8,7 @@
     border-radius: 50%;
 }
 
-.title-text {
+/*.title-text {
     height: 50%;
     line-height: 22.5px;
     vertical-align: text-top;
@@ -22,7 +22,7 @@
     vertical-align: text-bottom;
     font-size: 14px;
     color: rgba(255, 255, 255, .7);
-}
+}*/
 
 .profile-container {
     padding-top: 16px;
