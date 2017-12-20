@@ -8,21 +8,16 @@
     border-radius: 50%;
 }
 
-/*.title-text {
-    height: 50%;
-    line-height: 22.5px;
-    vertical-align: text-top;
+.title-text {
     font-size: 14px;
     text-align: right;
 }
 
 .sub-title-text {
-    height: 50%;
-    line-height: 22.5px;
-    vertical-align: text-bottom;
     font-size: 14px;
+    text-align: right;
     color: rgba(255, 255, 255, .7);
-}*/
+}
 
 .profile-container {
     padding-top: 16px;
@@ -34,6 +29,7 @@
     margin-right: 12px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 @media only screen and (max-width : 640px) {
