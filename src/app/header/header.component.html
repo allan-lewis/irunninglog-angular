@@ -6,6 +6,7 @@
     <md-toolbar-row>
         <img class="strava-powered" src="../assets/api_logo_pwrdBy_strava_horiz_white.svg"/>
         <span class="fill-remaining-space"></span>
+        <irl-component-ping [ping]="ping"></irl-component-ping>
         <irl-component-logout *ngIf="authenticationModel.authenticated === 0"></irl-component-logout>
     </md-toolbar-row>
 

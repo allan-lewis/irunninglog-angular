@@ -3,13 +3,16 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
 import { ProfileComponent } from './profile.component';
+import { PingComponent } from '../ping/ping.component';
 import { ProfileService } from './profile.service';
+import { PingService } from '../ping/ping.service';
 import { LogoutComponent } from './logout.component';
 import { MdToolbarModule, MdCardModule, MdButtonModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { AuthenticationModel } from '../state/authentication.model';
 import { profileModelReducer } from '../state/profile.reducer';
+import { PingModel } from '../state/ping.model';
 import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
@@ -31,10 +34,12 @@ describe('HeaderComponent', () => {
       declarations: [
         HeaderComponent,
         ProfileComponent,
+        PingComponent,
         LogoutComponent
       ],
       providers: [
-        ProfileService,        
+        ProfileService,  
+        PingService,      
           {
           provide: XHRBackend,
           useClass: MockBackend
@@ -60,6 +65,7 @@ describe('HeaderComponent', () => {
     const fixture = TestBed.createComponent(HeaderComponent);
     let comp = fixture.componentInstance;
     comp.authenticationModel = authenticationModel;
+    comp.ping = new PingModel();
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('span').textContent).toContain('irunninglog');

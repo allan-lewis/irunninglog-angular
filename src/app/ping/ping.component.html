@@ -1,6 +1,4 @@
-<div class="ping-container">
-    <div [ngClass]="style()">
-        <irl-component-ping-good *ngIf="ping.status >= 200 && ping.status < 300" [ping]="ping"></irl-component-ping-good>
-        <irl-component-ping-bad  *ngIf="ping.status >= 300" [ping]="ping"></irl-component-ping-bad>
-    </div>
-</div>
+<!--<button md-icon-button (click)="logout()">-->
+<button md-icon-button>
+    <md-icon class="md-24" [ngStyle]="style()">wifi</md-icon>
+</button>

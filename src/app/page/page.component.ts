@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { ChallengesModel } from '../state/challenges.model';
 import { DataSet } from '../state/data-set.model';
-import { PingModel } from '../state/ping.model';
 import { IProgressItem } from '../state/progress-item.model';
 import { ShoesModel } from '../state/shoes.model';
 import { StreaksModel } from '../state/streaks.model';
 import { SummaryModel } from '../state/summary.model';
 import { YearlyTotalsModel } from '../state/yearly-total.model';
 import { ChallengesService } from '../challenges/challenges.service';
-import { PingService } from '../ping/ping.service';
 import { ProgressListService } from '../progress/progress-list.service';
 import { ShoesService } from '../shoes/shoes.service';
 import { StatisticsService } from '../statistics/statistics.service';
@@ -23,7 +21,6 @@ export class PageComponent {
 
   challenges: ChallengesModel;
   dataSet: DataSet;
-  ping: PingModel;
   shoes: ShoesModel;
   streaks: StreaksModel;
   yearlyTotals: YearlyTotalsModel;
@@ -32,7 +29,6 @@ export class PageComponent {
   progressList: Array<IProgressItem>;
 
   constructor(challengesService: ChallengesService,
-              pingService: PingService,
               statisticsService: StatisticsService,
               shoesService: ShoesService,
               streaksService: StreaksService,
@@ -49,9 +45,7 @@ export class PageComponent {
 
     statisticsService.yearlyTotals().subscribe(x => this.yearlyTotals = x);
 
-    statisticsService.summary().subscribe(x => this.summary = x)
-
-    pingService.ping().subscribe(x => this.ping = x);
+    statisticsService.summary().subscribe(x => this.summary = x);
 
     progressListService.progressList().subscribe(x => this.progressList = x);
   }

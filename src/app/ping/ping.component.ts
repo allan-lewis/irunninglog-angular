@@ -19,7 +19,7 @@ export class PingComponent implements OnChanges {
     // console.log('PingComponent:ngOnChanges');
   }
 
-  style() {
+  private status() {
     let val = this.ping.average;
 
     if (val <= 0) {
@@ -30,6 +30,30 @@ export class PingComponent implements OnChanges {
       return 'ok'
     } else {
       return 'bad';
+    }
+  }
+
+  style() {
+    switch(this.status()) {
+      case 'ok' :
+        return {'color': '#fdd835'};
+      case 'good':
+        return {'color': '#43a047'};
+      default:
+        return {'color': '#e53935'};
+    }
+  }
+
+  text() {
+    switch(this.status()) {
+      case 'bad':
+        return 'Error';
+      case 'ok' :
+        return 'Poor Connection';
+      case 'good':
+        return 'Good Connection';
+      default:
+        return '';
     }
   }
 

@@ -19,6 +19,7 @@ import { AppState } from '../state/app.state';
 import { AUTHENTICATE } from '../state/authentication.reducer';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
+import { MdIconModule, MdDialogModule } from '@angular/material';
 
 let authenticationModel = new AuthenticationModel(); 
 
@@ -29,6 +30,7 @@ describe('PingComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
+        MdIconModule,
         StoreModule.provideStore({
           authentication: authenticationModelReducer,
           ping: pingModelReducer
@@ -123,26 +125,26 @@ describe('PingComponent', () => {
     let ping = new PingModel();
     fixture.componentInstance.ping = ping;
 
-    expect(fixture.componentInstance.style()).toBe('none');
+    expect(fixture.componentInstance.style()).toEqual({ color: '#e53935' });
 
     fixture.componentInstance.ping.status = 501;
 
-    expect(fixture.componentInstance.style()).toBe('bad');
+    expect(fixture.componentInstance.style()).toEqual({'color': '#e53935'});
 
     fixture.componentInstance.ping.status = 200;
     fixture.componentInstance.ping.average = 20;
 
-    expect(fixture.componentInstance.style()).toBe('good');
+    expect(fixture.componentInstance.style()).toEqual({'color': '#43a047'});
 
     fixture.componentInstance.ping.status = 200;
     fixture.componentInstance.ping.average = 700;
 
-    expect(fixture.componentInstance.style()).toBe('ok');
+    expect(fixture.componentInstance.style()).toEqual({ color: '#fdd835' });
 
     fixture.componentInstance.ping.status = 200;
     fixture.componentInstance.ping.average = 1001;
 
-    expect(fixture.componentInstance.style()).toBe('bad');
+    expect(fixture.componentInstance.style()).toEqual({ color: '#e53935' });
   }));
 
 });
