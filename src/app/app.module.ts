@@ -8,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // ~~ MATERIAL =====================
 
 import 'hammerjs';
-import { MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule, MdDialogModule, MdProgressBarModule } from '@angular/material';
+import { MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule, MdDialogModule, MdProgressBarModule, MdTooltipModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ~~ NGRX =========================
@@ -98,6 +98,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     MdDialogModule,
     MdIconModule,  
     MdProgressBarModule,
+    MdTooltipModule,
     MdToolbarModule,
     BrowserAnimationsModule,
     StoreModule.provideStore({

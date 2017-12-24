@@ -19,7 +19,7 @@ import { AppState } from '../state/app.state';
 import { AUTHENTICATE } from '../state/authentication.reducer';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
-import { MdIconModule, MdDialogModule } from '@angular/material';
+import { MdIconModule, MdDialogModule, MdTooltipModule } from '@angular/material';
 
 let authenticationModel = new AuthenticationModel(); 
 
@@ -31,6 +31,7 @@ describe('PingComponent', () => {
       imports: [     
         HttpModule,
         MdIconModule,
+        MdTooltipModule,
         StoreModule.provideStore({
           authentication: authenticationModelReducer,
           ping: pingModelReducer

@@ -44,16 +44,14 @@ export class PingComponent implements OnChanges {
     }
   }
 
-  text() {
+  tooltip() {
     switch(this.status()) {
-      case 'bad':
-        return 'Error';
       case 'ok' :
         return 'Poor Connection';
       case 'good':
         return 'Good Connection';
       default:
-        return '';
+        return 'Bad Connection';
     }
   }
 
