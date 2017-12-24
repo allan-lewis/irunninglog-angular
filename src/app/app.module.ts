@@ -25,7 +25,7 @@ import { ProfileComponent } from './header/profile.component';
 import { CompositeChartComponent } from './chart/composite-chart.component';
 import { LoginComponent } from './login/login.component';
 import { PageComponent } from './page/page.component';
-import { PingComponent, PingGoodComponent, PingBadComponent } from './ping/ping.component';
+import { PingComponent } from './ping/ping.component';
 import { ProgressCardComponent } from './progress/progress-card.component';
 import { ProgressListComponent } from './progress/progress-list.component';
 import { ShellComponent } from './shell/shell.component';

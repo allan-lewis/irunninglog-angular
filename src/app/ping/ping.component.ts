@@ -25,7 +25,7 @@ export class PingComponent implements OnChanges {
   }
 
   openSnackBar() {
-    this.snackBar.open('Snack Bar!');
+    this.snackBar.open(this.tooltip(), 'Close', {duration: 2000});
     // this.snackBar.openFromComponent(PizzaPartyComponent, {
     //   duration: 500,
     // });
