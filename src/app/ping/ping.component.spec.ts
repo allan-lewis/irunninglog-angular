@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { CommaSeparatedNumberPipe } from '../pipe/comma.pipe';
-import { PingComponent, PingGoodComponent, PingBadComponent } from './ping.component';
+import { PingComponent } from './ping.component';
 import { PingService } from './ping.service';
 import { AuthenticationModel } from '../state/authentication.model';
 import { pingModelReducer } from '../state/ping.reducer';
@@ -19,7 +19,7 @@ import { AppState } from '../state/app.state';
 import { AUTHENTICATE } from '../state/authentication.reducer';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service';
-import { MdIconModule, MdDialogModule, MdTooltipModule } from '@angular/material';
+import { MaterialModule } from '@angular/material';
 
 let authenticationModel = new AuthenticationModel(); 
 
@@ -30,8 +30,7 @@ describe('PingComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
-        MdIconModule,
-        MdTooltipModule,
+        MaterialModule.forRoot(),
         StoreModule.provideStore({
           authentication: authenticationModelReducer,
           ping: pingModelReducer
@@ -39,8 +38,6 @@ describe('PingComponent', () => {
       ],
       declarations: [
         PingComponent,
-        PingGoodComponent,
-        PingBadComponent,
         CommaSeparatedNumberPipe,
       ],
       providers: [

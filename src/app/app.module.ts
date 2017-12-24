@@ -8,7 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // ~~ MATERIAL =====================
 
 import 'hammerjs';
-import { MdToolbarModule, MdCardModule, MdButtonModule, MdIconModule, MdDialogModule, MdProgressBarModule, MdTooltipModule } from '@angular/material';
+import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ~~ NGRX =========================
@@ -77,8 +77,6 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     LogoutComponent,
     PageComponent,
     PingComponent,
-    PingBadComponent,
-    PingGoodComponent,
     ProfileComponent,
     ProgressCardComponent,
     ProgressListComponent,
@@ -93,13 +91,7 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
     FormsModule,
     HttpModule,
     BrowserModule,  
-    MdButtonModule,
-    MdCardModule,
-    MdDialogModule,
-    MdIconModule,  
-    MdProgressBarModule,
-    MdTooltipModule,
-    MdToolbarModule,
+    MaterialModule.forRoot(),
     BrowserAnimationsModule,
     StoreModule.provideStore({
       authentication: authenticationModelReducer,

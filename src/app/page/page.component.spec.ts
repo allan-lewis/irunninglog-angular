@@ -9,7 +9,7 @@ import { StreaksComponent } from '../streaks/streaks.component';
 import { YearlyComponent } from '../yearly/yearly.component';
 import { YearlyTotalComponent } from '../yearly/yearly-total.component';
 import { StreaksService } from '../streaks/streaks.service';
-import { PingComponent, PingGoodComponent, PingBadComponent } from '../ping/ping.component';
+import { PingComponent } from '../ping/ping.component';
 import { PingService } from '../ping/ping.service';
 import { ProgressCardComponent } from '../progress/progress-card.component';
 import { ProgressListComponent } from '../progress/progress-list.component';
@@ -44,8 +44,6 @@ describe('PageComponent', () => {
         ShoesComponent,
         StreaksComponent,
         PingComponent,
-        PingGoodComponent,
-        PingBadComponent,
         ChallengesComponent,
         ProgressCardComponent,
         ProgressListComponent,

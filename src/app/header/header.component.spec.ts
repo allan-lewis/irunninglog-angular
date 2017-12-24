@@ -7,7 +7,7 @@ import { PingComponent } from '../ping/ping.component';
 import { ProfileService } from './profile.service';
 import { PingService } from '../ping/ping.service';
 import { LogoutComponent } from './logout.component';
-import { MdToolbarModule, MdCardModule, MdButtonModule, MdTooltipModule } from '@angular/material';
+import { MaterialModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { AuthenticationModel } from '../state/authentication.model';
@@ -23,10 +23,7 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,  
-        MdToolbarModule,
-        MdCardModule,
-        MdButtonModule,
-        MdTooltipModule,
+        MaterialModule.forRoot(),
         StoreModule.provideStore({
           auth: authenticationModelReducer,
           profile: profileModelReducer
