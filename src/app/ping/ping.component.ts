@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, Inject, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PingModel } from '../state/ping.model'
 import { PingService } from './ping.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MAT_SNACK_BAR_DATA } from '@angular/material';
 
 @Component({
   selector: 'irl-component-ping',
@@ -25,10 +25,10 @@ export class PingComponent implements OnChanges {
   }
 
   openSnackBar() {
-    this.snackBar.open(this.tooltip(), 'Close', {duration: 2000});
-    // this.snackBar.openFromComponent(PizzaPartyComponent, {
-    //   duration: 500,
-    // });
+    this.snackBar.openFromComponent(PingStatusComponent, {
+      duration: 2000,
+      data: this.ping
+    });
   }
 
   private status() {
@@ -69,38 +69,21 @@ export class PingComponent implements OnChanges {
 
 }
 
+@Component({
+  selector: 'irl-component-ping-status',
+  template: `
+    <div>
+      <span class="status-label">Status:</span> <span class="status-value">{{data.status}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Avg:</span> <span class="status-value">{{data.average | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Avg:</span> <span class="status-value">{{data.last | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Avg:</span> <span class="status-value">{{data.min | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Avg:</span> <span class="status-value">{{data.max | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
+    </div>
+  `,
+  styles: []
+})
+export class PingStatusComponent {
 
+  constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
 
-// @Component({
-//   selector: 'irl-component-ping-good',
-//   template: `
-//     <div>
-//       <span class="status-label">Avg:</span> <span class="status-value">{{ping.average | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
-//       <span class="status-label">Last:</span> <span class="status-value">{{ping.last | comma}}</span><span class="status-ms">ms</span>
-//       <span class="status-label">Min:</span> <span class="status-value">{{ping.min | comma}}</span><span class="status-ms">ms</span>
-//       <span class="status-label">Max:</span> <span class="status-value">{{ping.max | comma}}</span><span class="status-ms">ms</span>
-//     </div>
-//   `,
-//   styleUrls: ['./ping.component.css']
-// })
-// export class PingGoodComponent {
-
-//   @Input() ping: PingModel;
-
-// }
-
-// @Component({
-//   selector: 'irl-component-ping-bad',
-//   template: `
-//     <div>
-//       <span class="error-code-label">Last:</span> <span class="error-code-value">{{ping.last | comma}}</span><span class="status-ms">ms</span>
-//       <span class="error-code-label">Error Code:</span> <span class="error-code-value">{{ping.status}}</span>
-//     </div>
-//   `,
-//   styleUrls: ['./ping.component.css']
-// })
-// export class PingBadComponent {
-
-//   @Input() ping: PingModel;
-
-// }
+}
