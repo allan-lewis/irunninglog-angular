@@ -20,7 +20,7 @@ describe('ProfileComponent', () => {
     TestBed.configureTestingModule({
       imports: [        
         HttpModule,
-        StoreModule.provideStore({
+        StoreModule.forRoot({
           authentication: authenticationModelReducer,
           profile: profileModelReducer
         })

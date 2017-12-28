@@ -1,5 +1,5 @@
 import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angular/http';
-import { MdCardModule, MdProgressBarModule } from '@angular/material';
+import { MatCardModule, MatProgressBarModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 
 import { ChallengesComponent } from './challenges.component';
@@ -17,9 +17,9 @@ describe('ChallengesComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
-        MdCardModule,
-        MdProgressBarModule,
-        StoreModule.provideStore({
+        MatCardModule,
+        MatProgressBarModule,
+        StoreModule.forRoot({
           challenges: challengesModelReducer
         })
       ],

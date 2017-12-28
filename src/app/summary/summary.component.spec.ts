@@ -1,5 +1,5 @@
 import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angular/http';
-import { MdCardModule, MdProgressBarModule } from '@angular/material';
+import { MatCardModule, MatProgressBarModule } from '@angular/material';
 
 import { SummaryComponent } from './summary.component';
 import { StatisticsService } from '../statistics/statistics.service';
@@ -20,9 +20,9 @@ describe('SummaryComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
-        MdCardModule,
-        MdProgressBarModule,
-        StoreModule.provideStore({
+        MatCardModule,
+        MatProgressBarModule,
+        StoreModule.forRoot({
           authentication: authenticationModelReducer,
           summary: summaryModelReducer
         })

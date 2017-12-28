@@ -13,7 +13,7 @@ import { profileModelReducer } from '../state/profile.reducer';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { AUTHENTICATE } from '../state/authentication.reducer';
 import { AppState } from '../state/app.state';
-import { MdIconModule, MdDialogModule } from '@angular/material';
+import { MatIconModule, MatDialogModule } from '@angular/material';
 
 
 import { NgModule } from '@angular/core';
@@ -21,7 +21,7 @@ import { NgModule } from '@angular/core';
 let authenticationModel = new AuthenticationModel(); 
 
 @NgModule({
-  imports: [MdDialogModule],
+  imports: [MatDialogModule],
   declarations: [ConfirmComponent],
   entryComponents: [ConfirmComponent]
 })
@@ -33,8 +33,8 @@ describe('LogoutComponent', () => {
       imports: [   
         FakeTestDialogModule,     
         HttpModule,
-        MdIconModule,
-        StoreModule.provideStore({
+        MatIconModule,
+        StoreModule.forRoot({
           authentication: authenticationModelReducer,
           profile: profileModelReducer
         })

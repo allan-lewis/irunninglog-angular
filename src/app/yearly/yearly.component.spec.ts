@@ -1,5 +1,5 @@
 import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angular/http';
-import { MdCardModule, MdProgressBarModule } from '@angular/material';
+import { MatCardModule, MatProgressBarModule } from '@angular/material';
 
 import { YearlyComponent } from './yearly.component';
 import { YearlyTotalComponent } from './yearly-total.component';
@@ -21,9 +21,9 @@ describe('YearlyTotalComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
-        MdCardModule,
-        MdProgressBarModule,
-        StoreModule.provideStore({
+        MatCardModule,
+        MatProgressBarModule,
+        StoreModule.forRoot({
           authentication: authenticationModelReducer,
           yearlyTotals: yearlyTotalModelReducer
         })

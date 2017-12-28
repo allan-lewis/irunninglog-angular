@@ -1,5 +1,5 @@
 import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angular/http';
-import { MdCardModule, MdProgressBarModule } from '@angular/material';
+import { MatCardModule, MatProgressBarModule } from '@angular/material';
 
 import { StreaksComponent } from './streaks.component';
 import { StreaksService } from './streaks.service';
@@ -21,9 +21,9 @@ describe('StreaksComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
-        MdCardModule,
-        MdProgressBarModule,
-        StoreModule.provideStore({
+        MatCardModule,
+        MatProgressBarModule,
+        StoreModule.forRoot({
           authentication: authenticationModelReducer,
           streaks: streaksModelReducer
         })

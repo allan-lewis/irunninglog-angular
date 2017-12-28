@@ -4,7 +4,12 @@ import * as Immutable from 'immutable';
 
 export const PROFILE_SET = '293b547b-0148-4e0f-9f83-e0f604bdc954';
 
-export function profileModelReducer(state: ProfileModel = {id: 0, username: '', firstName: '', lastName: ''}, action: Action) {
+export class SetProfileAction implements Action {
+    readonly type: string = PROFILE_SET;
+    constructor(public payload: any) { }
+}
+
+export function profileModelReducer(state: ProfileModel = {id: 0, username: '', firstName: '', lastName: ''}, action: SetProfileAction) {
   switch (action.type) {
     case PROFILE_SET: 
         let before = JSON.stringify(state);

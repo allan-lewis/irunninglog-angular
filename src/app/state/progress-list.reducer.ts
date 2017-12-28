@@ -10,8 +10,24 @@ export const UPDATE_CHALLENGES = '7ab68622-18e1-4f12-a2b6-494febdc2dbd';
 export const UPDATE_SHOES = 'a75e69f9-82c4-42f8-a9cc-be5de90686fa';
 export const UPDATE_STREAKS = 'aeb467d0-8cbd-4312-9b42-308f1c34af82';
 
-export function progressListReducer(state: Array<IProgressItem> = [], action: Action) {
-  
+export class UpdateChallengesAction implements Action {
+    readonly type: string = UPDATE_CHALLENGES;
+    constructor(public payload: any) { }
+}
+
+export class UpdateShoesAction implements Action {
+    readonly type: string = UPDATE_SHOES;
+    constructor(public payload: any) { }
+}
+
+export class UpdateStreaksAction implements Action {
+    readonly type: string = UPDATE_STREAKS;
+    constructor(public payload: any) { }
+}
+
+export type UpdateProgressItemAction = UpdateChallengesAction | UpdateShoesAction | UpdateStreaksAction;
+
+export function progressListReducer(state: Array<IProgressItem> = [], action: UpdateProgressItemAction) {
   switch (action.type) {
       case UPDATE_STREAKS:
         return mergeStreaks(state, action.payload);
@@ -22,7 +38,6 @@ export function progressListReducer(state: Array<IProgressItem> = [], action: Ac
       default:
         return state;
   }
-
 }
 
 function mergeStreaks(state: Array<IProgressItem>, streaks: StreaksModel): Array<IProgressItem> {

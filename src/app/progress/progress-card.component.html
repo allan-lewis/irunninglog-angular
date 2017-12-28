@@ -1,10 +1,10 @@
-<md-card [ngClass]="style()">
-    <md-card-title class="progress-card-type">{{model.getType()}}</md-card-title>
-    <md-card-title class="progress-card-title">{{model.getTitle()}}</md-card-title>
-    <md-card-subtitle>{{model.getSubtitle()}}</md-card-subtitle>
-    <md-card-content>
+<mat-card [ngClass]="style()">
+    <mat-card-title class="progress-card-type">{{model.getType()}}</mat-card-title>
+    <mat-card-title class="progress-card-title">{{model.getTitle()}}</mat-card-title>
+    <mat-card-subtitle>{{model.getSubtitle()}}</mat-card-subtitle>
+    <mat-card-content>
         <div class="progress-content-title">{{model.getLineOne()}}</div>
         <div class="progress-content-subtitle">{{model.getLineTwo()}}</div>
-        <md-progress-bar [color]="color()" value="{{model.getPercentage()}}"></md-progress-bar>
-    </md-card-content>
-</md-card>
+        <mat-progress-bar [color]="color()" value="{{model.getPercentage()}}"></mat-progress-bar>
+    </mat-card-content>
+</mat-card>

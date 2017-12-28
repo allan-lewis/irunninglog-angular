@@ -2,12 +2,12 @@ import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angula
 import { TestBed, async } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
+import { MatIconModule, MatToolbarModule } from '@angular/material';
 import { ProfileComponent } from './profile.component';
 import { PingComponent } from '../ping/ping.component';
 import { ProfileService } from './profile.service';
 import { PingService } from '../ping/ping.service';
 import { LogoutComponent } from './logout.component';
-import { MaterialModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { AuthenticationModel } from '../state/authentication.model';
@@ -23,8 +23,9 @@ describe('HeaderComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,  
-        MaterialModule.forRoot(),
-        StoreModule.provideStore({
+        MatIconModule,
+        MatToolbarModule,
+        StoreModule.forRoot({
           auth: authenticationModelReducer,
           profile: profileModelReducer
         })

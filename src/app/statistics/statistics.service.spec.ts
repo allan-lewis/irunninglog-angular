@@ -15,7 +15,7 @@ describe('StatisticsService', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
-        StoreModule.provideStore({
+        StoreModule.forRoot({
           authentication: authenticationModelReducer,
           summary: summaryModelReducer
         })

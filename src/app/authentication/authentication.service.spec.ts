@@ -1,3 +1,5 @@
+import 'rxjs/Rx';
+
 import { async, fakeAsync, tick, TestBed, inject} from '@angular/core/testing';
 import { AuthenticationService } from './authentication.service';
 import { authenticationModelReducer } from '../state/authentication.reducer';
@@ -13,7 +15,7 @@ describe('AuthenticationService', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpModule,
-        StoreModule.provideStore({
+        StoreModule.forRoot({
           authentication: authenticationModelReducer
         })
       ],

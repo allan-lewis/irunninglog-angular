@@ -1,5 +1,5 @@
 import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angular/http';
-import { MdCardModule, MdProgressBarModule } from '@angular/material';
+import { MatCardModule, MatProgressBarModule } from '@angular/material';
 
 import { StoreModule, Store } from '@ngrx/store';
 import { ShoesComponent } from './shoes.component';
@@ -21,9 +21,9 @@ describe('ShoesComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
-        MdCardModule,
-        MdProgressBarModule,
-        StoreModule.provideStore({
+        MatCardModule,
+        MatProgressBarModule,
+        StoreModule.forRoot({
           authentication: authenticationModelReducer,
           shoes: shoesModelReducer
         })

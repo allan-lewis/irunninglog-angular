@@ -12,7 +12,7 @@ describe('PingService', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
-        StoreModule.provideStore({
+        StoreModule.forRoot({
           auth: authenticationModelReducer,
           ping: pingModelReducer
         })

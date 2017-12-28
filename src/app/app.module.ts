@@ -7,9 +7,40 @@ import { BrowserModule } from '@angular/platform-browser';
 
 // ~~ MATERIAL =====================
 
-import 'hammerjs';
-import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatStepperModule,
+} from '@angular/material';
 
 // ~~ NGRX =========================
 
@@ -67,6 +98,43 @@ import { yearlyTotalModelReducer } from './state/yearly-total.reducer';
 import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
 
 @NgModule({
+  exports: [
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+  ]
+})
+export class MyMaterialModule {};
+
+@NgModule({
   declarations: [
     CommaSeparatedNumberPipe,
     ConfirmComponent,
@@ -90,10 +158,10 @@ import { CommaSeparatedNumberPipe } from './pipe/comma.pipe';
   imports: [
     FormsModule,
     HttpModule,
-    BrowserModule,  
-    MaterialModule.forRoot(),
+    BrowserModule, 
+    MyMaterialModule,
     BrowserAnimationsModule,
-    StoreModule.provideStore({
+    StoreModule.forRoot({
       authentication: authenticationModelReducer,
       challenges: challengesModelReducer,
       dataSet: dataSetModelReducer,

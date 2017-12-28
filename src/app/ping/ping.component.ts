@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PingModel } from '../state/ping.model'
 import { PingService } from './ping.service';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'irl-component-ping',
@@ -16,7 +16,7 @@ export class PingComponent implements OnChanges {
   @Input()
   ping: PingModel;
 
-  constructor(public snackBar: MdSnackBar) {
+  constructor(public snackBar: MatSnackBar) {
 
   }
 

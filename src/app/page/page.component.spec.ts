@@ -15,7 +15,7 @@ import { ProgressCardComponent } from '../progress/progress-card.component';
 import { ProgressListComponent } from '../progress/progress-list.component';
 import { ProgressListService } from '../progress/progress-list.service';
 import { CommaSeparatedNumberPipe } from '../pipe/comma.pipe';
-import { MdToolbarModule, MdCardModule, MdButtonModule, MdProgressBarModule, MdTooltipModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatCardModule, MatButtonModule, MatProgressBarModule, MatTooltipModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { authenticationModelReducer } from '../state/authentication.reducer';
 import { AuthenticationModel } from '../state/authentication.model';
@@ -31,10 +31,11 @@ describe('PageComponent', () => {
     TestBed.configureTestingModule({
       imports: [     
         HttpModule,
-        MdCardModule,
-        MdProgressBarModule,
-        MdTooltipModule,
-        StoreModule.provideStore({
+        MatCardModule,
+        MatIconModule,
+        MatProgressBarModule,
+        MatTooltipModule,
+        StoreModule.forRoot({
           auth: authenticationModelReducer,
           profile: profileModelReducer
         })

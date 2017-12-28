@@ -1,13 +1,15 @@
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
+        <mat-toolbar-row>
     <span class="main-title">{{title}}</span>
     <span class="fill-remaining-space"></span>
     <irl-component-profile *ngIf="authenticationModel.authenticated === 0" [profile]="profile"></irl-component-profile>
+        </mat-toolbar-row>
     
-    <md-toolbar-row>
+    <mat-toolbar-row>
         <img class="strava-powered" src="../assets/api_logo_pwrdBy_strava_horiz_white.svg"/>
         <span class="fill-remaining-space"></span>
-        <irl-component-ping [ping]="ping"></irl-component-ping>
+        <irl-component-ping [ping]="ping" *ngIf="authenticationModel.authenticated === 0"></irl-component-ping>
         <irl-component-logout *ngIf="authenticationModel.authenticated === 0"></irl-component-logout>
-    </md-toolbar-row>
+    </mat-toolbar-row>
 
-</md-toolbar>
+</mat-toolbar>
