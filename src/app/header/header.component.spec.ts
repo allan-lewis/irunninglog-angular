@@ -2,7 +2,7 @@ import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angula
 import { TestBed, async } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import { MatIconModule, MatToolbarModule } from '@angular/material';
+import { MatIconModule, MatToolbarModule, MatTooltipModule } from '@angular/material';
 import { ProfileComponent } from './profile.component';
 import { PingComponent } from '../ping/ping.component';
 import { ProfileService } from './profile.service';
@@ -25,6 +25,7 @@ describe('HeaderComponent', () => {
         HttpModule,  
         MatIconModule,
         MatToolbarModule,
+        MatTooltipModule,
         StoreModule.forRoot({
           auth: authenticationModelReducer,
           profile: profileModelReducer
