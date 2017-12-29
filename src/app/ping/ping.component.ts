@@ -26,7 +26,7 @@ export class PingComponent implements OnChanges {
 
   openSnackBar() {
     this.snackBar.openFromComponent(PingStatusComponent, {
-      duration: 2000,
+      duration: 5000,
       data: this.ping
     });
   }
@@ -35,7 +35,7 @@ export class PingComponent implements OnChanges {
     let val = this.ping.average;
 
     if (val <= 0) {
-      return this.ping.status >= 300 ? 'bad' : 'none';
+      return 'bad';
     } else if (val < 500) {
       return 'good';
     } else if (val < 1000) {
@@ -73,17 +73,35 @@ export class PingComponent implements OnChanges {
   selector: 'irl-component-ping-status',
   template: `
     <div>
-      <span class="status-label">Status:</span> <span class="status-value">{{data.status}}</span><span class="status-ms">ms</span>
-      <span class="status-label">Avg:</span> <span class="status-value">{{data.average | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
-      <span class="status-label">Avg:</span> <span class="status-value">{{data.last | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
-      <span class="status-label">Avg:</span> <span class="status-value">{{data.min | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
-      <span class="status-label">Avg:</span> <span class="status-value">{{data.max | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label">Status:</span> <span class="status-value" [ngClass]="style()">{{data.status}}</span>
+      <span class="status-label" *ngIf="!error()">Avg:</span> <span class="status-value" [ngClass]="style()" *ngIf="!error()">{{data.average | number:'1.0-0' | comma}}</span><span class="status-ms" *ngIf="!error()">ms</span>
+      <span class="status-label">Last:</span> <span class="status-value" [ngClass]="style()">{{data.last | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
+      <span class="status-label" *ngIf="!error()">Min:</span> <span class="status-value" [ngClass]="style()" *ngIf="!error()">{{data.min | number:'1.0-0' | comma}}</span><span class="status-ms" *ngIf="!error()">ms</span>
+      <span class="status-label" *ngIf="!error()">Max:</span> <span class="status-value" [ngClass]="style()" *ngIf="!error()">{{data.max | number:'1.0-0' | comma}}</span><span class="status-ms" *ngIf="!error()">ms</span>
     </div>
   `,
-  styles: []
+  styleUrls: ['./ping.component.css']
 })
 export class PingStatusComponent {
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) { }
+
+  error(): boolean {
+    return this.data.status < 200 || this.data.status >= 300;
+  }
+
+  style() {
+    let val = this.data.average;
+
+    if (val <= 0) {
+      return 'bad';
+    } else if (val < 500) {
+      return 'good';
+    } else if (val < 1000) {
+      return 'ok'
+    } else {
+      return 'bad';
+    }
+  }
 
 }
