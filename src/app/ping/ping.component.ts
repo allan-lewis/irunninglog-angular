@@ -73,7 +73,7 @@ export class PingComponent implements OnChanges {
   selector: 'irl-component-ping-status',
   template: `
     <div>
-      <span class="status-label">Status:</span> <span class="status-value" [ngClass]="style()">{{data.status}}</span>
+      <span class="status-label" *ngIf="error()">Status:</span> <span class="status-value" *ngIf="error()" [ngClass]="style()">{{data.status}}</span>
       <span class="status-label" *ngIf="!error()">Avg:</span> <span class="status-value" [ngClass]="style()" *ngIf="!error()">{{data.average | number:'1.0-0' | comma}}</span><span class="status-ms" *ngIf="!error()">ms</span>
       <span class="status-label">Last:</span> <span class="status-value" [ngClass]="style()">{{data.last | number:'1.0-0' | comma}}</span><span class="status-ms">ms</span>
       <span class="status-label" *ngIf="!error()">Min:</span> <span class="status-value" [ngClass]="style()" *ngIf="!error()">{{data.min | number:'1.0-0' | comma}}</span><span class="status-ms" *ngIf="!error()">ms</span>
