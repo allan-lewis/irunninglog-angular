@@ -1,7 +1,7 @@
 <div class="page-component-body">
     <irl-component-header [authenticationModel]="authenticationModel"></irl-component-header>
 
-    <irl-component-login *ngIf="authenticationModel.authenticated != 0"></irl-component-login>
+    <irl-component-login *ngIf="authenticationModel.authenticated === 1"></irl-component-login>
 
     <irl-component-page *ngIf="authenticationModel.authenticated === 0"></irl-component-page>
 </div>
