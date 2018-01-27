@@ -2,11 +2,12 @@ import { HttpModule, Http, XHRBackend, Response, ResponseOptions } from '@angula
 import { MatCardModule, MatProgressBarModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 
-import { ChallengesComponent } from './challenges.component';
-import { ChallengesService } from './challenges.service';
+import { CompositeChartComponent } from './composite-chart.component';
 import { ProgressCardComponent } from '../progress/progress-card.component';
 import { challengesModelReducer } from '../state/challenges.reducer';
-import { ChallengesModel } from '../state/challenges.model';
+import { DataSet } from '../state/data-set.model';
+import { DataPoint } from '../state/data-point.model';
+import * as D3 from 'd3';
 
 import { Component } from '@angular/core';
 import { TestBed, inject, fakeAsync, async } from '@angular/core/testing';
@@ -15,16 +16,16 @@ import { Scheduler, NoOpScheduler } from '../service/abstract-timed-http.service
 import { By }              from '@angular/platform-browser';
 
 @Component({
-  template: '<irl-component-challenges [model]="model"></irl-component-challenges>'
+  template: '<irl-component-composite-chart [model]="model"></irl-component-composite-chart>'
 })
 class TestHostComponent {
-  model: ChallengesModel
+  model: DataSet
 }
 
-describe('ChallengesComponent', () => {
+describe('CompositeChartComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
+            imports: [ 
                 HttpModule,
                 MatCardModule,
                 MatProgressBarModule,
@@ -33,12 +34,11 @@ describe('ChallengesComponent', () => {
                 })
             ],
             declarations: [
-                ChallengesComponent,
+                CompositeChartComponent,
                 TestHostComponent,
                 ProgressCardComponent
             ],
             providers: [
-                ChallengesService,
                 {
                     provide: XHRBackend,
                     useClass: MockBackend
@@ -51,14 +51,34 @@ describe('ChallengesComponent', () => {
     it('should load and call ngOnChanges', () => {
         const fixture = TestBed.createComponent(TestHostComponent);
 
-        fixture.componentInstance.model = new ChallengesModel();
+        fixture.detectChanges();
 
-        let element = fixture.debugElement.query(By.css('irl-component-challenges'));
-        let spy = spyOn(element.componentInstance, 'ngOnChanges').and.callThrough();
+        expect(D3.selectAll('.chart-bar').size()).toBe(0);
+        expect(D3.selectAll('.dot').size()).toBe(0);
+
+        let dataPoint1 = new DataPoint();
+        dataPoint1.date = '01-01-2018';
+        dataPoint1.cumulative = 100;
+        dataPoint1.cumulativeFormatted = '100 mi';
+        dataPoint1.monthly = 100;
+        dataPoint1.monthlyFormatted = '100 mi';
+
+        let dataPoint2 = new DataPoint();
+        dataPoint2.date = '02-01-2018';
+        dataPoint2.cumulative = 150;
+        dataPoint2.cumulativeFormatted = '150 mi';
+        dataPoint2.monthly = 50;
+        dataPoint2.monthlyFormatted = '50 mi';        
+        
+        fixture.componentInstance.model = new DataSet();
+        fixture.componentInstance.model.points = [];
+        fixture.componentInstance.model.points.push(dataPoint1);
+        fixture.componentInstance.model.points.push(dataPoint2);
 
         fixture.detectChanges();
 
-        expect(spy).toHaveBeenCalled();
+        expect(D3.selectAll('.chart-bar').size()).toBe(2);
+        expect(D3.selectAll('.dot').size()).toBe(2);
     });
 
 });

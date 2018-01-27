@@ -4,6 +4,6 @@ export class DataPoint {
     monthly: number;
     monthlyFormatted: string;
     cumulative: number;
-    cumulativeFormatted: number;
+    cumulativeFormatted: string;
 
 }

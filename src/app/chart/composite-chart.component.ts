@@ -3,7 +3,6 @@ import * as D3 from 'd3';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 
-import { DataPoint } from '../state/data-point.model';
 import { DataSet } from '../state/data-set.model';
 
 @Component({
@@ -57,7 +56,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   }
 
   private drawChart(): void {
-    if (this.model.points.length > 0) {
+    if (this.model && this.model.points) {
       this.doDrawChart();
     }
   }
