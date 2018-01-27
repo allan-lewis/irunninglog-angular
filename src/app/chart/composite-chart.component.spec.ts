@@ -48,7 +48,7 @@ describe('CompositeChartComponent', () => {
         }).compileComponents();
     }));
 
-    it('should load and call ngOnChanges', () => {
+    it('should verify bar and dot counts with and without data', () => {
         const fixture = TestBed.createComponent(TestHostComponent);
 
         fixture.detectChanges();
