@@ -8,7 +8,7 @@ export class UpdateStreaksAction implements Action {
     constructor(public payload: any) { }
 }
 
-export function streaksModelReducer(state: StreaksModel = null, action: UpdateStreaksAction) {
+export function streaksModelReducer(state: StreaksModel = new StreaksModel(), action: UpdateStreaksAction) {
   switch (action.type) {
     case STREAKS_UPDATE:
         let before = JSON.stringify(state);
