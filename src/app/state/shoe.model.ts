@@ -41,7 +41,7 @@ export class ShoeModel implements IProgressItem {
     }
 
     getOrder() {
-        return this.primary ? 500 : 200 + this.getPercentage();
+        return this.primary ? 900 : 600 + this.getPercentage();
     }
 
 }

@@ -48,6 +48,13 @@ export class ChallengesService extends AbstractTimedHttpService {
             challenges.challenges.push(model);
         }
 
+        for (let entry of challenges.challenges) {
+            if (entry.percentage < 100) {
+                entry.primary = true;
+                break;
+            }   
+        }
+
         this.store.dispatch({type: UPDATE_CHALLENGE, payload: challenges});
     }
 

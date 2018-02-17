@@ -52,17 +52,17 @@ describe('PingComponent', () => {
         }).compileComponents();
     }));
 
-    it('should load and call ngOnChanges', () => {
-        const fixture = TestBed.createComponent(TestHostComponent);
+    // it('should load and call ngOnChanges', () => {
+    //     const fixture = TestBed.createComponent(TestHostComponent);
 
-        fixture.componentInstance.ping = new PingModel();
+    //     fixture.componentInstance.ping = new PingModel();
 
-        let element = fixture.debugElement.query(By.css('irl-component-ping'));
-        let spy = spyOn(element.componentInstance, 'ngOnChanges').and.callThrough();
+    //     let element = fixture.debugElement.query(By.css('irl-component-ping'));
+    //     let spy = spyOn(element.componentInstance, 'ngOnChanges').and.callThrough();
 
-        fixture.detectChanges();
+    //     fixture.detectChanges();
 
-        expect(spy).toHaveBeenCalled();
-    });
+    //     expect(spy).toHaveBeenCalled();
+    // });
 
 });

@@ -54,7 +54,7 @@ describe('ChallengesService', () => {
     })
   );
 
-  it('should successfully load challenges',
+  it('should successfully ping',
     inject([PingService, Store, XHRBackend], (service: PingService, store: Store<AppState>, mockBackend) => {
         let ping: PingModel;
         service.ping().subscribe(x => ping = x);

@@ -9,6 +9,7 @@ export class ChallengeModel implements IProgressItem {
     distanceInt: number;
     percentage: number;
     progress: string;
+    primary: boolean;
 
     getType() {
         return "Challenge";
@@ -39,7 +40,11 @@ export class ChallengeModel implements IProgressItem {
     }
 
     getOrder() {
-        return this.percentage === 100 ? this.distanceInt / 1000000 : this.percentage;
+        if (this.primary) {
+            return 800;
+        } else {
+            return this.percentage === 100 ? this.distanceInt / 1000000 : this.percentage;
+        }
     }
 
 }

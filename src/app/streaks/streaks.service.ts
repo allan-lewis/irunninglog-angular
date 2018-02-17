@@ -40,15 +40,15 @@ export class StreaksService extends AbstractTimedHttpService {
         streaks.thisYear = this.streakFromJson('Longest Streak This Year', result['thisYear']);
 
         if (streaks.current) {
-            streaks.current.order = 102;
+            streaks.current.order = 1000;
         }
 
         if (streaks.longest) {
-            streaks.longest.order = 1000;
+            streaks.longest.order = 702;
         }
 
         if (streaks.thisYear) {
-            streaks.thisYear.order = 101;
+            streaks.thisYear.order = 701;
         }
 
         this.store.dispatch({type: STREAKS_UPDATE, payload: streaks})
