@@ -56,7 +56,7 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   }
 
   private drawChart(): void {
-    if (this.model && this.model.points) {
+    if (this.model && this.model.points && this.host) {
       this.doDrawChart();
     }
   }
@@ -231,11 +231,11 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   }
 
   private parseDate(string: string): Date {
-    return D3.timeParse('%m-%d-%Y')(string);
+    return D3.timeParse('%Y-%m-%d')(string);
   }
 
   private formatDate(string: string): string {
-    return moment(string, 'MM-DD-YYYY').format('MMM \'YY');
+    return moment(string, 'YYYY-MM-DD').format('MMM \'YY');
   }
 
   private fixXPosition(x: number): number {
