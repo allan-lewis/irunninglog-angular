@@ -82,14 +82,14 @@ export class StatisticsService extends AbstractTimedHttpService {
 
         let years = [];
         for (let entry of response.json()['years']) {
-            if (entry['year'] != new Date().getFullYear()) {
-                let model = new YearlyTotalModel();
-                model.year = entry['year'];
-                model.total = entry['total'];
-                model.percentage = entry['percentage'];
-                
-                totals.totals.push(model);
+            let model = new YearlyTotalModel();
+            model.year = entry['year'];
+            model.total = entry['total'];
+            model.percentage = entry['percentage'];
+            
+            totals.totals.push(model);
 
+            if (entry['year'] != new Date().getFullYear()) {
                 let range = new StatisticsDateRange();
                 let year = '' + model.year;
                 range.key = year;
