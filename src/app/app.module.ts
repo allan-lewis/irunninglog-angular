@@ -88,7 +88,9 @@ import { dataSetModelReducer } from './state/data-set.reducer';
 import { pingModelReducer } from './state/ping.reducer';
 import { profileModelReducer } from './state/profile.reducer';
 import { progressListReducer } from './state/progress-list.reducer';
+import { selectedDateRangeReducer } from './state/statistics-selected-date-range.reducer';
 import { shoesModelReducer } from './state/shoes.reducer';
+import { statisticsDateRangesReducer } from './state/statistics-date-ranges.reducer';
 import { streaksModelReducer } from './state/streaks.reducer';
 import { summaryModelReducer } from './state/summary.reducer';
 import { yearlyTotalModelReducer } from './state/yearly-total.reducer'; 
@@ -169,7 +171,9 @@ export class MyMaterialModule {};
       ping: pingModelReducer,
       profile: profileModelReducer,
       progress: progressListReducer,
+      selectedDateRange: selectedDateRangeReducer,
       shoes: shoesModelReducer,
+      statisticsDateRanges: statisticsDateRangesReducer,
       streaks: streaksModelReducer,
       summary: summaryModelReducer,
       yearlyTotals: yearlyTotalModelReducer

@@ -1,1 +1,15 @@
-<div #container class="container"><div>
+<div class="component-container">
+    
+    <div class="date-range">
+        <mat-form-field>
+            <mat-select placeholder="Select Date Range" [(value)]="selection" (selectionChange)="selectionChanged($event)">
+                <mat-option *ngFor="let option of options" [value]="option.key">
+                    {{option.description}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div #container class="container"><div>
+
+</div>

@@ -11,12 +11,39 @@ import { DataSet } from '../state/data-set.model';
 import { YearlyTotalModel, YearlyTotalsModel } from '../state/yearly-total.model';
 import { UPDATE_TOTALS } from '../state/yearly-total.reducer';
 import { UPDATE_DATA_SET } from '../state/data-set.reducer';
+import { RANGES_UPDATE } from '../state/statistics-date-ranges.reducer';
+import { StatisticsDateRange, THIS_YEAR } from '../state/statistics-date-range.model';
+
+const BASE = '/api/stats?';
 
 @Injectable()
 export class StatisticsService extends AbstractTimedHttpService {
 
+    private path: string = BASE;
+    private range: StatisticsDateRange;
+
     constructor(public store: Store<AppState>, scheduler: Scheduler, public http: Http) { 
         super(store, scheduler, http);
+
+        this.store.select(state => state.selectedDateRange).subscribe(x => this.updatePath(x));
+    }
+
+    private updatePath(range: StatisticsDateRange) {
+        const first = !this.range;
+
+        this.range = range;
+
+        this.path = BASE;
+        this.path += 'startDate=' + (this.range.startDate ? this.range.startDate : '');
+        this.path += '&endDate=' + (this.range.endDate ? this.range.endDate : '');
+
+        // console.log("StatisticsService:updatePath", first, this.path);
+
+        if (!first) {
+            this.call();
+        } else {
+
+        }
     }
 
     getInterval() {
@@ -24,15 +51,15 @@ export class StatisticsService extends AbstractTimedHttpService {
     }
 
     getPath() {
-         return '/api/stats'
+        return this.path;
     };
 
     getErrorMessage() {
         return 'failed to load statistics';
     }
 
-    before() {
-        // Nothing to do here
+    before() {      
+        // console.log("StatisticsService:before", this.path);
     }
 
     failure(response: Response, before: any) { 
@@ -53,16 +80,28 @@ export class StatisticsService extends AbstractTimedHttpService {
 
         let totals = new YearlyTotalsModel();
 
+        let years = [];
         for (let entry of response.json()['years']) {
-            let model = new YearlyTotalModel();
-            model.year = entry['year'];
-            model.total = entry['total'];
-            model.percentage = entry['percentage'];
-            
-            totals.totals.push(model);
+            if (entry['year'] != new Date().getFullYear()) {
+                let model = new YearlyTotalModel();
+                model.year = entry['year'];
+                model.total = entry['total'];
+                model.percentage = entry['percentage'];
+                
+                totals.totals.push(model);
+
+                let range = new StatisticsDateRange();
+                let year = '' + model.year;
+                range.key = year;
+                range.description = year;
+                range.startDate = year + '-01-01';
+                range.endDate = year + '-12-31';
+                years.push(range);
+            }
         }
 
         this.store.dispatch({type: UPDATE_TOTALS, payload: totals});
+        this.store.dispatch({type: RANGES_UPDATE, payload: years});
 
         let dataPoints: Array<DataPoint> = [];
         for (let entry of response.json()['dataSet']['points']) {
@@ -92,6 +131,14 @@ export class StatisticsService extends AbstractTimedHttpService {
 
     dataSet() {
         return this.store.select(state => state.dataSet).filter(x => !!x);
+    }
+
+    dateRanges() {
+        return this.store.select(state => state.statisticsDateRanges).filter(x => !!x);
+    }
+
+    selectedDateRange() {
+        return this.store.select(state => state.selectedDateRange).filter(x => !!x);
     }
 
 }

@@ -31,15 +31,19 @@ export class IntervalScheduler implements Scheduler {
 
 export abstract class AbstractTimedHttpService {
 
-    constructor(store: Store<AppState>, scheduler: Scheduler, public http: Http) {
-        store.select(state => state.authentication).filter(x => !!x && x.authenticated == AuthenticationState.Authenticated).subscribe(x => {
+    constructor(public store: Store<AppState>, public scheduler: Scheduler, public http: Http) {
+
+    }
+
+    public init() {
+        this.store.select(state => state.authentication).filter(x => !!x && x.authenticated == AuthenticationState.Authenticated).subscribe(x => {
             this.call();
 
-            scheduler.schedule(this.getInterval(), () => this.call());
+            this.scheduler.schedule(this.getInterval(), () => this.call());
         });
     }
 
-    private call() {
+    protected call() {
         let json = this.before();
 
         this.http.get(this.getPath()).catch(err => this.caught(err, json)).filter(x => x instanceof Response).map(x => <Response> x).subscribe(x => this.success(x, json));

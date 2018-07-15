@@ -23,6 +23,9 @@ export class HeaderComponent {
         profileService.profile().subscribe(x => this.profile = x);
 
         pingService.ping().subscribe(x => this.ping = x);
+
+        pingService.init();
+        profileService.init();
     }
 
 }

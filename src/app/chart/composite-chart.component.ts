@@ -1,9 +1,13 @@
-import { AfterViewInit, ElementRef, Component, Input, OnChanges, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ElementRef, Component, Input, OnChanges, ViewChild, ViewEncapsulation, SimpleChanges } from '@angular/core';
 import * as D3 from 'd3';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 
 import { DataSet } from '../state/data-set.model';
+import { SELECTION_UPDATE } from '../state/statistics-selected-date-range.reducer';
+import { StatisticsDateRange, THIS_YEAR, ALL_TIME } from '../state/statistics-date-range.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/app.state';
 
 @Component({
   selector: 'irl-component-composite-chart',
@@ -16,6 +20,12 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   @Input()
   model: DataSet;
 
+  @Input()
+  options: StatisticsDateRange [];
+
+  @Input()
+  selection: string;
+
   @ViewChild('container')
   element: ElementRef;
 
@@ -25,8 +35,12 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
   private dimensions: any;
   private tooltip: any;
 
+  constructor(public store: Store<AppState>) {
+    // console.log('CompositeChartComponent:constructor', this.selection, this.options);
+  }
+
   ngAfterViewInit(): void {
-    // console.log('CompositeChartComponent:ngAfterViewInit');
+    // console.log('CompositeChartComponent:ngAfterViewInit', this.selection, this.options);
 
     this.htmlElement = this.element.nativeElement;
 
@@ -49,10 +63,12 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
     });
   }
 
-  ngOnChanges(): void {
-    // console.log('CompositeChartComponent:ngOnChanges');
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log('CompositeChartComponent:ngOnChanges', changes);
 
-    this.drawChart();
+    if (changes.model) {
+      this.drawChart();
+    }
   }
 
   private drawChart(): void {
@@ -259,6 +275,14 @@ export class CompositeChartComponent implements OnChanges, AfterViewInit {
     return function (d, i) {
       return i % factor == 0;
     };
+  }
+
+  selectionChanged(event: any) {
+    for (let entry of this.options) {
+      if (entry.key == this.selection) {
+        this.store.dispatch({type: SELECTION_UPDATE, payload: entry});
+      }
+    }
   }
 
 }

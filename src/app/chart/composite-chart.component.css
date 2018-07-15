@@ -49,3 +49,12 @@
     fill: #ffab00;
     stroke: #fff;
 }
+
+.date-range {
+    text-align: right;
+    margin-right: 16px;
+}
+
+.component-container {
+    margin-top: 16px;
+}
