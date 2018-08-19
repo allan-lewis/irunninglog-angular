@@ -20,7 +20,7 @@ export class LoginComponent {
 
         this.authenticationService.setState(uuid);
 
-        window.location.href = 'https://www.strava.com/oauth/authorize?client_id=17706&response_type=code&redirect_uri=' + window.location.protocol + '//' + window.location.host + '&state=' + uuid;
+        window.location.href = 'https://www.strava.com/oauth/authorize?client_id=17706&response_type=code&scope=write&redirect_uri=' + window.location.protocol + '//' + window.location.host + '&state=' + uuid;
     }
 
 }
