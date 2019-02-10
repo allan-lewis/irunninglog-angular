@@ -1,6 +1,10 @@
 version: 0.2
 
 phases:
+    pre-build:
+        commands:
+            - echo Logging in to Amazon ECR...
+            - $(aws ecr get-login --no-include-email --region us-east-1)
     install:
         commands:
             - echo Installing source NPM dependencies...
@@ -10,16 +14,7 @@ phases:
         commands:
             - echo Build started on `date`
             - ng build --aot --prod
+            - docker build -t irunninglog/api:latest .
     post_build:
         commands:
             - echo Build completed on `date`
-            - chmod +x *.sh
-            
-artifacts:
-    files:
-        - ./app_start.sh
-        - ./app_stop.sh
-        - ./app_clean.sh
-        - ./appspec.yml
-#        - ./nginx.conf
-        - ./dist/**/*
