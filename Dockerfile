@@ -1,2 +1,2 @@
 FROM nginx:alpine
-COPY dist/* /usr/share/nginx/html
+ADD dist /usr/share/nginx/html/
