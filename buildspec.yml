@@ -14,7 +14,10 @@ phases:
         commands:
             - echo Build started on `date`
             - ng build --aot --prod
-            - docker build -t irunninglog/api:latest .
+            - docker build -t irunninglog/gui:latest .
+            - docker tag irunninglog/gui:latest 329192577320.dkr.ecr.us-east-1.amazonaws.com/irunninglog/gui:latest 
     post_build:
         commands:
             - echo Build completed on `date`
+            - echo Pushing the Docker image...
+            - docker push 329192577320.dkr.ecr.us-east-1.amazonaws.com/irunninglog/gui:latest
