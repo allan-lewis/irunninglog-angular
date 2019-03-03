@@ -21,3 +21,8 @@ phases:
             - echo Build completed on `date`
             - echo Pushing the Docker image...
             - docker push 329192577320.dkr.ecr.us-east-1.amazonaws.com/irunninglog/gui:latest
+            - printf '[{"name":"irunninglog-gui","imageUri":"%s"}]' 329192577320.dkr.ecr.us-east-1.amazonaws.com/irunninglog/gui:latest > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
